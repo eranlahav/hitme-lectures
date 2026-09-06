@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>עיצוב החלטות — חומרי הרצאה</title>
+<style>
+@font-face { font-family: Alef; font-weight: 400; src: url(./lesson-01/fonts/Alef-400.ttf) format('truetype'); }
+@font-face { font-family: Alef; font-weight: 700; src: url(./lesson-01/fonts/Alef-700.ttf) format('truetype'); }
+body {
+  margin: 0;
+  font-family: Alef, Arial, sans-serif;
+  background: #FFFFFF;
+  color: #0E2148;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+main {
+  width: 100%;
+  max-width: 720px;
+  padding: 80px 32px;
+  box-sizing: border-box;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  color: #5B6470;
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  margin-bottom: 24px;
+}
+.eyebrow .rule { width: 34px; height: 2px; background: #E31C6D; }
+h1 { font-size: 48px; line-height: 1.1; margin: 0 0 12px; font-weight: 700; }
+h1 .accent { color: #E31C6D; }
+.sub { color: #3C4757; font-size: 20px; line-height: 1.6; margin: 0 0 48px; font-weight: 400; }
+ul { list-style: none; padding: 0; margin: 0; }
+li a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  padding: 20px 24px;
+  border: 1px solid #E4E7EC;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #0E2148;
+  font-size: 22px;
+  font-weight: 700;
+  transition: border-color .15s, background .15s;
+}
+li a:hover { border-color: #E31C6D; background: #FCF2F6; }
+li a .num { color: #E31C6D; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+li + li { margin-top: 12px; }
+li.pending a { color: #98A2B3; border-style: dashed; pointer-events: none; }
+li.pending a .num { color: #CBD2DC; }
+footer { margin-top: 56px; color: #8B92A0; font-size: 15px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">
+    <div class="rule"></div>
+    <div>עיצוב החלטות / המכון הטכנולוגי חולון</div>
+  </div>
+  <h1>חומרי <span class="accent">הרצאה</span></h1>
+  <p class="sub">מצגות ההרצאה השבועיות של הקורס. בהנחיית ערן להב.</p>
+  <ul>
+    <li><a href="./lesson-01/"><span>מפגש 01 — פתיחה מעשית</span><span class="num">01</span></a></li>
+    <li class="pending"><a><span>מפגש 02</span><span class="num">בקרוב</span></a></li>
+    <li class="pending"><a><span>מפגש 03</span><span class="num">בקרוב</span></a></li>
+    <li class="pending"><a><span>מפגשים 04–14</span><span class="num">בקרוב</span></a></li>
+  </ul>
+  <footer>16 סטודנטים לעיצוב · בסיס קוד אחד · אפליקציה אמיתית</footer>
+</main>
+</body>
+</html>
