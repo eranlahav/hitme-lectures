@@ -11,6 +11,27 @@ window.__resources = {
 };
 </script>
 <script src="./support.js"></script>
+<script>
+// Full-screen, no thumbnail rail. The <x-import> wrapper drops hyphenated
+// attributes that aren't aria-/data-, so `no-rail` never reaches the mounted
+// <deck-stage>; set it directly on the element once it appears. This is
+// page-level config — the deck-stage runtime is untouched.
+(function () {
+  var mark = function (el) {
+    if (el && el.tagName === 'DECK-STAGE' && !el.hasAttribute('no-rail')) {
+      el.setAttribute('no-rail', '');
+    }
+  };
+  var sweep = function () { document.querySelectorAll('deck-stage').forEach(mark); };
+  new MutationObserver(function (muts) {
+    for (var m of muts) for (var n of m.addedNodes) {
+      if (n.nodeType === 1) { mark(n); if (n.querySelectorAll) n.querySelectorAll('deck-stage').forEach(mark); }
+    }
+  }).observe(document.documentElement, { childList: true, subtree: true });
+  sweep();
+  document.addEventListener('DOMContentLoaded', sweep);
+})();
+</script>
 </head>
 <body>
 <x-dc>
