@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<title>מה קורה בקורס · HIT ME</title>
+<style>
+@font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 400; font-display: swap; src: url(../assets/fonts/ibm-plex-sans-hebrew-hebrew-400-normal.woff2) format('woff2'); unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 500; font-display: swap; src: url(../assets/fonts/ibm-plex-sans-hebrew-hebrew-500-normal.woff2) format('woff2'); unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 700; font-display: swap; src: url(../assets/fonts/ibm-plex-sans-hebrew-hebrew-700-normal.woff2) format('woff2'); unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 400; font-display: swap; src: url(../assets/fonts/ibm-plex-sans-hebrew-latin-400-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 500; font-display: swap; src: url(../assets/fonts/ibm-plex-sans-hebrew-latin-500-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 700; font-display: swap; src: url(../assets/fonts/ibm-plex-sans-hebrew-latin-700-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family: 'IBM Plex Mono'; font-weight: 400; font-display: swap; src: url(../assets/fonts/ibm-plex-mono-latin-400-normal.woff2) format('woff2'); }
+</style>
+<style>
+:root {
+  --bg: #f5f4f0; --text: #141828; --text-2: #535a6e; --accent: #0a7a83; --accent-fill: #14a3ae;
+  --accent-soft: rgba(20,163,174,.12); --glass: rgba(255,255,255,.82); --glass-border: rgba(255,255,255,.95);
+  --muted: rgba(20,24,40,.05); --line: rgba(20,24,40,.1); --warm: #b45a1e; --warm-soft: rgba(255,170,120,.16);
+  --shadow: 0 1px 2px rgba(20,24,40,.05), 0 6px 18px rgba(20,24,40,.06);
+  --r: 20px; --font: 'IBM Plex Sans Hebrew', system-ui, 'Segoe UI', Arial, sans-serif; --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+.depth { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(90% 80% at 50% 30%, #fff 0%, var(--bg) 60%, #eae7e0 100%); }
+main { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 40px 16px 96px; }
+a { color: var(--accent); text-underline-offset: 3px; }
+.glass { background: var(--glass); border: 1px solid var(--glass-border); box-shadow: var(--shadow); border-radius: var(--r); }
+.wordmark { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--text-2); font-weight: 500; }
+.wordmark .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent-fill); box-shadow: 0 0 0 4px var(--accent-soft); }
+h1 { font-size: clamp(30px, 6.5vw, 44px); line-height: 1.15; font-weight: 700; margin: 18px 0 10px; letter-spacing: -.01em; }
+.sub { color: var(--text-2); font-size: 18px; margin: 0 0 6px; }
+.updated { font-size: 14px; color: var(--text-2); }
+.updated b { color: var(--accent); font-weight: 500; }
+h2 { font-size: 24px; margin: 52px 0 6px; font-weight: 700; }
+h2 + .lead { margin-top: 0; }
+h3 { font-size: 19px; margin: 22px 0 6px; font-weight: 500; }
+p, li { color: var(--text-2); font-size: 17px; }
+b, strong { color: var(--text); font-weight: 500; }
+.lead { font-size: 17px; color: var(--text-2); }
+.note { font-size: 14px; color: var(--text-2); }
+
+.stats { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; margin: 22px 0 0; }
+.stat { padding: 14px 16px; }
+.stat .big { font-size: 30px; font-weight: 300; color: var(--accent); line-height: 1.1; font-family: var(--mono); }
+.stat .lbl { font-size: 14px; color: var(--text-2); margin-top: 4px; }
+
+.pillars { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 10px; }
+.pillars li { padding: 16px 18px; margin: 0; }
+.pillars b { display: block; font-size: 17px; margin-bottom: 2px; }
+
+.session { margin-top: 22px; padding: 22px 20px; }
+.eyebrow { color: var(--accent); font-size: 14px; font-weight: 500; }
+.session h3 { font-size: 24px; font-weight: 700; margin: 2px 0 10px; }
+.session ul { padding-inline-start: 20px; margin: 8px 0; }
+.session li { margin: 4px 0; }
+figure { margin: 16px 0 6px; }
+figure img { width: 100%; height: auto; display: block; border-radius: 14px; border: 1px solid var(--line); background: #fff; }
+figcaption { font-size: 14px; color: var(--text-2); margin-top: 6px; }
+.chip { display: inline-block; font-size: 13px; background: var(--muted); color: var(--text-2); border-radius: 999px; padding: 2px 10px; margin-inline-end: 6px; }
+
+.quotes { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 10px; }
+.quotes li { margin: 0; padding: 16px 18px 14px; font-size: 18px; color: var(--text); position: relative; }
+.quotes li::before { content: "״"; position: absolute; top: 2px; inset-inline-start: 10px; font-size: 34px; color: var(--accent-fill); line-height: 1; }
+.quotes li { padding-inline-start: 34px; }
+.quotes small { display: block; font-size: 13px; color: var(--text-2); margin-top: 6px; }
+
+.gallery { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; margin-top: 14px; }
+.gallery figure { margin: 0; }
+.gallery img { aspect-ratio: 3 / 2; object-fit: cover; }
+.gallery figcaption { font-size: 13px; margin-top: 4px; }
+
+.learn { display: grid; gap: 10px; margin-top: 14px; }
+.learn .card { padding: 16px 18px; }
+.learn .card h3 { margin: 0 0 4px; font-size: 17px; }
+.learn .keep h3 { color: var(--accent); }
+.learn .change h3 { color: var(--warm); }
+.learn ul { margin: 0; padding-inline-start: 20px; }
+.learn li { font-size: 16px; margin: 3px 0; }
+
+.next { margin-top: 14px; padding: 18px 20px; background: var(--warm-soft); border-radius: var(--r); }
+.next p { margin: 4px 0; }
+.privacy { margin-top: 52px; padding: 16px 18px; border-top: 1px solid var(--line); font-size: 14px; color: var(--text-2); }
+.privacy p { font-size: 14px; margin: 4px 0; }
+footer { margin-top: 18px; font-size: 13px; color: var(--text-2); }
+
+@media (min-width: 720px) {
+  .stats { grid-template-columns: repeat(4, minmax(0,1fr)); }
+  .pillars { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .gallery { grid-template-columns: repeat(4, minmax(0,1fr)); }
+  .learn { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .session { padding: 26px 28px; }
+}
+</style>
+</head>
+<body>
+<div class="depth" aria-hidden="true"></div>
+<main>
+  <div class="wordmark"><span class="dot"></span>עיצוב החלטות · HIT ME</div>
+  <h1>מה קורה בקורס</h1>
+  <p class="sub">מבט מבחוץ על הקורס ״עיצוב החלטות״, לסטודנטים בשנה הרביעית בפקולטה לעיצוב, המכון הטכנולוגי חולון. הדף מתעדכן אחרי כל מפגש.</p>
+  <p class="updated">עודכן <b>28.10.2026</b>, אחרי מפגש 2 · מרצה: ערן להב</p>
+
+  <div class="stats">
+    <div class="stat glass"><div class="big">17</div><div class="lbl">סטודנטים בקורס</div></div>
+    <div class="stat glass"><div class="big">2</div><div class="lbl">מפגשים עד עכשיו</div></div>
+    <div class="stat glass"><div class="big">31</div><div class="lbl">ויזואלים למושגים שהסטודנטים יצרו בשיעורי הבית</div></div>
+    <div class="stat glass"><div class="big">4.7</div><div class="lbl">ממוצע המשוב על מפגש 1, מתוך 5</div></div>
+  </div>
+
+  <h2>על מה הקורס</h2>
+  <p class="lead">הכיתה בונה יחד מוצר אמיתי אחד: אפליקציה לסטודנטים של המכון. בדרך, מעצבים לומדים לעבוד כמו צוות מוצר, עם מחקר, החלטות מנומקות, וכלי בינה מלאכותית.</p>
+  <ul class="pillars">
+    <li class="glass"><b>מוצר אחד, אחריות אישית</b>כל סטודנט אחראי לחלק ממוצר משותף, וכל החלטה צריכה נימוק וראיה.</li>
+    <li class="glass"><b>כלים של צוותי מוצר</b>הסטודנטים עובדים במאגר קוד משותף ומגישים עבודות כמו בחברת תוכנה. כל 17 הסטודנטים הוזמנו למאגר.</li>
+    <li class="glass"><b>בינה מלאכותית ככלי עבודה</b>הסוכנים עוזרים לחקור, לנסח ולבנות. ההחלטות נשארות אצל הסטודנטים.</li>
+  </ul>
+
+  <h2>המפגשים</h2>
+  <p class="lead">המפגש האחרון למעלה.</p>
+
+  <article class="session glass" id="session-02">
+    <div class="eyebrow">מפגש 2 · 28.10</div>
+    <h3>מחקר משתמשים</h3>
+    <p>המטרה: לעבור מ״נראה לי שסטודנטים...״ להבנה שמבוססת על ראיות.</p>
+    <ul>
+      <li>למידה משותפת של 16 מושגי מחקר. כל סטודנט הכין ויזואל למושג אחד מראש.</li>
+      <li>תרגול מחקר על הכיתה עצמה: חצי מילאו סקר, חצי השתתפו בראיון קבוצתי, ואז התחלפו. בסוף סינתזה בעזרת בינה מלאכותית.</li>
+      <li>ראיון חי בזום עם בוגרת המחלקה, היום מעצבת מוצר בחברת הייטק.</li>
+      <li>חלוקה לארבע חוליות מחקר לשבוע הקרוב: תצפיות, ראיונות, סקר, ומחקר ברשת.</li>
+    </ul>
+    <figure>
+      <img src="../maps/02-research/concept-map.jpg" alt="מפת 16 מושגי מחקר המשתמשים, כפי שהוצגה בכיתה" loading="lazy" width="1600" height="900">
+      <figcaption>מפת מושגי המחקר שהכיתה למדה יחד.</figcaption>
+    </figure>
+    <p><b>מה גילינו על הכיתה</b> <span class="note">(סקר בכיתה, 12 מתוך 17 ענו, בלי שמות)</span></p>
+    <ul>
+      <li>11 מתוך 12 משתמשים בבינה מלאכותית כל יום. כל ה־12 יוצאים לפעמים מבולבלים מהעבודה איתה.</li>
+      <li>7 מתוך 12 עוד לא עשו אף ראיון או תצפית עם משתמשים.</li>
+      <li>הכי בטוחים בעבודה עם אחרים (4.4 מתוך 5). הכי פחות בטוחים בנתונים ומדידה (2.1) ובמחקר משתמשים (2.4).</li>
+      <li>הכי לא נוח להם להראות עבודה לא גמורה (1.7 מתוך 5).</li>
+    </ul>
+    <p><b>שיעורי בית עד מפגש 3:</b> מחקר בשטח בחוליות על סטודנטי המכון, דוח חוליה להצגה בכיתה, ורשומה ראשונה ביומן העיצוב האישי.</p>
+  </article>
+
+  <article class="session glass" id="session-01">
+    <div class="eyebrow">מפגש 1 · 21.10</div>
+    <h3>פתיחה: הקורס, עבודת צוות וכלים משותפים</h3>
+    <ul>
+      <li>ארוחת בוקר משותפת והיכרות.</li>
+      <li>מבנה הקורס והציפיות: מוצר אחד משותף, אחריות אישית, תוצרים אמיתיים.</li>
+      <li>למידה משותפת של 15 מושגים בעבודה במאגר קוד משותף. כל סטודנט הכין ויזואל והסביר אותו לכיתה.</li>
+    </ul>
+    <figure>
+      <img src="../maps/01-git/00-map.webp" alt="מפת מושגי העבודה במאגר קוד משותף" loading="lazy" width="2000" height="1125">
+      <figcaption>מפת מושגי העבודה המשותפת, ממפגש הפתיחה.</figcaption>
+    </figure>
+    <p><b>משוב הסטודנטים</b> <span class="note">(7 תשובות, ממוצע מתוך 5)</span></p>
+    <ul>
+      <li>הפעילויות עזרו ללמוד באופן פעיל: <b>5.0</b></li>
+      <li>הרגישו בנוח לשאול ולהביע דעה: <b>4.7</b></li>
+      <li>הרעיונות המרכזיים היו ברורים: <b>4.6</b></li>
+      <li>ברור מה עושים עד המפגש הבא, והקצב התאים: <b>4.4</b></li>
+    </ul>
+    <p><b>שיעורי בית:</b> פתיחת חשבון, הצטרפות למאגר המשותף, ויזואל למושג מחקר, וראיון היכרות קולי עם סוכן בינה מלאכותית.</p>
+  </article>
+
+  <h2>קולות מהכיתה</h2>
+  <p class="lead">מתוך המשוב והראיון הקבוצתי. בלי שמות, ובניסוח מקוצר.</p>
+  <ul class="quotes">
+    <li class="glass">הוויזואלים שהכנו למושגים, והחלוקה ביננו, עזרו להבין את התהליך כולו.<small>משוב על מפגש 1</small></li>
+    <li class="glass">הבנתי איך צוות עובד יחד על מוצר אמיתי: כל תפקיד נפרד, אבל כולם מדברים כל הזמן.<small>משוב על מפגש 1</small></li>
+    <li class="glass">אל תחליטי כלום. תשאלי אותי. מי שמחליט בסוף זה אני.<small>ראיון קבוצתי, מפגש 2: מה אומרים לבינה המלאכותית לפני שמתחילים</small></li>
+    <li class="glass">אפשר לבנות דברים לבד, גם בלי לדעת לתכנת.<small>ראיון קבוצתי, מפגש 2</small></li>
+  </ul>
+
+  <h2>מה הסטודנטים יצרו</h2>
+  <p class="lead">חלק מהוויזואלים שהסטודנטים הכינו כשיעורי בית, כל אחד למושג אחד. התמונות נוצרו בעזרת בינה מלאכותית, ואין בהן סטודנטים.</p>
+  <div class="gallery">
+    <figure><img src="../maps/02-research/11-insight.jpg" alt="ויזואל למושג תובנה מחקרית" loading="lazy"><figcaption>תובנה מחקרית</figcaption></figure>
+    <figure><img src="../maps/02-research/02-persona.jpg" alt="ויזואל למושג פרסונה" loading="lazy"><figcaption>פרסונה</figcaption></figure>
+    <figure><img src="../maps/02-research/14-pain-point.jpg" alt="ויזואל למושג נקודת כאב" loading="lazy"><figcaption>נקודת כאב</figcaption></figure>
+    <figure><img src="../maps/02-research/09-observation.jpg" alt="ויזואל למושג תצפית" loading="lazy"><figcaption>תצפית</figcaption></figure>
+    <figure><img src="../maps/01-git/09-branch.jpg" alt="ויזואל למושג ענף עבודה" loading="lazy"><figcaption>ענף עבודה</figcaption></figure>
+    <figure><img src="../maps/01-git/15-merge.jpg" alt="ויזואל למושג מיזוג" loading="lazy"><figcaption>מיזוג</figcaption></figure>
+    <figure><img src="../maps/02-research/08-interview.jpg" alt="ויזואל למושג ראיון עומק" loading="lazy"><figcaption>ראיון עומק</figcaption></figure>
+    <figure><img src="../maps/02-research/16-need.jpg" alt="ויזואל למושג צורך" loading="lazy"><figcaption>צורך</figcaption></figure>
+  </div>
+  <p class="note">כל הוויזואלים, משני המפגשים: <a href="../maps/">מפות המושגים</a></p>
+
+  <h2>מה אני לומד כמרצה</h2>
+  <p class="lead">תובנות ראשונות מהתחקיר אחרי כל מפגש. אלה התרשמויות, ונבדוק אותן מול המשוב.</p>
+  <div class="learn">
+    <div class="card glass keep">
+      <h3>עובד, ונשמור</h3>
+      <ul>
+        <li>פתיחה חברתית עם ארוחת בוקר.</li>
+        <li>חזרה מהזיכרון על מושגים מהמפגש הקודם.</li>
+        <li>למידה דרך מפת מושגים שהסטודנטים בונים בעצמם.</li>
+        <li>תרגול מעשי בכיתה, והפסקות מסודרות.</li>
+      </ul>
+    </div>
+    <div class="card glass change">
+      <h3>משנים</h3>
+      <ul>
+        <li>תכננו יותר תוכן ממה שאפשר להספיק. במפגש הבא פחות תוכן ויותר זמן עבודה.</li>
+        <li>לא כולם היו מוכנים טכנית לעבודה במאגר. הכנו מדריך צעד אחר צעד.</li>
+        <li>מודדים התקדמות לפי תוצרים קטנים וברורים, לא לפי תחושה.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>מה הלאה</h2>
+  <div class="next">
+    <p><b>מפגש 3 · 4.11</b></p>
+    <p>החוליות מציגות את ממצאי המחקר הראשון על סטודנטי המכון, והכיתה מתחלקת לצוותים הקבועים של הקורס.</p>
+  </div>
+
+  <div class="privacy">
+    <p><b>על הדף הזה.</b> הדף נועד לצוות המכון והפקולטה. אין בו שמות סטודנטים, אין ציטוטים מזוהים, ואין נתונים על סטודנט מסוים. מספרים מוצגים רק כסיכום של כל הכיתה.</p>
+    <p>הדף לא מופיע במנועי חיפוש. נא לא להעביר את הקישור הלאה בלי לשאול.</p>
+  </div>
+  <footer>עיצוב החלטות · HIT ME · המכון הטכנולוגי חולון · ערן להב</footer>
+</main>
+</body>
+</html>
