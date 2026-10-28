@@ -1,0 +1,89 @@
+{
+  "id": "02-research",
+  "session": "02",
+  "date": "28.10",
+  "title": "16 מושגי מחקר משתמשים",
+  "map": "concept-map.jpg",
+  "concepts": [
+    {
+      "n": "01",
+      "name": "קהל יעד (ראשי, משני, נוסף)",
+      "file": "01-target-audience.jpg"
+    },
+    {
+      "n": "02",
+      "name": "פרסונה",
+      "file": "02-persona.jpg"
+    },
+    {
+      "n": "03",
+      "name": "מחקר (איכותני מול כמותני)",
+      "file": "03-qual-quant.jpg"
+    },
+    {
+      "n": "04",
+      "name": "משתמש",
+      "file": "04-user.jpg"
+    },
+    {
+      "n": "05",
+      "name": "התנהגות (מוצהרת מול בפועל)",
+      "file": "05-behavior.jpg"
+    },
+    {
+      "n": "06",
+      "name": "שאלת מחקר",
+      "file": "06-research-question.jpg"
+    },
+    {
+      "n": "07",
+      "name": "השערה",
+      "file": "07-hypothesis.jpg"
+    },
+    {
+      "n": "08",
+      "name": "ראיון עומק",
+      "file": "08-interview.jpg"
+    },
+    {
+      "n": "09",
+      "name": "תצפית",
+      "file": "09-observation.jpg"
+    },
+    {
+      "n": "10",
+      "name": "סקר",
+      "file": "10-survey.jpg"
+    },
+    {
+      "n": "11",
+      "name": "תובנה מחקרית",
+      "file": "11-insight.jpg"
+    },
+    {
+      "n": "12",
+      "name": "הקשר שימוש",
+      "file": "12-context-of-use.jpg"
+    },
+    {
+      "n": "13",
+      "name": "דפוס התנהגות",
+      "file": "13-behavior-pattern.jpg"
+    },
+    {
+      "n": "14",
+      "name": "נקודת כאב",
+      "file": "14-pain-point.jpg"
+    },
+    {
+      "n": "15",
+      "name": "מניע",
+      "file": "15-motivation.jpg"
+    },
+    {
+      "n": "16",
+      "name": "צורך (גלוי מול סמוי)",
+      "file": "16-need.jpg"
+    }
+  ]
+}

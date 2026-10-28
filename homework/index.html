@@ -50,6 +50,10 @@ body { margin: 0; font-family: var(--font); background: var(--bg); color: var(--
 .blob.t { width: 640px; height: 640px; background: rgba(20, 163, 174, 0.14); filter: blur(120px); top: -8%; left: 50%; transform: translateX(-50%); }
 .blob.w { width: 460px; height: 460px; background: rgba(255, 170, 120, 0.1); filter: blur(130px); top: 30%; inset-inline-end: -10%; }
 main { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 40px 16px 96px; }
+.layout { margin-top: 8px; }
+.side { display: contents; }
+.mini { display: none; }
+.quick { display: none; }
 a { color: var(--accent); text-underline-offset: 3px; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
 
@@ -88,13 +92,14 @@ b, strong { color: var(--text); font-weight: 500; }
 
 /* progress */
 .progress { position: sticky; top: 8px; z-index: 3; padding: 12px 18px; margin: 18px 0 8px; }
+.progress .note { display: none; }
 .progress .row { display: flex; justify-content: space-between; font-size: 15px; font-weight: 500; }
 .progress .row span:last-child { font-family: var(--mono); color: var(--accent); }
 .bar { height: 6px; background: var(--track); border-radius: 99px; overflow: hidden; margin-top: 8px; }
 .bar i { display: block; height: 100%; width: 0; background: var(--accent-fill); border-radius: 99px; transition: width .3s ease; }
 
 /* tasks */
-.task { padding: 18px 18px 6px; margin: 12px 0; transition: background .2s, border-color .2s; }
+.task { scroll-margin-top: 20px; padding: 18px 18px 6px; margin: 12px 0; transition: background .2s, border-color .2s; }
 .task.is-done { background: rgba(240, 249, 244, 0.86); border-color: rgba(31, 138, 85, 0.25); }
 .task-head { display: flex; gap: 14px; align-items: flex-start; }
 .check { position: relative; flex: 0 0 auto; width: 28px; height: 28px; margin-top: 2px; }
@@ -152,6 +157,38 @@ th { color: var(--text); font-weight: 500; background: var(--muted); }
 .res .soon { padding: 14px 18px; color: var(--text-2); border: 1px dashed var(--line); border-radius: var(--r-card); }
 
 footer { margin-top: 64px; color: var(--text-2); font-size: 14px; }
+/* wide screens: side panel with progress, rules and links; content uses the rest */
+@media (min-width: 1080px) {
+  main { max-width: 1320px; padding-inline: 32px; }
+  .head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 8px 32px; }
+  .head .sub { margin-bottom: 0; max-width: 620px; }
+  .layout { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 32px; align-items: start; margin-top: 28px; }
+  .side { display: flex; flex-direction: column; gap: 14px; position: sticky; top: 20px; max-height: calc(100vh - 40px); overflow-y: auto; padding: 2px; }
+  .side .progress { position: static; margin: 0; padding: 16px 18px; }
+  .side .progress .note { display: block; margin: 10px 0 0; font-size: 13px; }
+  .side .rules { margin: 0; }
+  .mini { display: block; list-style: none; padding: 0; margin: 12px 0 0; }
+  .mini li { margin: 0; }
+  .mini a { display: flex; gap: 10px; align-items: center; padding: 6px 4px; font-size: 14px; color: var(--text); text-decoration: none; border-radius: 8px; line-height: 1.35; }
+  .mini a:hover { background: var(--muted); }
+  .mini i { flex: 0 0 auto; width: 16px; height: 16px; border-radius: 5px; border: 1.5px solid rgba(20, 24, 40, 0.25); background: #fff; }
+  .mini .on a { color: var(--success-text); }
+  .mini .on i { background: var(--success); border-color: var(--success); }
+  .quick { display: flex; flex-direction: column; gap: 2px; padding: 14px 18px; }
+  .quick b { font-size: 15px; margin-bottom: 4px; }
+  .quick a { font-size: 15px; padding: 3px 0; }
+  .content .session:first-child { margin-top: 0; }
+  .session-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; }
+  .session-head .session-title { margin-bottom: 0; }
+  .parts { grid-template-columns: repeat(2, 1fr); }
+  .stats { grid-template-columns: repeat(4, 1fr); }
+  .res { grid-template-columns: repeat(2, 1fr); }
+  .res li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; }
+}
+@media (min-width: 1400px) {
+  .layout { grid-template-columns: 360px minmax(0, 1fr); gap: 40px; }
+}
 @media (max-width: 520px) {
   .task-body { padding-inline-start: 0; }
   .prompt { padding: 44px 14px 12px; }
@@ -164,12 +201,46 @@ footer { margin-top: 64px; color: var(--text-2); font-size: 14px; }
 <div class="depth"></div><div class="blob t"></div><div class="blob w"></div>
 <main>
   <div class="wordmark"><span class="dot"></span><a href="../">עיצוב החלטות · HIT ME</a></div>
+  <header class="head">
+  <div>
   <h1>שיעורי בית ומפגשים</h1>
   <p class="sub">קישור אחד לכל הקורס. בכל מפגש: מה עושים עד המפגש הבא, סיכום, וחומרים. המפגש האחרון תמיד למעלה.</p>
+  </div>
   <nav class="pills" aria-label="מפגשים">
     <a class="on" href="#session-02">מפגש 02 · 28.10</a>
+    <a href="#session-01">מפגש 01</a>
+    <a href="../maps/">מפות המושגים</a>
   </nav>
+  </header>
 
+  <div class="layout">
+  <aside class="side" aria-label="ההתקדמות והכללים">
+    <div class="progress glass" aria-live="polite">
+      <div class="row"><span>ההתקדמות שלי · מפגש 02</span><span id="count">0/0</span></div>
+      <div class="bar"><i id="bar"></i></div>
+      <ol class="mini" id="mini"></ol>
+      <p class="note">הסימון נשמר רק בדפדפן שבו סימנתם. אני רואה את ההתקדמות לפי מה שנכנס למאגר.</p>
+    </div>
+
+    <div class="rules">
+      <b class="t">ארבעה כללים לשבוע הזה</b>
+      <ul>
+        <li>מתייעצים איתי בוואטסאפ. אני עוקב כל הזמן.</li>
+        <li>לא מתחילים לבצע את המחקר לפני שאישרתי את התדריך של החוליה.</li>
+        <li>יש בעיה? מעלים אותה כמה שיותר מוקדם, לא ערב לפני המפגש.</li>
+        <li>"גמור" אומר שיש משהו במאגר או אצלי, לא "עבדתי על זה".</li>
+      </ul>
+    </div>
+
+    <nav class="quick glass" aria-label="קישורים מהירים">
+      <b>קישורים מהירים</b>
+      <a href="https://forms.gle/dQ8pLsFGombzxj8L8">סקר המשוב השבועי</a>
+      <a href="../maps/">מפות המושגים</a>
+      <a href="https://github.com/eranlahav/hitme">המאגר של הקורס</a>
+    </nav>
+  </aside>
+
+  <div class="content">
   <article id="session-02" class="session">
     <div class="session-head glass">
       <div class="eyebrow">מפגש 02 · יום רביעי 28.10</div>
@@ -187,21 +258,19 @@ footer { margin-top: 64px; color: var(--text-2); font-size: 14px; }
       <h3 class="part"><span class="n">01</span>שיעורי בית עד מפגש 3</h3>
       <p>כל משימה כוללת מה עושים, איפה, ומתי היא <b>גמורה</b>. בכל משימה יש גם הנחיה מוכנה לסוכן: מעתיקים ומדביקים כמו שהיא, כדי שכולם יעבדו באותה צורה.</p>
 
-      <div class="rules">
-        <b class="t">ארבעה כללים לשבוע הזה</b>
-        <ul>
-          <li>מתייעצים איתי בוואטסאפ. אני עוקב כל הזמן.</li>
-          <li>לא מתחילים לבצע את המחקר לפני שאישרתי את התדריך של החוליה.</li>
-          <li>יש בעיה? מעלים אותה כמה שיותר מוקדם, לא ערב לפני המפגש.</li>
-          <li>"גמור" אומר שיש משהו במאגר או אצלי, לא "עבדתי על זה".</li>
-        </ul>
-      </div>
 
-      <div class="progress glass" aria-live="polite">
-        <div class="row"><span>ההתקדמות שלי</span><span id="count">0/0</span></div>
-        <div class="bar"><i id="bar"></i></div>
+      <!-- 0. Finish session 1 -->
+      <div class="task glass" data-id="s02-session1">
+        <div class="task-head">
+          <span class="check"><input type="checkbox" id="t0"><span></span></span>
+          <label for="t0"><span class="task-title">סיימתי את כל מה שהיה צריך לעשות אחרי מפגש 1</span>
+            <span class="meta"><span class="chip first">לפני הכול</span></span></label>
+        </div>
+        <div class="task-body">
+          <p>לפני שמתחילים את השבוע הזה, בדקו שכל המשימות של מפגש 1 גמורות. מה שעוד פתוח, סוגרים קודם.</p>
+          <div class="dod"><b>גמור כש:</b> כל המשימות ברשימה של מפגש 1 מסומנות.<br><a href="#session-01">לרשימה של מפגש 1</a></div>
+        </div>
       </div>
-      <p class="note">הסימון נשמר רק בדפדפן שבו סימנתם. אני רואה את ההתקדמות לפי מה שנכנס למאגר.</p>
 
       <!-- 1. Feedback -->
       <div class="task glass" data-id="s02-feedback">
@@ -365,7 +434,13 @@ https://github.com/eranlahav/hitme
 4. שלוש עד חמש תובנות מחקריות. ליד כל תובנה: על אילו ראיות היא נשענת, ומאיזה קובץ.
 5. האם ההשערה שלנו התאששה, הופרכה, או שעוד לא ברור.
 אל תוסיף תובנה בלי ראיה. אם משהו לא ברור, תשאל אותנו.</div>
-          <div class="dod"><b>גמור כש:</b> לחוליה יש דוח עם כמה תובנות מחקריות, ואתם מציגים אותו במפגש 3.</div>
+          <div class="prompt-label">הנחיה לסוכן: הגשת הדוח (חבר אחד מהחוליה)</div>
+          <div class="prompt"><button type="button">העתק</button>אני רוצה להגיש את הדוח של חוליית [שם החוליה], החלק השני של מטלה 3.
+תמשוך את הגרסה העדכנית, ותשים את הקבצים בתיקייה שלי ב-assignments/03-squad-reports/.
+שם כל קובץ מתחיל ב-[observation / interviews / survey / desk-research].
+אם יש קובץ גדול מדי, תגיד לי לפני שאתה מגיש.</div>
+          <p>מגישים שני דברים: הדוח בכתב, ומה שהצגתם בכיתה בכל צורה שהיא: מצגת פיגמה מיוצאת לקובץ, תמונות, או קישור למצגת בתוך הדוח. חבר אחד מגיש בשביל כל החוליה, ובראש הדוח כותבים את שמות המשתמש של כל החברים.</p>
+          <div class="dod"><b>גמור כש:</b> הדוח ומה שהוצג נכנסו לתיקיית דוחות החוליות במאגר, ואתם מציגים אותו במפגש 3.<br><a href="https://github.com/eranlahav/hitme/tree/main/assignments/03-squad-reports">לתיקיית דוחות החוליות</a></div>
         </div>
       </div>
 
@@ -379,12 +454,12 @@ https://github.com/eranlahav/hitme
         <div class="task-body">
           <p>היומן מלווה אתכם כל הקורס. כל רשומה עונה על ארבע שאלות: מה למדתי, אילו ראיות אספתי, מהי ההנחה שלי עכשיו, ומה הצעד הבא. כותבים מה למדתם והחלטתם, לא רק מה עשיתם.</p>
           <div class="prompt-label">הנחיה לסוכן</div>
-          <div class="prompt"><button type="button">העתק</button>אני רוצה לפתוח את יומן העיצוב שלי לקורס.
-תמשוך את הגרסה העדכנית, ותפתח בתיקייה שלי במטלה 3 קובץ בשם journal.md.
-תכתוב בו רשומה ראשונה עם התאריך של היום וארבע כותרות: מה למדתי, אילו ראיות אספתי, מהי ההנחה שלי עכשיו, ומה הצעד הבא.
+          <div class="prompt"><button type="button">העתק</button>אני רוצה לכתוב רשומה ביומן העיצוב שלי.
+תמשוך את הגרסה העדכנית. אם אין לי עדיין תיקייה, תפתח את assignments/design-journal/&lt;שם המשתמש שלי&gt;/journal.md.
+תוסיף בראש הקובץ רשומה עם התאריך של היום וארבע כותרות: מה למדתי, אילו ראיות אספתי, מהי ההנחה שלי עכשיו, ומה הצעד הבא.
 תשאל אותי על כל כותרת, ותכתוב את התשובות במילים שלי. אל תמלא במקומי.
 בסוף תגיש את הקובץ.</div>
-          <div class="dod"><b>גמור כש:</b> הקובץ עם הרשומה הראשונה נכנס למאגר.</div>
+          <div class="dod"><b>גמור כש:</b> הקובץ עם הרשומה הראשונה נכנס לתיקיית היומנים במאגר.<br><a href="https://github.com/eranlahav/hitme/tree/main/assignments/design-journal">לתיקיית יומני העיצוב</a></div>
         </div>
       </div>
 
@@ -396,7 +471,7 @@ https://github.com/eranlahav/hitme
             <span class="meta"><span class="chip">המפה תעלה כאן בקרוב</span></span></span>
         </div>
         <div class="task-body">
-          <p>כמו בפעם הקודמת: כל אחד בוחר מושג מהמפה החדשה ומכין לו ויזואל. המפה והפרטים יופיעו כאן.</p>
+          <p>כמו בפעם הקודמת: כל אחד בוחר מושג מהמפה החדשה ומכין לו ויזואל. הפעם מגישים אותו ישר למאגר, לתיקיית המפות, והוא מופיע לבד <a href="../maps/">בדף מפות המושגים</a>. המפה והפרטים יופיעו כאן.</p>
         </div>
       </div>
     </section>
@@ -453,7 +528,7 @@ https://github.com/eranlahav/hitme
       <h3 class="part"><span class="n">04</span>חומרים מהמפגש</h3>
       <p class="note">הקישורים למאגר נפתחים רק אחרי שאישרתם את ההזמנה.</p>
       <ul class="res">
-        <li><a class="glass" href="https://claude.ai/artifact/8jqHK94RYC48LKEErmj7w8">גלריית המושגים<span>הוויזואלים שלכם לכל המושגים, משני המפגשים</span></a></li>
+        <li><a class="glass" href="../maps/">מפות המושגים<span>המפות והוויזואלים שלכם לכל המושגים, משני המפגשים</span></a></li>
         <li><a class="glass" href="https://github.com/eranlahav/hitme/tree/main/assignments/02-research-concepts">מפת 16 מושגי המחקר והוראות מטלה 2<span>במאגר, בתיקיית מטלה 2</span></a></li>
         <li><a class="glass" href="https://github.com/eranlahav/hitme/tree/main/assignments/03-user-research">הוראות מטלה 3 ומה חברים כבר הגישו<span>במאגר, בתיקיית מטלה 3</span></a></li>
         <li><a class="glass" href="https://github.com/eranlahav/hitme/tree/main/docs/research/2026-09-21-session-2-field-methods">חבילת המחקר לשטח<span>שיטות, שאלון עומק, מיפוי הקמפוס, הרשאות ואתיקה</span></a></li>
@@ -464,6 +539,29 @@ https://github.com/eranlahav/hitme
     </section>
   </article>
 
+  <article id="session-01" class="session">
+    <div class="session-head glass">
+      <div class="eyebrow">מפגש 01</div>
+      <h2 class="session-title">המפגש הראשון</h2>
+      <nav class="subnav">
+        <a href="../lesson-01/">סקירת הקורס</a>
+        <a href="../maps/#01-git">מפת מושגי הגיט</a>
+      </nav>
+    </div>
+    <section id="s01-homework">
+      <h3 class="part"><span class="n">01</span>מה היה צריך לעשות אחרי מפגש 1</h3>
+      <div class="task pending">
+        <div class="task-head">
+          <span class="check"><input type="checkbox" disabled aria-label="עוד לא פורסם"><span></span></span>
+          <span class="lbl"><span class="task-title">רשימת המשימות של מפגש 1 תעלה כאן בקרוב</span></span>
+        </div>
+        <div class="task-body"><p>עד אז, אם אתם לא בטוחים מה נשאר פתוח, שאלו אותי בוואטסאפ.</p></div>
+      </div>
+    </section>
+  </article>
+  </div>
+  </div>
+
   <footer>עיצוב החלטות · HIT ME · המכון הטכנולוגי חולון · ערן להב</footer>
 </main>
 <script>
@@ -471,13 +569,24 @@ https://github.com/eranlahav/hitme
   var KEY = 'hitme-hw-v1';
   var state = {};
   try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
-  var tasks = Array.prototype.slice.call(document.querySelectorAll('.task[data-id]'));
+  var tasks = Array.prototype.slice.call(document.querySelectorAll('#session-02 .task[data-id]'));
+  var mini = document.getElementById('mini');
+  var minis = tasks.map(function (t) {
+    var li = document.createElement('li'); var a = document.createElement('a');
+    var target = t.querySelector('input').id;
+    t.id = t.id || 'task-' + t.dataset.id;
+    a.href = '#' + t.id;
+    a.appendChild(document.createElement('i'));
+    a.appendChild(document.createTextNode(t.querySelector('.task-title').textContent));
+    li.appendChild(a); mini.appendChild(li); return li;
+  });
   function render() {
     var done = 0;
     tasks.forEach(function (t) {
       var on = !!state[t.dataset.id];
       t.querySelector('input').checked = on;
       t.classList.toggle('is-done', on);
+      minis[tasks.indexOf(t)].classList.toggle('on', on);
       if (on) done++;
     });
     document.getElementById('count').textContent = done + '/' + tasks.length;
