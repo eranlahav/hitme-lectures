@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<title>מפגש 02 · מחקר משתמשים</title>
+<title>שיעורי בית · עיצוב החלטות</title>
 <style>
 @font-face { font-family: Alef; font-weight: 400; src: url(../lesson-01/fonts/Alef-400.ttf) format('truetype'); }
 @font-face { font-family: Alef; font-weight: 700; src: url(../lesson-01/fonts/Alef-700.ttf) format('truetype'); }
@@ -42,7 +42,11 @@ nav.toc a { border: 1px solid var(--line); border-radius: 999px; padding: 6px 14
 nav.toc a:hover { border-color: var(--accent); }
 section { margin-top: 56px; }
 h2 { font-size: 30px; margin: 0 0 8px; }
-h2 .num { color: var(--accent); font-size: 18px; letter-spacing: 1px; display: block; }
+h2 .num, h3.part .num { color: var(--accent); font-size: 18px; letter-spacing: 1px; display: block; }
+h3.part { font-size: 26px; margin: 0 0 8px; }
+.session { border-top: 3px solid var(--ink); padding-top: 24px; margin-top: 8px; }
+.session-head .num { color: var(--accent); font-size: 18px; letter-spacing: 1px; font-weight: 700; }
+.session-title { font-size: 34px; margin: 4px 0 16px; }
 h3 { font-size: 21px; margin: 28px 0 8px; }
 p, li { color: var(--body); font-size: 18px; }
 .key { border-right: 4px solid var(--accent); background: var(--accent-soft); padding: 14px 18px; border-radius: 8px; font-size: 20px; color: var(--ink); margin: 20px 0; }
@@ -96,18 +100,24 @@ footer { margin-top: 64px; color: var(--muted); font-size: 15px; }
 <body>
 <main>
   <div class="eyebrow"><div class="rule"></div><a href="../">עיצוב החלטות · HIT ME</a></div>
-  <h1>מפגש 02 · <span class="accent">מחקר משתמשים</span></h1>
-  <p class="sub">יום רביעי, 28.10. סיכום המפגש, החומרים, ומה עושים עד המפגש הבא.</p>
+  <h1>שיעורי בית <span class="accent">ומפגשים</span></h1>
+  <p class="sub">קישור אחד לכל הקורס. לכל מפגש: מה עושים עד המפגש הבא, סיכום, וחומרים. המפגש האחרון תמיד למעלה.</p>
+  <nav class="toc sessions">
+    <a href="#session-02">מפגש 02 · 28.10</a>
+  </nav>
+
+  <article id="session-02" class="session">
+  <div class="session-head"><span class="num">מפגש 02 · 28.10</span><h2 class="session-title">מחקר משתמשים</h2></div>
   <nav class="toc">
-    <a href="#homework">שיעורי בית</a>
-    <a href="#summary">מה עשינו</a>
-    <a href="#us">מה גילינו עלינו</a>
-    <a href="#resources">חומרים</a>
+    <a href="#s02-homework">שיעורי בית</a>
+    <a href="#s02-summary">מה עשינו</a>
+    <a href="#s02-us">מה גילינו עלינו</a>
+    <a href="#s02-resources">חומרים</a>
   </nav>
 
   <!-- ===== HOMEWORK ===== -->
-  <section id="homework">
-    <h2><span class="num">01</span>שיעורי בית עד מפגש 3</h2>
+  <section id="s02-homework">
+    <h3 class="part"><span class="num">01</span>שיעורי בית עד מפגש 3</h3>
     <p>כל משימה כוללת מה עושים, איפה, ומתי היא <b>גמורה</b>. "גמור" אומר שיש משהו במאגר או אצלי, לא "עבדתי על זה". סמנו בעצמכם מה סיימתם.</p>
     <p class="note">הסימון נשמר בדפדפן שבו סימנתם, ורק אצלכם. אני רואה את ההתקדמות לפי מה שנכנס למאגר.</p>
 
@@ -234,8 +244,8 @@ footer { margin-top: 64px; color: var(--muted); font-size: 15px; }
   </section>
 
   <!-- ===== SUMMARY ===== -->
-  <section id="summary">
-    <h2><span class="num">02</span>מה עשינו במפגש</h2>
+  <section id="s02-summary">
+    <h3 class="part"><span class="num">02</span>מה עשינו במפגש</h3>
     <div class="key">לעבור מהנחות על אנשים להבנה מבוססת של צרכים, הקשר והתנהגות.</div>
     <p>המטרה של היום: לעבור מ"נראה לי שסטודנטים..." ל"שמענו משלושה מתוך חמישה ש...". עשינו את זה בשלושה שלבים: למדנו את המילים, תרגלנו אותן על עצמנו, ותכננו את המחקר על סטודנטי המכון.</p>
     <ul class="parts">
@@ -253,8 +263,8 @@ footer { margin-top: 64px; color: var(--muted); font-size: 15px; }
   </section>
 
   <!-- ===== ABOUT US ===== -->
-  <section id="us">
-    <h2><span class="num">03</span>מה גילינו עלינו</h2>
+  <section id="s02-us">
+    <h3 class="part"><span class="num">03</span>מה גילינו עלינו</h3>
     <p>מהסקר שמילאתם בכיתה (12 מתוך 17 ענו, בלי שמות) ומהראיון הקבוצתי. אלה תצפיות, לא מסקנות: בדיוק החומר שממנו מתחילים מחקר.</p>
     <div class="stats">
       <div class="stat"><div class="big">11 מתוך 12</div><div class="lbl">משתמשים בבינה מלאכותית כל יום, או כמה פעמים ביום</div></div>
@@ -281,8 +291,8 @@ footer { margin-top: 64px; color: var(--muted); font-size: 15px; }
   </section>
 
   <!-- ===== RESOURCES ===== -->
-  <section id="resources">
-    <h2><span class="num">04</span>חומרים מהמפגש</h2>
+  <section id="s02-resources">
+    <h3 class="part"><span class="num">04</span>חומרים מהמפגש</h3>
     <p class="note">הקישורים למאגר נפתחים רק אחרי שאישרתם את ההזמנה.</p>
     <ul class="res">
       <li><a href="https://claude.ai/artifact/8jqHK94RYC48LKEErmj7w8">גלריית המושגים<span>הוויזואלים שלכם לכל המושגים, משני המפגשים</span></a></li>
@@ -294,6 +304,8 @@ footer { margin-top: 64px; color: var(--muted); font-size: 15px; }
       <li><div class="soon">סיכום הראיון עם הבוגרת · בקרוב</div></li>
     </ul>
   </section>
+
+  </article>
 
   <footer>עיצוב החלטות · HIT ME · המכון הטכנולוגי חולון · ערן להב</footer>
 </main>
