@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<title>מפגש 02 · מחקר משתמשים</title>
+<style>
+@font-face { font-family: Alef; font-weight: 400; src: url(../lesson-01/fonts/Alef-400.ttf) format('truetype'); }
+@font-face { font-family: Alef; font-weight: 700; src: url(../lesson-01/fonts/Alef-700.ttf) format('truetype'); }
+:root {
+  --bg: #FFFFFF; --ink: #0E2148; --body: #3C4757; --muted: #5B6470;
+  --line: #E4E7EC; --soft: #F6F7F9; --accent: #E31C6D; --accent-soft: #FCF2F6;
+  --done: #12805C; --done-soft: #EAF6F1; --code-bg: #0E2148; --code-ink: #F3F5F9;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B1324; --ink: #EEF1F7; --body: #C3CAD6; --muted: #98A2B3;
+    --line: #243049; --soft: #121C31; --accent: #FF4D8D; --accent-soft: #2A1424;
+    --done: #3CCB95; --done-soft: #10291F; --code-bg: #050A15; --code-ink: #E6EAF2;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B1324; --ink: #EEF1F7; --body: #C3CAD6; --muted: #98A2B3;
+  --line: #243049; --soft: #121C31; --accent: #FF4D8D; --accent-soft: #2A1424;
+  --done: #3CCB95; --done-soft: #10291F; --code-bg: #050A15; --code-ink: #E6EAF2;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: Alef, Arial, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+main { max-width: 760px; margin: 0 auto; padding: 48px 16px 80px; }
+a { color: var(--accent); }
+.eyebrow { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 16px; letter-spacing: 1px; margin-bottom: 16px; }
+.eyebrow .rule { width: 34px; height: 2px; background: var(--accent); }
+.eyebrow a { color: var(--muted); text-decoration: none; }
+h1 { font-size: clamp(34px, 7vw, 48px); line-height: 1.1; margin: 0 0 12px; }
+h1 .accent { color: var(--accent); }
+.sub { color: var(--body); font-size: 19px; margin: 0 0 28px; }
+nav.toc { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+nav.toc a { border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; text-decoration: none; color: var(--ink); font-size: 16px; }
+nav.toc a:hover { border-color: var(--accent); }
+section { margin-top: 56px; }
+h2 { font-size: 30px; margin: 0 0 8px; }
+h2 .num { color: var(--accent); font-size: 18px; letter-spacing: 1px; display: block; }
+h3 { font-size: 21px; margin: 28px 0 8px; }
+p, li { color: var(--body); font-size: 18px; }
+.key { border-right: 4px solid var(--accent); background: var(--accent-soft); padding: 14px 18px; border-radius: 8px; font-size: 20px; color: var(--ink); margin: 20px 0; }
+.parts { list-style: none; padding: 0; margin: 16px 0; display: grid; gap: 10px; }
+.parts li { border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin: 0; }
+.parts b { color: var(--ink); display: block; font-size: 19px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 16px 0; }
+.stat { background: var(--soft); border-radius: 12px; padding: 14px 16px; }
+.stat .big { font-size: 30px; font-weight: 700; color: var(--ink); line-height: 1.1; }
+.stat .lbl { font-size: 16px; color: var(--body); }
+.note { font-size: 15px; color: var(--muted); }
+.quote-list li { margin-bottom: 8px; }
+
+/* homework */
+.progress { position: sticky; top: 0; z-index: 2; background: var(--bg); padding: 12px 0; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+.progress .row { display: flex; justify-content: space-between; font-size: 17px; color: var(--ink); font-weight: 700; }
+.bar { height: 8px; background: var(--soft); border-radius: 99px; overflow: hidden; margin-top: 8px; }
+.bar i { display: block; height: 100%; width: 0; background: var(--done); transition: width .25s; }
+.task { border: 1px solid var(--line); border-radius: 14px; padding: 18px; margin: 14px 0; transition: background .2s, border-color .2s; }
+.task.is-done { background: var(--done-soft); border-color: var(--done); }
+.task-head { display: flex; gap: 14px; align-items: flex-start; }
+.task-head input { width: 26px; height: 26px; margin: 4px 0 0; accent-color: var(--done); flex: 0 0 auto; cursor: pointer; }
+.task-head label { cursor: pointer; flex: 1; }
+.task-title { font-size: 21px; font-weight: 700; color: var(--ink); display: block; line-height: 1.3; }
+.task.is-done .task-title { text-decoration: line-through; text-decoration-color: var(--done); }
+.meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.chip { font-size: 14px; border-radius: 99px; padding: 2px 10px; background: var(--soft); color: var(--body); }
+.chip.due { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.task-body { padding-right: 40px; }
+.task-body p { margin: 10px 0; }
+.dod { border-right: 3px solid var(--done); padding: 6px 12px; background: var(--soft); border-radius: 6px; color: var(--ink); font-size: 17px; margin: 12px 0; }
+.dod b { color: var(--done); }
+.task.pending { border-style: dashed; }
+.task.pending .task-title { color: var(--muted); }
+.tbl-wrap { overflow-x: auto; margin: 12px 0; }
+table { border-collapse: collapse; width: 100%; font-size: 16px; min-width: 560px; }
+th, td { text-align: right; padding: 10px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--body); }
+th { color: var(--ink); background: var(--soft); }
+.prompt { position: relative; background: var(--code-bg); color: var(--code-ink); border-radius: 10px; padding: 14px 16px 14px 76px; margin: 8px 0 14px; font-size: 16px; white-space: pre-wrap; line-height: 1.6; }
+.prompt button { position: absolute; left: 10px; top: 10px; font: inherit; font-size: 14px; border: 0; border-radius: 6px; padding: 4px 10px; background: var(--accent); color: #fff; cursor: pointer; }
+.res { list-style: none; padding: 0; display: grid; gap: 10px; }
+.res li { margin: 0; }
+.res a { display: block; border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; text-decoration: none; color: var(--ink); }
+.res a:hover { border-color: var(--accent); background: var(--accent-soft); }
+.res a span { display: block; font-size: 16px; color: var(--body); }
+.res .soon { border: 1px dashed var(--line); border-radius: 12px; padding: 14px 18px; color: var(--muted); }
+.help { background: var(--soft); border-radius: 14px; padding: 18px; margin-top: 24px; }
+footer { margin-top: 64px; color: var(--muted); font-size: 15px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow"><div class="rule"></div><a href="../">עיצוב החלטות · HIT ME</a></div>
+  <h1>מפגש 02 · <span class="accent">מחקר משתמשים</span></h1>
+  <p class="sub">יום רביעי, 28.10. סיכום המפגש, החומרים, ומה עושים עד המפגש הבא.</p>
+  <nav class="toc">
+    <a href="#homework">שיעורי בית</a>
+    <a href="#summary">מה עשינו</a>
+    <a href="#us">מה גילינו עלינו</a>
+    <a href="#resources">חומרים</a>
+  </nav>
+
+  <!-- ===== HOMEWORK ===== -->
+  <section id="homework">
+    <h2><span class="num">01</span>שיעורי בית עד מפגש 3</h2>
+    <p>כל משימה כוללת מה עושים, איפה, ומתי היא <b>גמורה</b>. "גמור" אומר שיש משהו במאגר או אצלי, לא "עבדתי על זה". סמנו בעצמכם מה סיימתם.</p>
+    <p class="note">הסימון נשמר בדפדפן שבו סימנתם, ורק אצלכם. אני רואה את ההתקדמות לפי מה שנכנס למאגר.</p>
+
+    <div class="progress" aria-live="polite">
+      <div class="row"><span>ההתקדמות שלי</span><span id="count">0 מתוך 0</span></div>
+      <div class="bar"><i id="bar"></i></div>
+    </div>
+
+    <div class="task" data-id="s02-access">
+      <div class="task-head">
+        <input type="checkbox" id="t1">
+        <label for="t1"><span class="task-title">גישה למאגר בגיטהאב</span>
+          <span class="meta"><span class="chip due">מיד</span><span class="chip">5 דקות</span></span></label>
+      </div>
+      <div class="task-body">
+        <p>אשרו את ההזמנה למאגר שקיבלתם במייל מגיטהאב. בלי זה אי אפשר להגיש שום דבר.</p>
+        <div class="dod"><b>גמור כש:</b> הקישור הזה נפתח לכם ואתם רואים את הקבצים:<br><a href="https://github.com/eranlahav/hitme">github.com/eranlahav/hitme</a></div>
+        <p>לא קיבלתם הזמנה, או שהיא פגה? כתבו לי בקבוצה עם שם המשתמש שלכם בגיטהאב.</p>
+      </div>
+    </div>
+
+    <div class="task" data-id="s02-subject">
+      <div class="task-head">
+        <input type="checkbox" id="t2">
+        <label for="t2"><span class="task-title">מה אני חוקר/ת</span>
+          <span class="meta"><span class="chip due">לפני שיוצאים לשטח</span><span class="chip">אישי</span></span></label>
+      </div>
+      <div class="task-body">
+        <p>במפגש לא הספקנו להגדיר יחד מה כל אחד חוקר. עכשיו כל אחד מגדיר לעצמו שלושה דברים:</p>
+        <ol>
+          <li><b>מי</b> המשתמש או מושא המחקר שלי.</li>
+          <li><b>מה</b> הנושא.</li>
+          <li><b>איזו שאלה</b> אני רוצה לברר. שאלת מחקר היא מה שאני רוצה להבין, לא שאלה שאפשר לענות עליה בכן או לא.</li>
+        </ol>
+        <div class="dod"><b>גמור כש:</b> שלושת המשפטים כתובים בראש קובץ המחקר שלכם במטלה 3 (המשימה הבאה).</div>
+      </div>
+    </div>
+
+    <div class="task" data-id="s02-research">
+      <div class="task-head">
+        <input type="checkbox" id="t3">
+        <label for="t3"><span class="task-title">מטלה 3: המחקר של הצוות הזמני</span>
+          <span class="meta"><span class="chip due">מפגש 3, 4.11</span><span class="chip">אישי, בתוך הצוות</span></span></label>
+      </div>
+      <div class="task-body">
+        <p>כל צוות זמני עובד עם הכלי שקיבל בסיעור המוחות. קהל היעד הוא סטודנטי המכון, לא הכיתה שלנו. הצוותים הקבועים של הקורס יוקמו במפגש 3.</p>
+        <div class="tbl-wrap"><table>
+          <tr><th>כלי</th><th>מה עושים</th><th>מה מגישים</th></tr>
+          <tr><td>סקר</td><td>בונים טופס גוגל, מפיצים, ומגיעים לכמה שיותר עונים</td><td>מספר העונים, חמישה ממצאים במספרים, ומה הסקר לא יכול להסביר</td></tr>
+          <tr><td>ראיונות עם סטודנטים</td><td>כמה שיותר ראיונות, מוקלטים בהסכמה, ומתמללים</td><td>תמלולים בלי שמות, ושלושה ציטוטים מסווגים מכל ראיון</td></tr>
+          <tr><td>ראיונות עם סגל</td><td>מראיינים אנשי סגל ומנהלה: מי מטפל במה, ואיפה זה נתקע</td><td>תמלולים ומפה קצרה: מה הסטודנט רואה, ומי עובד מאחורי זה</td></tr>
+          <tr><td>תצפיות</td><td>צופים איפה סטודנטים יושבים, ממתינים ועובדים, בכמה שעות שונות</td><td>מפה של המקומות והשעות, ורשימת התנהגויות שחזרו</td></tr>
+          <tr><td>מחקר ברשת</td><td>מחקרים, נתונים, ביקורות על אפליקציות, קבוצות סטודנטים</td><td>רשימת מקורות שנפתחו בפועל, וכל טענה עם רמת הביטחון שלה</td></tr>
+        </table></div>
+        <p><b>לפני שמתחילים</b>, אומרים לסוכן:</p>
+        <div class="prompt"><button type="button">העתק</button>אני רוצה לעבוד על מטלה 3, מחקר משתמשים.
+קודם תמשוך את הגרסה העדכנית ותקרא את כל מה שחברים כבר הגישו בתיקיית המחקר.
+תסכם לי בחמש שורות מה כבר ידוע ומה עוד חסר.
+אחרי זה נכין יחד את המחקר שלי כך שיבנה על מה שכבר נמצא.</div>
+        <p><b>אחרי שאספתם את החומר:</b></p>
+        <div class="prompt"><button type="button">העתק</button>תגיש את תוצאות המחקר שלי למטלה 3.</div>
+        <div class="dod"><b>גמור כש:</b> בתיקייה שלכם במטלה 3 יש קובץ חדש, בשם תאריך ושיטה (למשל <span dir="ltr">2026-10-29-survey</span>), כתוב בו על מה בניתם, והוא נכנס למאגר.</div>
+        <p class="note">הקלטות ותמלולים גולמיים נשמרים בכונן מוגבל, לא במאגר. למאגר נכנסים רק סיכומים בלי שמות ובלי פרטים מזהים.</p>
+      </div>
+    </div>
+
+    <div class="task" data-id="s02-team-summary">
+      <div class="task-head">
+        <input type="checkbox" id="t4">
+        <label for="t4"><span class="task-title">סיכום הצוות למפגש 3</span>
+          <span class="meta"><span class="chip due">מפגש 3, 4.11</span><span class="chip">צוותי</span></span></label>
+      </div>
+      <div class="task-body">
+        <p>בסוף השבוע כל צוות מכין סיכום אחד, בשלושה חלקים:</p>
+        <ol>
+          <li><b>מה ראינו.</b> רק מה שקרה ונאמר.</li>
+          <li><b>מה אנחנו מפרשים.</b> מה לדעתנו זה אומר.</li>
+          <li><b>מה עדיין איננו יודעים.</b></li>
+        </ol>
+        <div class="dod"><b>גמור כש:</b> הצוות מגיע למפגש 3 עם הסיכום, ושלושת החלקים מופרדים.</div>
+      </div>
+    </div>
+
+    <div class="task" data-id="s02-a2">
+      <div class="task-head">
+        <input type="checkbox" id="t5">
+        <label for="t5"><span class="task-title">מטלה 2: הוויזואל של המושג למאגר</span>
+          <span class="meta"><span class="chip due">מפגש 3, 4.11</span><span class="chip">אישי, תרגול גיט</span></span></label>
+      </div>
+      <div class="task-body">
+        <p>את הוויזואל שהכנתם למושג המחקר מעלים למאגר בעצמכם, עם הסוכן. זה התרגול הראשון שלכם בגיט: ענף, שמירה, ובקשת מיזוג.</p>
+        <div class="prompt"><button type="button">העתק</button>אני רוצה להגיש את מטלה 2.</div>
+        <div class="dod"><b>גמור כש:</b> פתחתם בקשת מיזוג עם התיקייה שלכם, <b>או</b> כתבתם בקבוצה מה תקע אתכם. גם זה נחשב.</div>
+      </div>
+    </div>
+
+    <div class="task" data-id="s02-feedback">
+      <div class="task-head">
+        <input type="checkbox" id="t6">
+        <label for="t6"><span class="task-title">סקר משוב על המפגש</span>
+          <span class="meta"><span class="chip due">היום</span><span class="chip">2 דקות</span></span></label>
+      </div>
+      <div class="task-body">
+        <p>מה היה ברור, מה לא, ומה עוד תקוע. גם זה מחקר: אני משתמש בו כדי לשפר את הקורס בשבילכם. הקישור בקבוצת הוואטסאפ.</p>
+        <div class="dod"><b>גמור כש:</b> שלחתם את הטופס.</div>
+      </div>
+    </div>
+
+    <div class="task pending" data-pending="1">
+      <div class="task-head">
+        <input type="checkbox" disabled aria-label="עוד לא פורסם">
+        <span><span class="task-title">יומן העיצוב: הרשומה הראשונה</span>
+          <span class="meta"><span class="chip">ההנחיה תתפרסם כאן בקרוב</span></span></span>
+      </div>
+      <div class="task-body">
+        <p>כל רשומה ביומן תענה על ארבע שאלות: מה למדתי, אילו ראיות אספתי, מהי ההנחה שלי, ומה הצעד הבא.</p>
+      </div>
+    </div>
+
+    <div class="help">
+      <b>נתקעתם? אל תחכו למפגש.</b>
+      <p style="margin:6px 0 0">כתבו בקבוצה מה לא ברור או איפה נתקעתם, באמצע השבוע. שאלה טובה עוזרת לכל הכיתה.</p>
+    </div>
+  </section>
+
+  <!-- ===== SUMMARY ===== -->
+  <section id="summary">
+    <h2><span class="num">02</span>מה עשינו במפגש</h2>
+    <div class="key">לעבור מהנחות על אנשים להבנה מבוססת של צרכים, הקשר והתנהגות.</div>
+    <p>המטרה של היום: לעבור מ"נראה לי שסטודנטים..." ל"שמענו משלושה מתוך חמישה ש...". עשינו את זה בשלושה שלבים: למדנו את המילים, תרגלנו אותן על עצמנו, ותכננו את המחקר על סטודנטי המכון.</p>
+    <ul class="parts">
+      <li><b>למידה משותפת: 16 מושגי מחקר</b>חזרה מהזיכרון על מושגי הגיט ממפגש 1, ואז סבב על מושגי המחקר. אתם הסברתם מהוויזואלים שלכם, ומי שהסביר הזמין את הבא.</li>
+      <li><b>תרגול מחקר עלינו</b>חצי מהכיתה מילאה סקר, וחצי השתתפה בראיון קבוצתי, ואז התחלפו. בסוף, הבינה המלאכותית עזרה לסנתז את מה שעלה.</li>
+      <li><b>סיעור מוחות: כלי המחקר</b>בצוותים זמניים: מה כל כלי יכול לגלות, ומי לוקח איזה כלי לשבוע הקרוב.</li>
+      <li><b>ראיון עם בוגרת</b>ראיון עומק חי מול הכיתה. סיכום הנקודות שעלו יעלה לכאן בהמשך.</li>
+    </ul>
+    <h3>על מה שמתי דגש</h3>
+    <ul>
+      <li>למה חוקרים בכלל: התובנות מהמחקר הן מה שיקבע מה נבנה ב-HIT ME.</li>
+      <li>מה שאדם אומר על עצמו לא תמיד שווה למה שהוא עושה. מחפשים ראיות, לא רק אמירות.</li>
+      <li>"גמור" זה קובץ במאגר. שמירה קטנה וברורה עדיפה על עבודה גדולה שאף אחד לא רואה.</li>
+    </ul>
+  </section>
+
+  <!-- ===== ABOUT US ===== -->
+  <section id="us">
+    <h2><span class="num">03</span>מה גילינו עלינו</h2>
+    <p>מהסקר שמילאתם בכיתה (12 מתוך 17 ענו, בלי שמות) ומהראיון הקבוצתי. אלה תצפיות, לא מסקנות: בדיוק החומר שממנו מתחילים מחקר.</p>
+    <div class="stats">
+      <div class="stat"><div class="big">11 מתוך 12</div><div class="lbl">משתמשים בבינה מלאכותית כל יום, או כמה פעמים ביום</div></div>
+      <div class="stat"><div class="big">7 מתוך 12</div><div class="lbl">עוד לא עשו אף ראיון או תצפית עם משתמשים</div></div>
+      <div class="stat"><div class="big">12 מתוך 12</div><div class="lbl">יוצאים לפעמים או לעיתים קרובות מבולבלים מעבודה עם בינה</div></div>
+      <div class="stat"><div class="big">8 מתוך 12</div><div class="lbl">יכולים להשקיע 5 עד 7 שעות בשבוע מחוץ למפגש</div></div>
+    </div>
+    <h3>איפה אתם מרגישים בטוחים, ואיפה פחות</h3>
+    <p>הכי גבוה (מתוך 5): עבודה עם אחרים 4.4, הבנה טכנולוגית 4.1, שפה חזותית 3.9, שימוש בבינה 3.9.<br>
+    הכי נמוך: נתונים ומדידה 2.1, קוד 2.2, מחקר משתמשים 2.4.</p>
+    <h3>מה הכי לא נוח</h3>
+    <p>להראות עבודה לא גמורה (1.7), לעבוד בתלות באחרים (2.2), ולסיים עבודה כשהיא לא מושלמת (2.3). שלושת הדברים שהכי מדאיגים אתכם בקורס: תלות באחרים, עומס, ועבודה לא ברורה.</p>
+    <div class="key" style="font-size:18px">שאלה לבדוק: אתם מרגישים בטוחים מאוד בעבודה עם אחרים, אבל תלות באחרים היא הדאגה מספר אחת. מה ההבדל בין השניים?</div>
+    <h3>מהראיון הקבוצתי</h3>
+    <ul class="quote-list">
+      <li>הבינה ממציאה דברים, ואז צריך לקרוא הכול ולבדוק איפה היא טעתה.</li>
+      <li>בלי ההחלטות שלכם היא בונה ממשק "בנאלי": כל הפיצ'רים בדף הראשי, גלילה אינסופית, ואין שום החלטה.</li>
+      <li>יש מי שאומר לה מראש: "אל תחליט כלום. תשאל אותי. מי שמחליט בסוף זה אני."</li>
+      <li>היו מקרים שהיא פעלה בלי לבקש אישור, וזה הפתיע.</li>
+      <li>החשש: כמה זמן מה שלומדים עכשיו יחזיק. העידוד: אפשר לבנות דברים לבד, גם בלי לדעת לתכנת.</li>
+      <li>מה יגרום להרגיש בסוף הסמסטר שאתם יודעים מה אתם עושים: להבין כל צעד בדרך, ולמה עשיתם אותו.</li>
+    </ul>
+    <p>בבדיקת תוצאות של בינה, 11 מתוך 12 מבקשים מהכלי לבקר את עצמו, ורק 4 משווים למקור. כדאי לזכור את זה כשאתם אוספים ראיות השבוע.</p>
+  </section>
+
+  <!-- ===== RESOURCES ===== -->
+  <section id="resources">
+    <h2><span class="num">04</span>חומרים מהמפגש</h2>
+    <p class="note">הקישורים למאגר נפתחים רק אחרי שאישרתם את ההזמנה.</p>
+    <ul class="res">
+      <li><a href="https://claude.ai/artifact/8jqHK94RYC48LKEErmj7w8">גלריית המושגים<span>הוויזואלים שלכם לכל המושגים, משני המפגשים</span></a></li>
+      <li><a href="https://github.com/eranlahav/hitme/tree/main/assignments/02-research-concepts">מפת 16 מושגי המחקר והוראות מטלה 2<span>במאגר, בתיקיית מטלה 2</span></a></li>
+      <li><a href="https://github.com/eranlahav/hitme/tree/main/assignments/03-user-research">הוראות מטלה 3 ומה חברים כבר הגישו<span>במאגר, בתיקיית מטלה 3</span></a></li>
+      <li><a href="https://github.com/eranlahav/hitme/tree/main/docs/research/2026-09-21-session-2-field-methods">חבילת המחקר לשטח<span>שיטות, שאלון עומק, מיפוי הקמפוס, הרשאות ואתיקה</span></a></li>
+      <li><a href="https://github.com/eranlahav/hitme/tree/main/docs/research">כל המחקרים שכבר במאגר<span>סקר 40 אפליקציות, יום בחיי סטודנט, מפת השירותים המנהליים ועוד. נקודת התחלה, לא תשובה</span></a></li>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScSPJtFh-wKnQlT_pxJMusQ5RapNCYazDySasnYTIkGlY4o9g/viewform">הסקר שמילאתם בכיתה<span>דוגמה לסקר, אם הצוות שלכם בונה סקר</span></a></li>
+      <li><div class="soon">סיכום הראיון עם הבוגרת · בקרוב</div></li>
+    </ul>
+  </section>
+
+  <footer>עיצוב החלטות · HIT ME · המכון הטכנולוגי חולון · ערן להב</footer>
+</main>
+<script>
+(function () {
+  var KEY = 'hitme-hw-v1';
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
+  var tasks = Array.prototype.slice.call(document.querySelectorAll('.task[data-id]'));
+  function render() {
+    var done = 0;
+    tasks.forEach(function (t) {
+      var on = !!state[t.dataset.id];
+      t.querySelector('input').checked = on;
+      t.classList.toggle('is-done', on);
+      if (on) done++;
+    });
+    document.getElementById('count').textContent = done + ' מתוך ' + tasks.length;
+    document.getElementById('bar').style.width = (tasks.length ? done / tasks.length * 100 : 0) + '%';
+  }
+  tasks.forEach(function (t) {
+    t.querySelector('input').addEventListener('change', function (e) {
+      state[t.dataset.id] = e.target.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (err) {}
+      render();
+    });
+  });
+  document.querySelectorAll('.prompt button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var text = b.parentNode.textContent.replace(b.textContent, '').trim();
+      var ok = function () { b.textContent = 'הועתק'; setTimeout(function () { b.textContent = 'העתק'; }, 1500); };
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(ok, function () {});
+    });
+  });
+  render();
+})();
+</script>
+</body>
+</html>
