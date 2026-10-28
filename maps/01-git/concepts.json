@@ -1,0 +1,84 @@
+{
+  "id": "01-git",
+  "session": "01",
+  "date": "21.10",
+  "title": "15 מושגי גיט",
+  "map": "00-map.webp",
+  "concepts": [
+    {
+      "n": "01",
+      "name": "גיט (Git)",
+      "file": "01-git.jpg"
+    },
+    {
+      "n": "02",
+      "name": "מאגר קוד (Repo)",
+      "file": "02-repo.jpg"
+    },
+    {
+      "n": "03",
+      "name": "מרוחק (Remote)",
+      "file": "03-remote.jpg"
+    },
+    {
+      "n": "04",
+      "name": "מקומי (Local)",
+      "file": "04-local.jpg"
+    },
+    {
+      "n": "05",
+      "name": "סביבת עבודה (Env)",
+      "file": "05-env.jpg"
+    },
+    {
+      "n": "06",
+      "name": "קובץ הסבר (README)",
+      "file": "06-readme.jpg"
+    },
+    {
+      "n": "07",
+      "name": "שכפול (Clone)",
+      "file": "07-clone.jpg"
+    },
+    {
+      "n": "08",
+      "name": "משימה (Issue)",
+      "file": "08-issue.jpg"
+    },
+    {
+      "n": "09",
+      "name": "ענף (Branch)",
+      "file": "09-branch.jpg"
+    },
+    {
+      "n": "10",
+      "name": "שמירה (Commit)",
+      "file": "10-commit.jpg"
+    },
+    {
+      "n": "11",
+      "name": "גרסה (Version)",
+      "file": "11-version.jpg"
+    },
+    {
+      "n": "12",
+      "name": "דחיפה (Push)",
+      "file": "12-push.jpg"
+    },
+    {
+      "n": "13",
+      "name": "משיכה (Pull)",
+      "file": "13-pull.jpg"
+    },
+    {
+      "n": "14",
+      "name": "בקשת מיזוג (Pull Request)",
+      "file": "14-pull-request.jpg"
+    },
+    {
+      "n": "15",
+      "name": "מיזוג (Merge)",
+      "file": "15-merge.jpg"
+    }
+  ]
+}

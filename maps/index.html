@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<title>מפות המושגים · HIT ME</title>
+<!-- Data comes from maps/ in the course repo; a workflow there copies it here on every merge. This page is not overwritten by the copy. -->
+<style>
+@font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 400; font-display: swap; src: url(../assets/fonts/ibm-plex-sans-hebrew-hebrew-400-normal.woff2) format('woff2'); unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 500; font-display: swap; src: url(../assets/fonts/ibm-plex-sans-hebrew-hebrew-500-normal.woff2) format('woff2'); unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 700; font-display: swap; src: url(../assets/fonts/ibm-plex-sans-hebrew-hebrew-700-normal.woff2) format('woff2'); unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 400; font-display: swap; src: url(../assets/fonts/ibm-plex-sans-hebrew-latin-400-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 500; font-display: swap; src: url(../assets/fonts/ibm-plex-sans-hebrew-latin-500-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 700; font-display: swap; src: url(../assets/fonts/ibm-plex-sans-hebrew-latin-700-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family: 'IBM Plex Mono'; font-weight: 400; font-display: swap; src: url(../assets/fonts/ibm-plex-mono-latin-400-normal.woff2) format('woff2'); }
+:root {
+  --bg: #f5f4f0; --text: #141828; --text-2: #535a6e; --accent: #0a7a83; --accent-fill: #14a3ae;
+  --accent-soft: rgba(20,163,174,.12); --pill-text: #066a72; --glass: rgba(255,255,255,.8); --glass-border: rgba(255,255,255,.95);
+  --muted: rgba(20,24,40,.05); --line: rgba(20,24,40,.1);
+  --shadow: 0 1px 2px rgba(20,24,40,.05), 0 6px 18px rgba(20,24,40,.06);
+  --shadow-lift: 0 1px 2px rgba(20,24,40,.06), 0 10px 28px rgba(20,24,40,.1);
+  --r-card: 20px; --r-small: 12px;
+  --font: 'IBM Plex Sans Hebrew', system-ui, 'Segoe UI', Arial, sans-serif; --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.depth { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(90% 80% at 50% 30%, #fff 0%, var(--bg) 60%, #eae7e0 100%); }
+.blob { position: fixed; z-index: 0; width: 640px; height: 640px; border-radius: 50%; background: rgba(20,163,174,.14); filter: blur(120px); top: -8%; left: 50%; transform: translateX(-50%); pointer-events: none; }
+main { position: relative; z-index: 1; max-width: 1280px; margin: 0 auto; padding: 40px 16px 96px; }
+a { color: var(--accent); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+.wordmark { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--text-2); font-weight: 500; }
+.wordmark .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent-fill); box-shadow: 0 0 0 4px var(--accent-soft); }
+.wordmark a { color: inherit; text-decoration: none; }
+h1 { font-size: clamp(32px, 7vw, 44px); line-height: 1.15; font-weight: 700; margin: 18px 0 10px; }
+.sub { color: var(--text-2); font-size: 18px; margin: 0 0 22px; max-width: 640px; }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pills a { background: var(--glass); border: 1px solid var(--glass-border); box-shadow: var(--shadow); border-radius: 999px; padding: 7px 16px; text-decoration: none; color: var(--text); font-size: 15px; font-weight: 500; }
+.glass { background: var(--glass); border: 1px solid var(--glass-border); box-shadow: var(--shadow); border-radius: var(--r-card); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
+.map { margin-top: 44px; scroll-margin-top: 16px; }
+.map-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; }
+.eyebrow { color: var(--accent); font-size: 14px; font-weight: 500; }
+.map h2 { font-size: 26px; margin: 2px 0 0; line-height: 1.25; }
+.count { font-family: var(--mono); font-size: 14px; color: var(--text-2); }
+.whole { display: block; margin: 16px 0; padding: 10px; cursor: zoom-in; width: 100%; font: inherit; text-align: inherit; }
+.whole img { display: block; width: 100%; height: auto; border-radius: var(--r-small); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; list-style: none; padding: 0; margin: 0; }
+.card { padding: 0; overflow: hidden; display: flex; flex-direction: column; font: inherit; color: inherit; text-align: inherit; cursor: zoom-in; width: 100%; transition: box-shadow .15s; }
+.card:hover { box-shadow: var(--shadow-lift); }
+.thumb { aspect-ratio: 4 / 3; background: var(--muted); display: flex; align-items: center; justify-content: center; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.card .cap { padding: 10px 14px 12px; display: flex; gap: 8px; align-items: baseline; }
+.card .n { font-family: var(--mono); font-size: 13px; color: var(--accent); }
+.card .name { font-size: 16px; font-weight: 500; line-height: 1.35; }
+.card.missing { cursor: default; border-style: dashed; box-shadow: none; background: rgba(255,255,255,.5); }
+.card.missing .thumb { color: var(--text-2); font-size: 14px; }
+.status { color: var(--text-2); margin-top: 32px; }
+.how { margin-top: 56px; padding: 18px 20px; }
+.how h2 { font-size: 20px; margin: 0 0 6px; }
+.how p, .how li { color: var(--text-2); font-size: 16px; }
+.how ol { padding-inline-start: 20px; margin: 6px 0; }
+dialog { border: 0; padding: 0; background: transparent; max-width: min(96vw, 1200px); max-height: 94vh; }
+dialog::backdrop { background: rgba(20,24,40,.82); }
+.lb { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.lb img { max-width: 100%; max-height: 82vh; border-radius: var(--r-small); display: block; }
+.lb .row { display: flex; gap: 8px; align-items: center; color: #fff; font-size: 17px; font-weight: 500; }
+.lb button { font: inherit; font-size: 14px; border: 0; border-radius: 999px; padding: 6px 14px; background: rgba(255,255,255,.92); color: var(--text); cursor: pointer; }
+footer { margin-top: 64px; color: var(--text-2); font-size: 14px; }
+@media (min-width: 1080px) {
+  main { padding-inline: 32px; }
+  .map-body { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px; align-items: start; margin-top: 16px; }
+  .whole { position: sticky; top: 20px; margin: 0; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+}
+@media (max-width: 520px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 8px; } .card .name { font-size: 14px; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<div class="depth"></div><div class="blob"></div>
+<main>
+  <div class="wordmark"><span class="dot"></span><a href="../">עיצוב החלטות · HIT ME</a></div>
+  <h1>מפות המושגים</h1>
+  <p class="sub">בכל מפגש יש מפה של מושגים, וכל אחד מכם מכין ויזואל למושג. כאן רואים את כולם במקום אחד. לוחצים על תמונה כדי להגדיל.</p>
+  <nav class="pills" id="pills" aria-label="מפות"><a href="../homework/">שיעורי בית ומפגשים</a></nav>
+  <div id="maps"><p class="status">טוען את המפות…</p></div>
+
+  <section class="how glass">
+    <h2>איך מוסיפים ויזואל למושג</h2>
+    <ol>
+      <li>בוחרים מושג שעוד מחכה לוויזואל.</li>
+      <li>שומרים את התמונה בשם הקובץ שכתוב מתחת לכרטיס, בתיקיית המפה במאגר.</li>
+      <li>פותחים בקשת מיזוג. אחרי שאני ממזג, התמונה מופיעה כאן לבד.</li>
+    </ol>
+    <p>תמונה בלבד, עד 2 מגה. בלי פנים של אנשים ובלי פרטים מזהים: הדף הזה פתוח לכל מי שיש לו את הקישור.</p>
+  </section>
+
+  <footer>עיצוב החלטות · HIT ME · המכון הטכנולוגי חולון · ערן להב</footer>
+</main>
+
+<dialog id="lb" aria-label="תמונה מוגדלת">
+  <div class="lb">
+    <img id="lb-img" alt="">
+    <div class="row"><button type="button" id="lb-prev">הקודם</button><span id="lb-cap"></span><button type="button" id="lb-next">הבא</button><button type="button" id="lb-close">סגירה</button></div>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  var root = document.getElementById('maps');
+  var pills = document.getElementById('pills');
+  var items = []; var cur = -1;
+  var lb = document.getElementById('lb'), lbImg = document.getElementById('lb-img'), lbCap = document.getElementById('lb-cap');
+
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function getJSON(url) { return fetch(url, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(url); return r.json(); }); }
+  function safe(s) { return /^[A-Za-z0-9._-]+$/.test(s || '') ? s : null; }
+
+  function open(i) {
+    cur = i; var it = items[i];
+    lbImg.src = it.src; lbImg.alt = it.cap; lbCap.textContent = it.cap;
+    if (!lb.open) { if (lb.showModal) lb.showModal(); else lb.setAttribute('open', ''); }
+  }
+  function step(d) { if (items.length) open((cur + d + items.length) % items.length); }
+  document.getElementById('lb-close').onclick = function () { lb.close ? lb.close() : lb.removeAttribute('open'); };
+  document.getElementById('lb-prev').onclick = function () { step(-1); };
+  document.getElementById('lb-next').onclick = function () { step(1); };
+  lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.open) return;
+    if (e.key === 'ArrowLeft') step(1);   /* RTL: left is "next" */
+    if (e.key === 'ArrowRight') step(-1);
+  });
+
+  function addZoom(btn, src, cap) {
+    var i = items.push({ src: src, cap: cap }) - 1;
+    btn.addEventListener('click', function () { open(i); });
+  }
+
+  function renderMap(m) {
+    var id = safe(m.id); if (!id) return;
+    var sec = el('section', 'map'); sec.id = id;
+    var head = el('div', 'map-head');
+    var t = el('div'); t.appendChild(el('div', 'eyebrow', 'מפגש ' + (m.session || '') + (m.date ? ' · ' + m.date : '')));
+    t.appendChild(el('h2', null, m.title || id)); head.appendChild(t);
+    var list = Array.isArray(m.concepts) ? m.concepts : [];
+    var countEl = el('span', 'count'); head.appendChild(countEl); sec.appendChild(head);
+
+    var body = el('div', 'map-body'); sec.appendChild(body);
+    var mapFile = safe(m.map);
+    if (mapFile) {
+      var w = el('button', 'whole glass'); w.type = 'button';
+      var mi = el('img'); mi.src = id + '/' + mapFile; mi.alt = 'המפה: ' + (m.title || ''); mi.loading = 'lazy';
+      w.appendChild(mi); body.appendChild(w); addZoom(w, mi.src, 'המפה: ' + (m.title || ''));
+    }
+
+    var grid = el('ul', 'grid'); var have = 0, total = list.length, settled = 0;
+    function updateCount() { countEl.textContent = have + '/' + total + ' ויזואלים'; }
+    list.forEach(function (c) {
+      var file = safe(c.file); var cap = (c.n ? c.n + ' · ' : '') + (c.name || '');
+      var li = el('li'); var card = el('button', 'card glass'); card.type = 'button';
+      var th = el('div', 'thumb'); var cp = el('div', 'cap');
+      cp.appendChild(el('span', 'n', c.n || '')); cp.appendChild(el('span', 'name', c.name || ''));
+      card.appendChild(th); card.appendChild(cp); li.appendChild(card); grid.appendChild(li);
+      function missing() {
+        card.classList.add('missing'); card.disabled = true; th.textContent = 'מחכה לוויזואל';
+        if (file) { var f = el('span', 'n', file); f.dir = 'ltr'; f.style.display = 'block'; f.style.marginTop = '4px'; th.appendChild(f); }
+        settled++; updateCount();
+      }
+      if (!file) return missing();
+      var img = el('img'); img.alt = c.name || ''; img.loading = 'lazy'; img.decoding = 'async';
+      img.onload = function () { have++; settled++; updateCount(); addZoom(card, img.src, cap); };
+      img.onerror = function () { if (img.parentNode) img.parentNode.removeChild(img); missing(); };
+      th.appendChild(img); img.src = id + '/' + file;
+    });
+    updateCount(); body.appendChild(grid); root.appendChild(sec);
+
+    var p = el('a', null, m.title || id); p.href = '#' + id; pills.appendChild(p);
+  }
+
+  getJSON('index.json').then(function (idx) {
+    var ids = (idx && Array.isArray(idx.maps) ? idx.maps : []).map(safe).filter(Boolean);
+    return Promise.all(ids.map(function (id) { return getJSON(id + '/concepts.json').catch(function () { return null; }); }));
+  }).then(function (maps) {
+    root.textContent = '';
+    maps.filter(Boolean).forEach(renderMap);
+    if (!root.children.length) root.appendChild(el('p', 'status', 'עוד אין מפות להציג.'));
+    if (location.hash) { var t = document.getElementById(location.hash.slice(1)); if (t) t.scrollIntoView(); }
+  }).catch(function () {
+    root.textContent = ''; root.appendChild(el('p', 'status', 'לא הצלחתי לטעון את המפות. נסו לרענן את הדף.'));
+  });
+})();
+</script>
+</body>
+</html>
