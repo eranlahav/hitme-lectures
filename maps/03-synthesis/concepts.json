@@ -2,8 +2,8 @@
   "id": "03-synthesis",
   "session": "03",
   "date": "4.11",
-  "title": "17 מושגים למפגש 3",
-  "map": "",
+  "title": "מאוסף אנשים להבנת אדם: 17 מושגים",
+  "map": "00-map.jpg",
   "concepts": [
     {
       "n": "01",
@@ -12,82 +12,82 @@
     },
     {
       "n": "02",
-      "name": "",
+      "name": "ראיה",
       "file": "02.jpg"
     },
     {
       "n": "03",
-      "name": "",
+      "name": "פרשנות",
       "file": "03.jpg"
     },
     {
       "n": "04",
-      "name": "",
+      "name": "דפוס חוזר",
       "file": "04.jpg"
     },
     {
       "n": "05",
-      "name": "",
+      "name": "הכללה",
       "file": "05.jpg"
     },
     {
       "n": "06",
-      "name": "",
+      "name": "מאפיין מבחין",
       "file": "06.jpg"
     },
     {
       "n": "07",
-      "name": "",
+      "name": "פילוח (Segmentation)",
       "file": "07.jpg"
     },
     {
       "n": "08",
-      "name": "",
+      "name": "ארכיטיפ (Archetype)",
       "file": "08.jpg"
     },
     {
       "n": "09",
-      "name": "",
+      "name": "מקרה חריג",
       "file": "09.jpg"
     },
     {
       "n": "10",
-      "name": "",
+      "name": "סתירה במחקר",
       "file": "10.jpg"
     },
     {
       "n": "11",
-      "name": "",
+      "name": "מטרה (Goal)",
       "file": "11.jpg"
     },
     {
       "n": "12",
-      "name": "חסם",
+      "name": "חסם (Barrier)",
       "file": "12.jpg"
     },
     {
       "n": "13",
-      "name": "",
+      "name": "ציפייה (Expectation)",
       "file": "13.jpg"
     },
     {
       "n": "14",
-      "name": "פתרון מאולתר",
+      "name": "אסטרטגיית התמודדות (Workaround)",
       "file": "14.jpg"
     },
     {
       "n": "15",
-      "name": "",
+      "name": "סינתזה (Synthesis)",
       "file": "15.jpg"
     },
     {
       "n": "16",
-      "name": "",
+      "name": "רמת ביטחון (Confidence Level)",
       "file": "16.jpg"
     },
     {
       "n": "17",
-      "name": "",
+      "name": "אימות (Validation)",
       "file": "17.jpg"
     }
   ]
