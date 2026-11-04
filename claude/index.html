@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<title>הדרכת קלוד · HIT ME</title>
+<style>
+@font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 400; font-display: swap; src: url(../assets/fonts/ibm-plex-sans-hebrew-hebrew-400-normal.woff2) format('woff2'); unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 500; font-display: swap; src: url(../assets/fonts/ibm-plex-sans-hebrew-hebrew-500-normal.woff2) format('woff2'); unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 700; font-display: swap; src: url(../assets/fonts/ibm-plex-sans-hebrew-hebrew-700-normal.woff2) format('woff2'); unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 400; font-display: swap; src: url(../assets/fonts/ibm-plex-sans-hebrew-latin-400-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 500; font-display: swap; src: url(../assets/fonts/ibm-plex-sans-hebrew-latin-500-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 700; font-display: swap; src: url(../assets/fonts/ibm-plex-sans-hebrew-latin-700-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family: 'IBM Plex Mono'; font-weight: 400; font-display: swap; src: url(../assets/fonts/ibm-plex-mono-latin-400-normal.woff2) format('woff2'); }
+
+/* Colours and surfaces follow the HIT ME studio ("Living Product") light theme. */
+:root {
+  --bg: #f5f4f0;
+  --text: #141828;
+  --text-2: #535a6e;
+  --accent: #0a7a83;
+  --accent-fill: #14a3ae;
+  --accent-soft: rgba(20, 163, 174, 0.12);
+  --pill-text: #066a72;
+  --glass: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.95);
+  --muted: rgba(20, 24, 40, 0.05);
+  --track: rgba(20, 24, 40, 0.08);
+  --line: rgba(20, 24, 40, 0.1);
+  --success: #1f8a55;
+  --success-text: #18794a;
+  --success-soft: rgba(31, 138, 85, 0.1);
+  --warning: #9a6200;
+  --warm-soft: rgba(255, 170, 120, 0.14);
+  --shadow: 0 1px 2px rgba(20, 24, 40, 0.05), 0 6px 18px rgba(20, 24, 40, 0.06);
+  --shadow-lift: 0 1px 2px rgba(20, 24, 40, 0.06), 0 10px 28px rgba(20, 24, 40, 0.08);
+  --r-card: 20px;
+  --r-small: 12px;
+  --font: 'IBM Plex Sans Hebrew', system-ui, 'Segoe UI', Arial, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+.depth { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(90% 80% at 50% 30%, #ffffff 0%, var(--bg) 60%, #eae7e0 100%); }
+.blob { position: fixed; z-index: 0; border-radius: 50%; pointer-events: none; }
+.blob.t { width: 640px; height: 640px; background: rgba(20, 163, 174, 0.14); filter: blur(120px); top: -8%; left: 50%; transform: translateX(-50%); }
+.blob.w { width: 460px; height: 460px; background: rgba(255, 170, 120, 0.1); filter: blur(130px); top: 30%; inset-inline-end: -10%; }
+main { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 40px 16px 96px; }
+.layout { margin-top: 8px; }
+.side { display: contents; }
+.mini { display: none; }
+.quick { display: none; }
+a { color: var(--accent); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+
+.wordmark { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--text-2); font-weight: 500; }
+.wordmark .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent-fill); box-shadow: 0 0 0 4px var(--accent-soft); }
+.wordmark a { color: inherit; text-decoration: none; }
+h1 { font-size: clamp(32px, 7vw, 44px); line-height: 1.15; font-weight: 700; margin: 18px 0 10px; letter-spacing: -0.01em; }
+.sub { color: var(--text-2); font-size: 18px; margin: 0 0 22px; }
+
+.pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 8px; }
+.pills a { background: var(--glass); border: 1px solid var(--glass-border); box-shadow: var(--shadow); border-radius: 999px; padding: 7px 16px; text-decoration: none; color: var(--text); font-size: 15px; font-weight: 500; }
+.pills a.on { background: var(--accent-soft); color: var(--pill-text); border-color: transparent; box-shadow: none; }
+
+.glass { background: var(--glass); border: 1px solid var(--glass-border); box-shadow: var(--shadow); border-radius: var(--r-card); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
+
+.session { margin-top: 36px; }
+.session-head { padding: 22px 22px 18px; }
+.hero { margin: -10px -10px 16px; flex-basis: 100%; }
+.hero img { display: block; width: 100%; height: auto; aspect-ratio: var(--ar, 16 / 9); object-fit: cover; object-position: top; border-radius: var(--r-small); background: var(--muted); }
+.chip.time { background: transparent; border: 1px solid var(--line); color: var(--text-2); }
+.eyebrow { color: var(--accent); font-size: 14px; font-weight: 500; }
+.session-title { font-size: 28px; font-weight: 700; margin: 2px 0 12px; line-height: 1.25; }
+.subnav { display: flex; flex-wrap: wrap; gap: 6px; }
+.subnav a { font-size: 14px; color: var(--text-2); background: var(--muted); border-radius: 999px; padding: 4px 12px; text-decoration: none; }
+
+section { margin-top: 40px; }
+h3.part { font-size: 22px; font-weight: 700; margin: 0 0 6px; display: flex; align-items: baseline; gap: 10px; }
+h3.part .n { font-family: var(--mono); font-size: 14px; color: var(--accent); font-weight: 400; }
+h4 { font-size: 18px; margin: 22px 0 6px; font-weight: 500; }
+p, li { color: var(--text-2); font-size: 17px; }
+b, strong { color: var(--text); font-weight: 500; }
+.note { font-size: 14px; color: var(--text-2); }
+
+/* rules card */
+.rules { padding: 18px 20px; margin: 16px 0; background: var(--warm-soft); border: 1px solid rgba(154, 98, 0, 0.14); border-radius: var(--r-card); }
+.rules b.t { display: block; font-size: 17px; margin-bottom: 4px; }
+.rules ul { margin: 0; padding-inline-start: 20px; }
+.rules li { margin: 4px 0; font-size: 16px; color: var(--text); }
+
+/* progress */
+.progress { position: sticky; top: 8px; z-index: 3; padding: 12px 18px; margin: 18px 0 8px; }
+.progress .note { display: none; }
+.progress .row { display: flex; justify-content: space-between; font-size: 15px; font-weight: 500; }
+.progress .row span:last-child { font-family: var(--mono); color: var(--accent); }
+.bar { height: 6px; background: var(--track); border-radius: 99px; overflow: hidden; margin-top: 8px; }
+.bar i { display: block; height: 100%; width: 0; background: var(--accent-fill); border-radius: 99px; transition: width .3s ease; }
+
+/* tasks */
+.task { scroll-margin-top: 20px; padding: 18px 18px 6px; margin: 12px 0; transition: background .2s, border-color .2s; }
+.task.is-done { background: rgba(240, 249, 244, 0.86); border-color: rgba(31, 138, 85, 0.25); }
+.task-head { display: flex; gap: 14px; align-items: flex-start; }
+.check { position: relative; flex: 0 0 auto; width: 28px; height: 28px; margin-top: 2px; }
+.check input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.check span { display: block; width: 28px; height: 28px; border-radius: 9px; border: 2px solid rgba(20, 24, 40, 0.25); background: #fff; transition: all .15s; }
+.check input:checked + span { background: var(--success); border-color: var(--success); }
+.check input:checked + span::after { content: ""; position: absolute; left: 9px; top: 4px; width: 7px; height: 14px; border: solid #fff; border-width: 0 3px 3px 0; transform: rotate(45deg); }
+.check input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.check input:disabled + span { border-style: dashed; background: transparent; }
+.task-head label, .task-head .lbl { flex: 1; cursor: pointer; }
+.task-title { display: block; font-size: 19px; font-weight: 500; color: var(--text); line-height: 1.35; }
+.task.is-done .task-title { color: var(--success-text); }
+.meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.chip { font-size: 13px; border-radius: 999px; padding: 2px 10px; background: var(--muted); color: var(--text-2); }
+.chip.due { background: var(--accent-soft); color: var(--pill-text); font-weight: 500; }
+.chip.first { background: var(--warm-soft); color: var(--warning); font-weight: 500; }
+.task-body { padding-inline-start: 42px; }
+.task-body p { margin: 10px 0; }
+.task-body ol, .task-body ul { padding-inline-start: 20px; margin: 8px 0; }
+.task-body li { margin: 4px 0; }
+.dod { background: var(--success-soft); border-radius: var(--r-small); padding: 10px 14px; margin: 12px 0; font-size: 16px; color: var(--text); }
+.dod b { color: var(--success-text); }
+.task.pending { background: rgba(255, 255, 255, 0.5); border: 1px dashed var(--line); box-shadow: none; }
+.task.pending .task-title { color: var(--text-2); }
+
+/* prompts */
+.prompt-label { font-size: 14px; color: var(--text-2); margin: 14px 0 4px; font-weight: 500; }
+.prompt { position: relative; background: var(--muted); border: 1px solid var(--line); border-radius: var(--r-small); padding: 12px 14px 12px 78px; margin: 0 0 12px; font-size: 15px; color: var(--text); white-space: pre-wrap; line-height: 1.65; }
+.prompt button { position: absolute; left: 8px; top: 8px; font: inherit; font-size: 13px; font-weight: 500; border: 0; border-radius: 999px; padding: 4px 12px; background: var(--accent); color: #fff; cursor: pointer; }
+.prompt button.ok { background: var(--success); }
+details { margin: 10px 0; }
+summary { cursor: pointer; color: var(--accent); font-weight: 500; font-size: 16px; }
+details[open] summary { margin-bottom: 6px; }
+
+.tbl-wrap { overflow-x: auto; margin: 10px 0; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; min-width: 520px; }
+th, td { text-align: right; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--text-2); }
+th { color: var(--text); font-weight: 500; background: var(--muted); }
+
+/* summary + stats */
+.key { background: var(--accent-soft); color: var(--pill-text); border-radius: var(--r-small); padding: 14px 18px; font-size: 19px; font-weight: 500; margin: 14px 0; }
+.parts { list-style: none; padding: 0; margin: 14px 0; display: grid; gap: 10px; }
+.parts li { padding: 14px 18px; margin: 0; }
+.parts b { display: block; font-size: 17px; margin-bottom: 2px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 14px 0; }
+.stat { padding: 14px 16px; }
+.stat .big { font-size: 30px; font-weight: 300; color: var(--accent); line-height: 1.1; font-family: var(--mono); }
+.stat .lbl { font-size: 14px; color: var(--text-2); margin-top: 4px; }
+
+.res { list-style: none; padding: 0; display: grid; gap: 10px; }
+.res li { margin: 0; }
+.res a { display: block; padding: 14px 18px; text-decoration: none; color: var(--text); font-weight: 500; transition: box-shadow .15s; }
+.res a:hover { box-shadow: var(--shadow-lift); }
+.res a span { display: block; font-size: 14px; color: var(--text-2); font-weight: 400; }
+.res .soon { padding: 14px 18px; color: var(--text-2); border: 1px dashed var(--line); border-radius: var(--r-card); }
+
+footer { margin-top: 64px; color: var(--text-2); font-size: 14px; }
+/* wide screens: side panel with progress, rules and links; content uses the rest */
+@media (min-width: 1080px) {
+  main { max-width: 1320px; padding-inline: 32px; }
+  .head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 8px 32px; }
+  .head .sub { margin-bottom: 0; max-width: 620px; }
+  .layout { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 32px; align-items: start; margin-top: 28px; }
+  .side { display: flex; flex-direction: column; gap: 14px; position: sticky; top: 20px; max-height: calc(100vh - 40px); overflow-y: auto; padding: 2px; }
+  .side .progress { position: static; margin: 0; padding: 16px 18px; }
+  .side .progress .note { display: block; margin: 10px 0 0; font-size: 13px; }
+  .side .rules { margin: 0; }
+  .mini { display: block; list-style: none; padding: 0; margin: 12px 0 0; }
+  .mini li { margin: 0; }
+  .mini a { display: flex; gap: 10px; align-items: center; padding: 6px 4px; font-size: 14px; color: var(--text); text-decoration: none; border-radius: 8px; line-height: 1.35; }
+  .mini a:hover { background: var(--muted); }
+  .mini i { flex: 0 0 auto; width: 16px; height: 16px; border-radius: 5px; border: 1.5px solid rgba(20, 24, 40, 0.25); background: #fff; }
+  .mini .on a { color: var(--success-text); }
+  .mini .on i { background: var(--success); border-color: var(--success); }
+  .quick { display: flex; flex-direction: column; gap: 2px; padding: 14px 18px; }
+  .quick b { font-size: 15px; margin-bottom: 4px; }
+  .quick a { font-size: 15px; padding: 3px 0; }
+  .content .session:first-child { margin-top: 0; }
+  .session-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; }
+  .session-head .session-title { margin-bottom: 0; }
+  .parts { grid-template-columns: repeat(2, 1fr); }
+  .stats { grid-template-columns: repeat(4, 1fr); }
+  .res { grid-template-columns: repeat(2, 1fr); }
+  .res li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; }
+}
+@media (min-width: 1400px) {
+  .layout { grid-template-columns: 360px minmax(0, 1fr); gap: 40px; }
+}
+@media (max-width: 520px) {
+  .task-body { padding-inline-start: 0; }
+  .prompt { padding: 44px 14px 12px; }
+  .prompt button { top: 8px; left: 8px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<div class="depth"></div><div class="blob t"></div><div class="blob w"></div>
+<main>
+  <div class="wordmark"><span class="dot"></span><a href="../">עיצוב החלטות · HIT ME</a></div>
+  <header class="head">
+  <div>
+  <h1>הדרכת קלוד לקורס</h1>
+  <p class="sub">איך מגדירים את קלוד כך שיעבוד על הפרויקט של הקורס, כמו אצל כולם. ההדרכה לא נכנסה למפגש 3, אז עוברים עליה לבד: קודם הסרטון, ואז השלבים בדף. בסוף יש משימה קטנה שמראה שהכול עובד.</p>
+  </div>
+  <nav class="pills" aria-label="ניווט">
+    <a href="../homework/#session-03">שיעורי הבית</a>
+    <a href="#finish">משימת הסיום</a>
+    <a href="../maps/">מפות המושגים</a>
+  </nav>
+  </header>
+
+  <div class="content">
+  <article class="session">
+    <div class="session-head glass">
+      <div class="eyebrow">הסרטון</div>
+      <h2 class="session-title">צפו קודם, אחר כך עשו</h2>
+      <p class="note">הסרטון יעלה לכאן בקרוב. עד אז, הדף הזה מספיק כדי לעבור על כל השלבים.</p>
+    </div>
+
+    <section>
+      <h3 class="part"><span class="n">00</span>ארבע שכבות של הגדרות</h3>
+      <div class="key">רוב הבלבול בקלוד מגיע מזה שלא יודעים באיזו שכבה נמצאת הגדרה. מה שנכון תמיד, עולה לשכבה גבוהה. מה שנכון רק למשימה אחת, נשאר בשיחה.</div>
+      <div class="tbl-wrap"><table>
+        <tr><th>שכבה</th><th>מה יש בה</th><th>על מה היא חלה</th></tr>
+        <tr><td>החשבון</td><td>העדפות אישיות, זיכרון כללי, חיבורים</td><td>כל שיחה וכל פרויקט</td></tr>
+        <tr><td>הפרויקט</td><td>הנחיות, מאגר, קבצים, זיכרון של הפרויקט</td><td>כל השיחות בפרויקט</td></tr>
+        <tr><td>השיחה (שרשור)</td><td>משימה אחת עם מטרה אחת</td><td>רק השיחה הזו</td></tr>
+        <tr><td>המחשב (קלוד קוד)</td><td>קובץ הוראות אישי, הרשאות, תיקיות</td><td>עבודה על קבצים במחשב שלי</td></tr>
+      </table></div>
+      <p class="note">שמות הכפתורים בקלוד משתנים לפעמים. אם משהו לא נמצא בדיוק במקום, חפשו שם דומה, או שאלו את קלוד עצמו איפה זה.</p>
+    </section>
+
+    <section>
+      <h3 class="part"><span class="n">01</span>הגדרות החשבון</h3>
+      <p>נכנסים להגדרות: לחיצה על השם בפינה, ואז Settings.</p>
+      <p><b>פרופיל.</b> בשדה ההעדפות האישיות כותבים מי אני ואיך לדבר איתי. זה חל על כל שיחה. דוגמה:</p>
+      <div class="prompt"><button type="button">העתק</button>אני סטודנט/ית לתקשורת חזותית בשנה ד' ב־HIT, בקורס "עיצוב החלטות".
+ענה לי בעברית פשוטה, בלי לערבב מילים באנגלית בתוך משפטים.
+פקודות ושמות קבצים, כתוב בשורה נפרדת.
+כשאתה לא בטוח, תגיד. כשמשהו הוא הנחה ולא עובדה, סמן אותו.
+אל תחמיא לי. אם הרעיון שלי חלש, תגיד למה.</div>
+      <p><b>זיכרון.</b> מפעילים את החיפוש בשיחות קודמות ואת יצירת הזיכרון מהשיחות.</p>
+      <p><b>יכולות.</b> מפעילים יצירת קבצים והרצת קוד, חיפוש ברשת, ו־Artifacts.</p>
+    </section>
+
+    <section>
+      <h3 class="part"><span class="n">02</span>חיבורים</h3>
+      <p>חיבור נותן לקלוד גישה לשירות אחר בלי להעלות קבצים ביד. בהגדרות, Connectors.</p>
+      <div class="tbl-wrap"><table>
+        <tr><th>חיבור</th><th>למה</th></tr>
+        <tr><td>GitHub</td><td>כל העבודה במאגר. בלי זה קלוד לא קורא, לא כותב ולא מגיש. מתחברים עם החשבון שאיתו הוזמנתם למאגר</td></tr>
+        <tr><td>Google Drive</td><td>החומרים של החוליה בכונן: הקלטות, תמלולים, טבלאות סקר</td></tr>
+        <tr><td>Google Docs ו־Sheets</td><td>לקרוא ולכתוב מסמכים וטבלאות של החוליה</td></tr>
+        <tr><td>Figma</td><td>למי שמעצב בפיגמה</td></tr>
+      </table></div>
+      <p>החיבור לגיטהאב:</p>
+      <div class="prompt"><button type="button">העתק</button>https://claude.ai/connect-github</div>
+      <ul>
+        <li>חיבור נקרא כשהשיחה מתחילה. מי שחיבר משהו באמצע, פותח שיחה חדשה.</li>
+        <li>בכל חיבור אפשר לקבוע מה קלוד עושה לבד ומה דורש אישור. בהתחלה: קריאה חופשית, כתיבה עם אישור.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="part"><span class="n">03</span>פרויקט הקורס והנחיות</h3>
+      <p>יוצרים פרויקט חדש בתפריט הצד, בשם:</p>
+      <div class="prompt"><button type="button">העתק</button>HIT ME · עיצוב החלטות</div>
+      <p>הנחיות הפרויקט הן החוקים הקבועים, וכל שיחה בפרויקט קוראת אותן. כותבים רק מה שנכון תמיד, עד עמוד אחד. משימה של השבוע נכנסת לשיחה, לא להנחיות. שינוי בהנחיות חל על שיחות חדשות בלבד.</p>
+      <div class="prompt-label">הנחיות להדבקה (משנים את השורה הראשונה)</div>
+      <div class="prompt"><button type="button">העתק</button>אני [שם], סטודנט/ית בקורס "עיצוב החלטות" ב־HIT. שם המשתמש שלי בגיטהאב: [שם משתמש].
+הכיתה בונה יחד את HIT ME, האפליקציה הלא רשמית של הסטודנטים במכון.
+העבודה מתנהלת במאגר eranlahav/hitme. המטלות שלי נמצאות בתיקיות שלי בתוך assignments.
+איפה אנחנו: שלב המחקר. מנסים להבין את הסטודנטים ב־HIT לפני שמחליטים על פתרונות.
+כללים:
+1. הפרד תמיד בין ראיה (מה נאסף, עם מקור) לבין פרשנות.
+2. כשאתה מסתמך על קובץ, ציין את שמו. אל תמציא נתונים, ציטוטים או מספרים.
+3. רעיון לפתרון שעולה, רשום בסוף תחת "חניית פתרונות".
+4. בסוף כל ניתוח, כתוב מה צריך אימות אנושי ואיך לבדוק.
+5. בלי שמות ופרטים מזהים של משתתפי מחקר.
+6. במאגר: עבוד רק בתיקיות שלי. אל תדחוף לענף הראשי ואל תמזג.
+7. את הנימוק להחלטה שלי, שאל אותי. אל תכתוב אותו במקומי.
+8. ענה בעברית פשוטה. פקודות ושמות קבצים בשורה נפרדת.</div>
+      <p><b>המאגר.</b> בהגדרות הפרויקט, בחלק של המאגרים, מוסיפים:</p>
+      <div class="prompt"><button type="button">העתק</button>eranlahav/hitme</div>
+      <p><b>הסביבה.</b> כשקלוד עובד על המאגר הוא עובד על מחשב בענן. משאירים את ברירות המחדל: בלי סקריפט הכנה, בלי משתנים ובלי סודות. בקורס אין סודות.</p>
+    </section>
+
+    <section>
+      <h3 class="part"><span class="n">04</span>קבצים וזיכרון</h3>
+      <p><b>קבצי הפרויקט</b> הם קבצים שכל שיחה בפרויקט קוראת. מעלים:</p>
+      <ul>
+        <li>קובץ ההקשר הציבורי שלכם ממטלה 1.</li>
+        <li>הקובץ האישי הפרטי מראיון ההקשר. הפרויקט פרטי לכם, אז זה המקום שלו. לעולם לא במאגר.</li>
+        <li><a href="https://github.com/eranlahav/hitme/blob/main/assignments/team-agreements.md">ההסכמות לעבודה בחוליות</a>.</li>
+      </ul>
+      <p>את דוחות החוליות לא מעלים. הם במאגר, וקלוד קורא אותם משם, כך שהם תמיד מעודכנים.</p>
+      <p><b>הזיכרון של הפרויקט</b> הוא מה שקלוד כותב בעצמו, כדי ששיחה חדשה תדע מה קרה קודם. הנחיות כותבים אנחנו, והן חוקים. זיכרון כותב קלוד, והוא עובדות שנלמדו בדרך: החלטות ולמה, מצב העבודה, העדפות. לא סיסמאות ולא פרטים של משתתפי מחקר. עורכים אותו בשיחה:</p>
+      <div class="prompt"><button type="button">העתק</button>תראה לי מה שמור בזיכרון של הפרויקט, ותמחק את מה שכבר לא נכון.</div>
+    </section>
+
+    <section>
+      <h3 class="part"><span class="n">05</span>שרשורים, והגשה לגיט</h3>
+      <ul>
+        <li><b>שרשור אחד לכל משימה.</b> "פרסונה רזה", "דוח החוליה". לא הכול באותה שיחה.</li>
+        <li><b>שם ברור,</b> כדי שבשם רואים מה המטרה.</li>
+        <li><b>לא עוזבים באמצע החלטה.</b> אם קלוד שאל שאלה, עונים, אחרת העבודה עומדת.</li>
+        <li><b>סוגרים כשהמשימה נגמרה.</b> אפשר לפתוח מחדש.</li>
+      </ul>
+      <p>הגשה מתוך שרשור, בלי טרמינל. קלוד פותח ענף, מוסיף את הקובץ ופותח בקשת מיזוג. בקשה שנוגעת רק בתיקייה שלכם ועוברת את הבדיקות נכנסת לבד תוך כמה דקות.</p>
+    </section>
+
+    <section>
+      <h3 class="part"><span class="n">06</span>קלוד דיזיין</h3>
+      <p>כלי של קלוד לעיצוב מסכים, אבות טיפוס ומצגות. בלי מערכת עיצוב התוצאות גנריות, אז מגדירים אחת פעם אחת: יוצרים מערכת עיצוב חדשה, נותנים לה מקור (המאגר של הקורס, צילומי מסך של האפליקציה, או קובץ פיגמה), בודקים מה היא חילצה, ומפרסמים.</p>
+      <div class="prompt"><button type="button">העתק</button>https://claude.ai/design</div>
+      <p class="note">השבוע עוד לא מעצבים פתרונות. רק מכירים את הכלי ומגדירים מערכת עיצוב. העבודה בו מתחילה במפגש 5.</p>
+    </section>
+
+    <section>
+      <h3 class="part"><span class="n">07</span>למי שרוצה יותר: קלוד קוד במחשב</h3>
+      <p>לא חובה השבוע. קלוד קוד עובד על קבצים במחשב שלכם. אפשר באתר בלי התקנה, באפליקציה למחשב בלשונית Code, או בטרמינל.</p>
+      <div class="prompt"><button type="button">העתק</button>https://claude.ai/code</div>
+      <p>כשהוא נפתח בתיקיית המאגר, הוא קורא לבד את ההוראות של הקורס. הבדיקה הראשונה:</p>
+      <div class="prompt"><button type="button">העתק</button>תריץ את הבדיקה של היום הראשון (first-day-setup) ותגיד לי מה מוכן ומה חסר.</div>
+      <p>הקובץ האישי הפרטי נשמר מחוץ למאגר, ונטען מקובץ ההוראות האישי:</p>
+      <div class="prompt"><button type="button">העתק</button>~/.claude/me.private.md</div>
+    </section>
+
+    <section id="finish">
+      <h3 class="part"><span class="n">08</span>משימת הסיום</h3>
+      <div class="key">פותחים שרשור חדש בפרויקט הקורס, ומגישים ממנו קובץ קטן. אם זה עובד, כל השלבים עובדים. כשהקובץ נכנס למאגר, אני יודע שסיימתם.</div>
+      <p><b>רשימת הבדיקה:</b></p>
+      <ul>
+        <li>העדפות אישיות כתובות, והזיכרון מופעל.</li>
+        <li>גיטהאב מחובר, וגם הכונן של גוגל.</li>
+        <li>יש פרויקט "HIT ME · עיצוב החלטות" עם הנחיות.</li>
+        <li>המאגר מחובר לפרויקט.</li>
+        <li>קובץ ההקשר הציבורי והקובץ הפרטי בקבצי הפרויקט.</li>
+        <li>נכנסתי לקלוד דיזיין והתחלתי מערכת עיצוב.</li>
+      </ul>
+      <div class="prompt-label">הנחיה לשרשור החדש</div>
+      <div class="prompt"><button type="button">העתק</button>אני מגיש/ה את משימת הסיום של הדרכת קלוד בקורס עיצוב החלטות.
+תמשוך את הגרסה העדכנית, ותקרא את assignments/00-claude-setup/README.md.
+תעבור איתי על רשימת הבדיקה מההדרכה, שורה אחת בכל פעם, ותשאל אותי אם היא מוכנה.
+תכתוב את setup.md לפי ארבעת החלקים. מהקבצים, רק שמות. את התוכן של הקובץ הפרטי שלי אל תעתיק.
+תראה לי את הקובץ, ורק אחרי שאישרתי תגיש אותו לתיקייה שלי ותפתח בקשת מיזוג.</div>
+      <div class="dod"><b>גמור כש:</b> setup.md נכנס למאגר, בתיקייה שלכם ב־assignments/00-claude-setup.</div>
+    </section>
+
+    <section>
+      <h3 class="part"><span class="n">09</span>תקלות נפוצות</h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>מה קורה</th><th>מה עושים</th></tr>
+        <tr><td>המאגר לא מופיע</td><td>בודקים בגיטהאב שאישרתם את ההזמנה למאגר, ושהחשבון המחובר הוא אותו חשבון</td></tr>
+        <tr><td>חיבור לא עובד בשיחה</td><td>פותחים שיחה חדשה. חיבורים נקראים רק בתחילת שיחה</td></tr>
+        <tr><td>קלוד עונה באנגלית</td><td>בודקים את הפרופיל ואת הנחיות הפרויקט</td></tr>
+        <tr><td>בקשת המיזוג לא נכנסה לבד</td><td>בודקים שהקבצים רק בתיקייה שלכם, ושאין שם קובץ בעברית. קלוד יסביר מה נכשל</td></tr>
+        <tr><td>תקועים יותר מרבע שעה</td><td>כותבים לי בוואטסאפ, עם צילום מסך</td></tr>
+      </table></div>
+    </section>
+  </article>
+  </div>
+</main>
+<script>
+document.querySelectorAll('.prompt button').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var text = b.parentNode.textContent.replace(b.textContent, '').trim();
+    var done = function () { b.textContent = 'הועתק'; b.classList.add('ok'); setTimeout(function () { b.textContent = 'העתק'; b.classList.remove('ok'); }, 1500); };
+    var fallback = function () {
+      var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+      try { if (document.execCommand('copy')) done(); } catch (e) {}
+      document.body.removeChild(ta);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, fallback); } else { fallback(); }
+  });
+});
+</script>
+</body>
+</html>
