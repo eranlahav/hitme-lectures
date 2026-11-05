@@ -10,9 +10,10 @@
 <!--
   How to edit: every slide is one object in the SLIDES list at the bottom.
   Change the Hebrew text in "do", or the English labels inside the mock screens.
-  Mock screens are built from small helpers (sidebar, settings, project, chat, github).
-  Labels follow the Claude site; design is intentionally schematic.
-  Prompt texts must stay identical to the copy blocks in ../index.html.
+  Mock screens follow the Claude desktop app (sidebar, Settings modal, Project settings);
+  design is schematic, labels follow the app as of Nov 2026.
+  Prompt texts (P) must stay identical to the copy blocks in ../index.html.
+  Text in [square brackets] is shown in yellow and is editable before copying.
 -->
 <style>
 @font-face { font-family: 'IBM Plex Sans Hebrew'; font-weight: 400; font-display: swap; src: url(../../assets/fonts/ibm-plex-sans-hebrew-hebrew-400-normal.woff2) format('woff2'); unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
@@ -30,53 +31,79 @@ header select { font:inherit; padding:4px 8px; border-radius:8px; border:1px sol
 .nav button:disabled { opacity:.4; cursor:default; }
 .bar { height:4px; background:var(--accent-soft); }
 .bar i { display:block; height:100%; background:var(--accent); transition:width .2s; }
-main { display:grid; grid-template-columns: minmax(260px, 360px) 1fr; gap:20px; padding:20px 16px 40px; max-width:1300px; margin:0 auto; }
+main { display:grid; grid-template-columns: minmax(280px, 380px) 1fr; gap:20px; padding:20px 16px 40px; max-width:1300px; margin:0 auto; }
+.panel { min-width:0; }
 .panel .ch { font-size:13px; color:var(--accent); font-weight:700; }
 .panel h1 { font-size:24px; line-height:1.3; margin:4px 0 10px; }
 .panel .do { font-size:16px; }
 .panel .do p { margin:0 0 10px; }
 .panel .skip { background:#fff4d6; border-inline-start:4px solid #e8b100; padding:8px 12px; border-radius:8px; font-size:14px; margin:10px 0; }
 .panel .why { color:var(--text-2); font-size:14px; border-top:1px solid var(--line); padding-top:8px; margin-top:12px; }
-.copy { position:relative; background:#fff; border:1px solid var(--line); border-radius:10px; padding:10px 12px; margin:8px 0 12px; white-space:pre-wrap; font-size:14px; }
-.copy.ltr { direction:ltr; text-align:left; font-family:ui-monospace,Menlo,monospace; font-size:13px; }
-.copy button { position:absolute; top:6px; inset-inline-end:6px; font:inherit; font-size:12px; padding:2px 10px; border-radius:999px; border:1px solid var(--line); background:var(--accent-soft); cursor:pointer; direction:rtl; }
-.copy .t { display:block; padding-inline-end:56px; }
-.copy.ltr .t { padding-inline-end:0; padding-right:56px; }
-/* mock window */
-.win { direction:ltr; text-align:left; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--ui); box-shadow:0 8px 28px rgba(20,24,40,.08); font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif; color:var(--ui-text); font-size:14px; align-self:start; }
-.url { display:flex; align-items:center; gap:8px; padding:8px 12px; background:#e9e7e1; border-bottom:1px solid var(--line); font-size:12px; color:var(--ui-2); }
-.url .dots { display:flex; gap:5px; } .url .dots i { width:10px; height:10px; border-radius:50%; background:#cfccc4; display:block; }
-.url .addr { flex:1; background:#fff; border-radius:6px; padding:3px 10px; }
-.app { display:flex; min-height:440px; }
-.side { width:190px; flex:none; background:var(--ui-side); border-right:1px solid var(--line); padding:12px 8px; display:flex; flex-direction:column; gap:2px; }
-.side .brand { font-weight:700; padding:4px 8px 10px; }
-.side .it { padding:6px 8px; border-radius:8px; color:var(--ui-text); }
+/* copy box: header row with the button, editable text below, so nothing overlaps */
+.copy { background:#fff; border:1px solid var(--line); border-radius:10px; margin:8px 0 12px; overflow:hidden; }
+.copy .head { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:5px 8px 5px 10px; background:#f7f6f2; border-bottom:1px solid var(--line); font-size:12px; color:var(--text-2); }
+.copy .head button { font:inherit; font-size:12px; padding:2px 12px; border-radius:999px; border:1px solid var(--line); background:var(--accent-soft); cursor:pointer; flex:none; }
+.copy .t { display:block; padding:10px 12px; white-space:pre-wrap; font-size:14px; overflow-wrap:anywhere; outline:none; }
+.copy .t[contenteditable]:focus { background:#fffbea; }
+.copy .t mark { background:#ffe58a; color:inherit; border-radius:3px; padding:0 2px; }
+.copy.ltr .t { direction:ltr; text-align:left; font-family:ui-monospace,Menlo,monospace; font-size:13px; }
+/* mock desktop app window */
+.win { direction:ltr; text-align:left; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--ui); box-shadow:0 8px 28px rgba(20,24,40,.08); font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif; color:var(--ui-text); font-size:14px; align-self:start; min-width:0; }
+.tbar { display:flex; align-items:center; gap:8px; padding:8px 12px; background:#e9e7e1; border-bottom:1px solid var(--line); font-size:12px; color:var(--ui-2); }
+.tbar .dots { display:flex; gap:5px; } .tbar .dots i { width:10px; height:10px; border-radius:50%; background:#cfccc4; display:block; }
+.tbar .ttl { flex:1; text-align:center; }
+.app { display:flex; min-height:460px; position:relative; }
+.app.tall { min-height:640px; }
+.side { width:180px; flex:none; background:var(--ui-side); border-right:1px solid var(--line); padding:10px 8px; display:flex; flex-direction:column; gap:1px; }
+.side .modes { display:flex; gap:4px; padding:0 4px 8px; }
+.side .modes span { flex:1; text-align:center; padding:3px 0; border-radius:6px; font-size:12px; }
+.side .modes .on { background:#fff; font-weight:600; }
+.side .it { padding:5px 8px; border-radius:8px; color:var(--ui-text); }
 .side .it.on { background:#e3e0d6; font-weight:600; }
 .side .sec { font-size:11px; color:var(--ui-2); padding:10px 8px 2px; }
 .side .grow { flex:1; }
 .side .user { display:flex; align-items:center; gap:8px; padding:8px; border-top:1px solid var(--line); }
-.av { width:24px; height:24px; border-radius:50%; background:var(--ui-brand); color:#fff; display:grid; place-items:center; font-size:12px; font-weight:700; }
+.side .user .plan { color:var(--ui-2); font-size:12px; }
+.av { width:24px; height:24px; border-radius:50%; background:var(--ui-brand); color:#fff; display:grid; place-items:center; font-size:12px; font-weight:700; flex:none; }
 .menu { margin:0 8px 6px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:4px; box-shadow:0 6px 16px rgba(0,0,0,.08); }
 .menu div { padding:6px 8px; border-radius:6px; }
 .main { flex:1; padding:20px 24px; min-width:0; }
 .main h2 { font-size:20px; margin:0 0 14px; font-weight:600; }
 .main h3 { font-size:14px; margin:16px 0 6px; font-weight:600; }
 .muted { color:var(--ui-2); font-size:13px; }
-.setwrap { display:flex; gap:20px; }
-.setnav { width:130px; flex:none; display:flex; flex-direction:column; gap:2px; }
-.setnav div { padding:6px 10px; border-radius:8px; }
-.setnav .on { background:#e9e6dc; font-weight:600; }
-.setbody { flex:1; min-width:0; }
-.row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:#fff; margin-bottom:8px; }
-.btn { display:inline-block; padding:5px 12px; border-radius:8px; border:1px solid var(--line); background:#fff; font-size:13px; white-space:nowrap; }
+/* modal (settings / project settings) */
+.shade { position:absolute; inset:0; background:rgba(20,20,20,.25); display:flex; align-items:center; justify-content:center; padding:14px; }
+.modal { background:var(--ui); border-radius:14px; box-shadow:0 12px 40px rgba(0,0,0,.18); width:100%; max-width:760px; display:flex; min-height:400px; overflow:hidden; }
+.mnav { width:150px; flex:none; border-right:1px solid var(--line); padding:12px 8px; display:flex; flex-direction:column; gap:1px; font-size:13px; }
+.mnav .t { font-weight:700; padding:2px 8px 8px; }
+.mnav div.i { padding:4px 8px; border-radius:7px; }
+.mnav div.i.on { background:#e3e0d6; font-weight:600; }
+.mnav hr { border:0; border-top:1px solid var(--line); margin:6px 4px; width:auto; }
+.mbody { flex:1; padding:16px 20px; min-width:0; }
+.mbody h2 { font-size:18px; margin:0 0 12px; }
+.row { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:9px 12px; border:1px solid var(--line); border-radius:10px; background:#fff; margin-bottom:8px; }
+.btn { display:inline-block; padding:4px 12px; border-radius:8px; border:1px solid var(--line); background:#fff; font-size:13px; white-space:nowrap; }
 .btn.dark { background:var(--ui-text); color:#fff; border-color:var(--ui-text); }
 .btn.green { background:#1f883d; color:#fff; border-color:#1f883d; }
 .tog { width:34px; height:20px; border-radius:999px; background:#cfccc4; position:relative; flex:none; }
 .tog::after { content:""; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#fff; }
 .tog.on { background:#2c84db; } .tog.on::after { left:16px; }
-.field { border:1px solid var(--line); border-radius:10px; background:#fff; padding:10px 12px; min-height:38px; white-space:pre-wrap; font-size:13px; }
+.field { border:1px solid var(--line); border-radius:10px; background:#fff; padding:8px 12px; min-height:36px; white-space:pre-wrap; font-size:13px; max-height:150px; overflow:hidden; }
 .field.rtl { direction:rtl; text-align:right; font-family:'IBM Plex Sans Hebrew',system-ui,sans-serif; }
-.cols { display:flex; gap:16px; } .cols > div { flex:1; min-width:0; }
+.lbl { font-weight:600; font-size:13px; margin:12px 0 2px; }
+.lbl:first-child { margin-top:0; }
+.sub { color:var(--ui-2); font-size:12px; margin-bottom:6px; }
+.tabs { display:flex; gap:14px; border-bottom:1px solid var(--line); margin-bottom:10px; font-size:13px; }
+.tabs span { padding:4px 0; }
+.tabs .on { border-bottom:2px solid var(--ui-text); font-weight:600; }
+.pills { display:flex; gap:6px; align-items:center; margin-bottom:10px; font-size:12px; flex-wrap:wrap; }
+.pills span { padding:2px 10px; border-radius:999px; border:1px solid var(--line); background:#fff; }
+.pills .on { background:var(--ui-text); color:#fff; }
+.pills .grow { flex:1; border:0; background:none; padding:0; }
+.tbl { font-size:13px; }
+.tbl .tr { display:grid; grid-template-columns:2fr 1fr 1fr; gap:8px; padding:7px 6px; border-bottom:1px solid var(--line); }
+.tbl .tr.th { color:var(--ui-2); padding-top:2px; }
+.ok { color:#1f883d; }
 .card { border:1px solid var(--line); border-radius:12px; background:#fff; padding:12px; margin-bottom:10px; }
 .file { display:flex; gap:8px; align-items:center; padding:6px 0; border-bottom:1px solid var(--line); font-size:13px; } .file:last-child { border:0; }
 .file i { width:22px; height:26px; border:1px solid var(--line); border-radius:4px; background:#f7f6f2; display:block; flex:none; }
@@ -84,6 +111,8 @@ main { display:grid; grid-template-columns: minmax(260px, 360px) 1fr; gap:20px; 
 .msg.me { background:#e9e6dc; margin-left:auto; }
 .msg.ai { background:#fff; border:1px solid var(--line); }
 .composer { border:1px solid var(--line); border-radius:14px; background:#fff; padding:12px; margin-top:12px; color:var(--ui-2); }
+.chips { display:flex; gap:6px; margin-bottom:8px; flex-wrap:wrap; }
+.chips span { display:inline-flex; gap:6px; align-items:center; border:1px solid var(--line); border-radius:8px; padding:3px 8px; background:#f7f6f2; font-size:12px; color:var(--ui-text); }
 .gh { background:#fff; }
 .gh .ghbar { background:#24292f; color:#fff; padding:10px 16px; font-weight:600; }
 .gh .body { padding:24px; }
@@ -96,18 +125,29 @@ main { display:grid; grid-template-columns: minmax(260px, 360px) 1fr; gap:20px; 
 .layers { width:100%; border-collapse:collapse; direction:rtl; text-align:right; font-family:'IBM Plex Sans Hebrew',system-ui,sans-serif; }
 .layers th, .layers td { border:1px solid var(--line); padding:8px 10px; vertical-align:top; }
 .layers th { background:#efede6; }
-.cover { padding:40px 28px; direction:rtl; text-align:right; font-family:'IBM Plex Sans Hebrew',system-ui,sans-serif; }
+.cover { padding:36px 28px; direction:rtl; text-align:right; font-family:'IBM Plex Sans Hebrew',system-ui,sans-serif; }
 .cover ol { padding-inline-start:20px; } .cover li { margin:4px 0; }
 .hint { font-size:13px; color:var(--text-2); margin-top:10px; }
-@media (max-width: 860px) {
+@media (max-width: 900px) {
   main { grid-template-columns: 1fr; }
   .side { width:120px; font-size:12px; }
-  .setnav { width:96px; font-size:12px; }
+  .mnav { width:110px; font-size:12px; }
   .main { padding:14px; }
-  .cols { flex-direction:column; }
   .app { min-height:0; }
 }
-@media (max-width: 520px) { .side { display:none; } .setwrap { flex-direction:column; } .setnav { flex-direction:row; flex-wrap:wrap; width:auto; } }
+@media (max-width: 560px) {
+  .side { display:none; }
+  .shade { position:static; background:none; padding:0; }
+  .app.tall { min-height:0; }
+  .app.tall > .main { display:none; }
+  .shade { flex:1; min-width:0; }
+  .modal { flex-direction:column; box-shadow:none; border-radius:0; min-height:0; }
+  .mnav { width:auto; flex-direction:row; flex-wrap:wrap; border-right:0; border-bottom:1px solid var(--line); }
+  .mnav hr, .mnav .t { display:none; }
+  .tbl .tr { grid-template-columns:1.4fr 1fr; overflow-wrap:anywhere; }
+  .tbl .tr > :nth-child(2) { display:none; }
+  .mbody { padding:12px; }
+}
 </style>
 </head>
 <body>
@@ -127,117 +167,145 @@ main { display:grid; grid-template-columns: minmax(260px, 360px) 1fr; gap:20px; 
   <div id="screen"></div>
 </main>
 <script>
-var P = {"prefs": "אני סטודנט/ית לתקשורת חזותית בשנה ד' ב־HIT, בקורס \"עיצוב החלטות\".\nענה לי בעברית פשוטה, בלי לערבב מילים באנגלית בתוך משפטים.\nפקודות ושמות קבצים, כתוב בשורה נפרדת.\nכשאתה לא בטוח, תגיד. כשמשהו הוא הנחה ולא עובדה, סמן אותו.\nאל תחמיא לי. אם הרעיון שלי חלש, תגיד למה.", "github": "https://claude.ai/connect-github", "name": "HIT ME · עיצוב החלטות", "instructions": "אני [שם], סטודנט/ית בקורס \"עיצוב החלטות\" ב־HIT. שם המשתמש שלי בגיטהאב: [שם משתמש].\nהכיתה בונה יחד את HIT ME, האפליקציה הלא רשמית של הסטודנטים במכון.\nהעבודה מתנהלת במאגר eranlahav/hitme. המטלות שלי נמצאות בתיקיות שלי בתוך assignments.\nאיפה אנחנו: שלב המחקר. מנסים להבין את הסטודנטים ב־HIT לפני שמחליטים על פתרונות.\nכללים:\n1. הפרד תמיד בין ראיה (מה נאסף, עם מקור) לבין פרשנות.\n2. כשאתה מסתמך על קובץ, ציין את שמו. אל תמציא נתונים, ציטוטים או מספרים.\n3. רעיון לפתרון שעולה, רשום בסוף תחת \"חניית פתרונות\".\n4. בסוף כל ניתוח, כתוב מה צריך אימות אנושי ואיך לבדוק.\n5. בלי שמות ופרטים מזהים של משתתפי מחקר.\n6. במאגר: עבוד רק בתיקיות שלי. אל תדחוף לענף הראשי ואל תמזג.\n7. את הנימוק להחלטה שלי, שאל אותי. אל תכתוב אותו במקומי.\n8. ענה בעברית פשוטה. פקודות ושמות קבצים בשורה נפרדת.", "repo": "eranlahav/hitme", "memory": "תראה לי מה שמור בזיכרון של הפרויקט, ותמחק את מה שכבר לא נכון.", "design": "https://claude.ai/design", "finish": "אני מגיש/ה את משימת הסיום של הדרכת קלוד בקורס עיצוב החלטות.\nתמשוך את הגרסה העדכנית, ותקרא את assignments/00-claude-setup/README.md.\nתעבור איתי על רשימת הבדיקה מההדרכה, שורה אחת בכל פעם, ותשאל אותי אם היא מוכנה.\nתכתוב את setup.md לפי ארבעת החלקים. מהקבצים, רק שמות. את התוכן של הקובץ הפרטי שלי אל תעתיק.\nתראה לי את הקובץ, ורק אחרי שאישרתי תגיש אותו לתיקייה שלי ותפתח בקשת מיזוג."};
+/* Prompts: copied from the copy blocks in ../index.html. Keep both identical. */
+var P = {"name": "HIT ME · עיצוב החלטות", "goal": "אני [שם], סטודנט/ית ל[מחלקה] בשנה [שנה] ב־HIT, בקורס \"עיצוב החלטות\".\nבקורס הכיתה בונה יחד את HIT ME, אפליקציה לסטודנטים במכון.\nבפרויקט הזה אני רוצה לעבוד על המטלות שלי, להגיש אותן למאגר, ולדעת בכל רגע מה החוליה שלי עושה.\nהשבוע אני בחוליית [שם החוליה], ואחראי/ת על [הנושא שלי].\nמה שהכי יעזור לי: [למשל: תזכורות למועדים, עזרה בניסוח, בדיקה שהראיות שלי חזקות].", "instructions": "אני [שם], סטודנט/ית בקורס \"עיצוב החלטות\" ב־HIT. שם המשתמש שלי בגיטהאב: [שם משתמש].\nהכיתה בונה יחד את HIT ME, האפליקציה הלא רשמית של הסטודנטים במכון.\nהעבודה מתנהלת במאגר eranlahav/hitme. המטלות שלי נמצאות בתיקיות שלי בתוך assignments.\nאיפה אנחנו: שלב המחקר. מנסים להבין את הסטודנטים ב־HIT לפני שמחליטים על פתרונות.\nאיך נוח לי לעבוד: [למשל: צעדים קצרים, דוגמה לפני הסבר, שאלה אחת בכל פעם].\nכללים:\n1. הפרד תמיד בין ראיה (מה נאסף, עם מקור) לבין פרשנות.\n2. כשאתה מסתמך על קובץ, ציין את שמו. אל תמציא נתונים, ציטוטים או מספרים.\n3. רעיון לפתרון שעולה, רשום בסוף תחת \"חניית פתרונות\".\n4. בסוף כל ניתוח, כתוב מה צריך אימות אנושי ואיך לבדוק.\n5. בלי שמות ופרטים מזהים של משתתפי מחקר.\n6. במאגר: עבוד רק בתיקיות שלי. אל תדחוף לענף הראשי ואל תמזג.\n7. את הנימוק להחלטה שלי, שאל אותי. אל תכתוב אותו במקומי.\n8. ענה בעברית פשוטה. פקודות ושמות קבצים בשורה נפרדת.", "repo": "eranlahav/hitme", "files": "צירפתי שני קבצים: קובץ ההקשר הציבורי שלי, וקובץ ההקשר הפרטי שלי.\nתקרא את שניהם, ותשמור בזיכרון של הפרויקט את מה שחשוב כדי לעבוד איתי טוב.\nחשוב לי במיוחד שתזכור: [למשל: איך אני לומד/ת, במה אני חזק/ה, במה אני רוצה להשתפר, איך אני רוצה לקבל משוב].\nאת הקובץ הפרטי לעולם אל תעלה למאגר, ואל תצטט ממנו בקבצים שאני מגיש/ה.\nבסוף תראה לי מה שמרת.", "memory": "תראה לי מה שמור בזיכרון של הפרויקט, ותמחק את מה שכבר לא נכון.", "prefs": "אני [שם], סטודנט/ית ל[מחלקה] בשנה [שנה] ב־HIT.\nענה לי ב[עברית פשוטה], בלי לערבב מילים באנגלית בתוך משפטים.\nפקודות ושמות קבצים, כתוב בשורה נפרדת.\nכשאתה לא בטוח, תגיד. כשמשהו הוא הנחה ולא עובדה, סמן אותו.\nאל תחמיא לי. אם הרעיון שלי חלש, תגיד למה.\nעוד דבר שחשוב לי: [למשל: תשובות קצרות, דוגמאות מעולם העיצוב].", "finish": "אני מגיש/ה את משימת הסיום של הדרכת קלוד בקורס עיצוב החלטות.\nתמשוך את הגרסה העדכנית, ותקרא את assignments/00-claude-setup/README.md.\nתעבור איתי על רשימת הבדיקה מההדרכה, שורה אחת בכל פעם, ותשאל אותי אם היא מוכנה.\nתכתוב את setup.md לפי ארבעת החלקים. מהקבצים, רק שמות. את התוכן של הקובץ הפרטי שלי אל תעתיק.\nתראה לי את הקובץ, ורק אחרי שאישרתי תגיש אותו לתיקייה שלי ותפתח בקשת מיזוג.", "sync": "תמשוך את הגרסה העדכנית של המאגר.\nאני בחוליית [שם החוליה], ואחראי/ת על הנושא [הנושא שלי].\nתביא לי את כל מה שנוסף לאחרונה ונוגע אליי: דוחות של החוליות, קבצים של חברי החוליה שלי, ושינויים בהוראות של המטלות.\nלכל דבר, כתוב את שם הקובץ ומה חדש בו.\nבסוף, תגיד לי מה כדאי לי לעשות עכשיו."};
 
-/* ---------- small builders for the mock Claude screens ---------- */
-function esc(s){ return String(s).replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+/* ---------- small builders for the mock Claude desktop app ---------- */
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function marks(s){ return esc(s).replace(/\[[^\]\n]+\]/g, '<mark>$&</mark>'); }
 function h(n, on){ return on ? ' data-hl="'+n+'"' : ''; }
-function win(url, inner){ return '<div class="win"><div class="url"><span class="dots"><i></i><i></i><i></i></span><span class="addr">'+url+'</span></div>'+inner+'</div>'; }
+function win(inner){ return '<div class="win"><div class="tbar"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">Claude</span></div>'+inner+'</div>'; }
+/* opt: active (item name), hl (item name gets highlight 1), menu (user menu open), userHl */
 function sidebar(opt){
   opt = opt || {};
-  var items = ['New chat','Chats','Projects','Artifacts','Code'];
-  var s = '<nav class="side"><div class="brand">Claude</div>';
+  var items = ['+ New','Search','Projects','Artifacts','Scheduled','Customize'];
+  var s = '<nav class="side"><div class="modes"><span class="on">Home</span><span>Code</span></div>';
   items.forEach(function(it){
-    var on = opt.active === it;
-    var hl = opt.hl === it;
-    s += '<div class="it'+(on?' on':'')+'"'+(hl?' data-hl="1"':'')+'>'+it+'</div>';
+    s += '<div class="it'+(opt.active===it?' on':'')+'"'+(opt.hl===it?' data-hl="1"':'')+'>'+it+'</div>';
   });
-  if (opt.recents) { s += '<div class="sec">Recents</div>'; opt.recents.forEach(function(r){ s += '<div class="it">'+r+'</div>'; }); }
+  s += '<div class="sec">Pinned</div><div class="sec">Chats and tasks</div>';
+  (opt.recents || []).forEach(function(r){ s += '<div class="it">'+r+'</div>'; });
   s += '<div class="grow"></div>';
-  if (opt.menu) s += '<div class="menu"><div>'+'Your name'+'</div><div'+h(2,true)+'>Settings</div><div>Help</div><div>Log out</div></div>';
-  s += '<div class="user"'+h(1, opt.userHl)+'><span class="av">S</span><span>Student</span></div></nav>';
+  if (opt.menu) s += '<div class="menu"><div class="muted">student@example.com</div><div'+h(2,true)+'>Settings</div><div>Help</div><div>Log out</div></div>';
+  s += '<div class="user"'+h(1, opt.userHl)+'><span class="av">S</span><span>Student <span class="plan">· Pro</span></span></div></nav>';
   return s;
 }
-function app(side, main){ return '<div class="app">'+side+'<div class="main">'+main+'</div></div>'; }
-function settings(tab, body){
-  var tabs = ['General','Account','Privacy','Billing','Capabilities','Connectors'];
-  var nav = '<div class="setnav">'+tabs.map(function(t){ return '<div class="'+(t===tab?'on':'')+'">'+t+'</div>'; }).join('')+'</div>';
-  return win('claude.ai/settings/'+tab.toLowerCase(), app(sidebar({}), '<h2>Settings</h2><div class="setwrap">'+nav+'<div class="setbody">'+body+'</div></div>'));
+function app(side, main, overlay){ return '<div class="app'+(overlay?' tall':'')+'">'+side+'<div class="main">'+main+'</div>'+(overlay||'')+'</div>'; }
+var HOME = '<h2>Good afternoon</h2><div class="composer">How can I help you today?</div>';
+/* account settings modal. groups separated by '|' */
+var SETNAV = ['Search','Account','Billing','Usage','|','Appearance','Your Claude','Capabilities','Notifications','Privacy','Wellbeing','|','Customize','Code','Cowork','|','Desktop app','|','API keys'];
+function navList(title, list, on, hlItem){
+  return '<div class="mnav"><div class="t">'+title+'</div>'+list.map(function(t){
+    if (t === '|') return '<hr>';
+    return '<div class="i'+(t===on?' on':'')+'"'+(t===hlItem?' data-hl="1"':'')+'>'+t+'</div>';
+  }).join('')+'</div>';
 }
-function project(body, opt){
-  opt = opt || {};
-  return win('claude.ai/project/…', app(sidebar({active:'Projects', recents: opt.recents}), '<div class="muted">Projects /</div><h2>HIT ME · עיצוב החלטות</h2>'+body));
+function settings(tab, body, hlNav){
+  var m = '<div class="shade"><div class="modal">'+navList('Settings', SETNAV, tab, hlNav)+'<div class="mbody">'+body+'</div></div></div>';
+  return win(app(sidebar({}), HOME, m));
+}
+var PNAV = ['General','Memory','Environment','Usage','Debug access'];
+function projSettings(tab, body){
+  var m = '<div class="shade"><div class="modal">'+navList('Project settings', PNAV, tab)+'<div class="mbody">'+body+'</div></div></div>';
+  return win(app(sidebar({active:'Projects'}), '<div class="muted">Projects /</div><h2>HIT ME · עיצוב החלטות</h2>', m));
+}
+function project(body){
+  return win(app(sidebar({active:'Projects'}), '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div><div class="muted">Projects /</div><h2 style="margin:0">HIT ME · עיצוב החלטות</h2></div><span class="btn">Settings</span></div>'+body));
 }
 function chat(title, msgs, composer){
-  var m = msgs.map(function(x){ return '<div class="msg '+x[0]+'">'+x[1]+'</div>'; }).join('');
-  return win('claude.ai/…', app(sidebar({active:'Projects'}), '<div class="muted">HIT ME · עיצוב החלטות /</div><h2>'+title+'</h2>'+m+(composer?'<div class="composer">'+composer+'</div>':'')));
+  var m = msgs.map(function(x){ return '<div class="msg '+x[0]+'"'+(x[2]?h(x[2],true):'')+'>'+x[1]+'</div>'; }).join('');
+  return win(app(sidebar({active:'Projects'}), '<div class="muted">HIT ME · עיצוב החלטות /</div><h2>'+title+'</h2>'+m+(composer?'<div class="composer">'+composer+'</div>':'')));
 }
-function copy(text, ltr){ return '<div class="copy'+(ltr?' ltr':'')+'"><button type="button">העתק</button><span class="t">'+esc(text)+'</span></div>'; }
+function tog(label, on, sub){ return '<div class="row"><div>'+label+(sub?'<div class="muted">'+sub+'</div>':'')+'</div><span class="tog'+(on?' on':'')+'"></span></div>'; }
+/* editable copy box. key = name in P; edits are kept while the page is open */
+var EDITS = {};
+try { EDITS = JSON.parse(localStorage.getItem('hitme-claude-slides-v1') || '{}') || {}; } catch (e) { EDITS = {}; }
+function copy(key, ltr){
+  var text = EDITS[key] != null ? EDITS[key] : P[key];
+  var fill = /\[[^\]\n]+\]/.test(P[key]);
+  var label = fill ? 'לוחצים על הטקסט, ממלאים את הצהוב, ומעתיקים' : '';
+  return '<div class="copy'+(ltr?' ltr':'')+'"><div class="head"><span>'+label+'</span><button type="button">העתק</button></div><span class="t" data-key="'+key+'"'+(fill?' contenteditable="true" spellcheck="false"':'')+'>'+marks(text)+'</span></div>';
+}
 function skip(t){ return '<div class="skip"><b>כבר עשיתם?</b> '+t+'</div>'; }
 
 /* ---------- the slides ---------- */
 var SLIDES = [
  { ch:'פתיחה', title:'איך משתמשים במצגת הזו',
-   do:'<p>פותחים את המצגת בחצי מסך, ואת קלוד בחצי השני. עוברים צעד אחרי צעד: בכל צעד רואים איך המסך בקלוד אמור להיראות, ומה ללחוץ. הדבר שלוחצים עליו מסומן במסגרת ורודה.</p><p>מעבר בין צעדים: בכפתורים למעלה, או בחצים במקלדת. מי שכבר עשה פרק, בוחר את הפרק הבא ברשימה למעלה.</p>',
-   screen: function(){ return win('claude.ai', '<div class="cover"><h2 style="margin-top:0">הדרכת קלוד לקורס</h2><ol><li>חיבור גיטהאב לקלוד</li><li>פרויקט הקורס והנחיות</li><li>קבצים וזיכרון</li><li>הגדרות החשבון</li><li>שרשורים</li><li>משימת הסיום</li><li>קלוד דיזיין</li></ol><p class="hint">שמות הכפתורים בקלוד משתנים לפעמים. אם משהו לא נמצא בדיוק במקום, חפשו שם דומה, או שאלו את קלוד עצמו איפה זה.</p></div>'); } },
+   do:'<p>פותחים את המצגת בחצי מסך, ואת האפליקציה של קלוד במחשב בחצי השני. בכל צעד רואים איך המסך אמור להיראות, ומה ללחוץ. מה שלוחצים עליו מסומן במסגרת ורודה.</p><p>בכל הנחיה להעתקה, מה שבצהוב ממלאים בעצמכם: שם, מחלקה, מה אתם צריכים. אפשר למלא כאן, ישר בתוך המצגת, ואז להעתיק.</p><p>מעבר בין צעדים: בכפתורים למעלה, או בחצים במקלדת. מי שכבר עשה פרק, בוחר את הפרק הבא ברשימה.</p>',
+   screen: function(){ return win('<div class="cover"><h2 style="margin-top:0">הדרכת קלוד לקורס</h2><ol><li>חיבורים</li><li>פרויקט הקורס: כללי, זיכרון, סביבה</li><li>קבצי ההקשר והזיכרון</li><li>הגדרות החשבון</li><li>שרשורים</li><li>משימת הסיום</li><li>מה חדש במאגר</li></ol><p class="hint">המסכים כאן מצוירים, לא צילום. שמות הכפתורים באנגלית כמו באפליקציה. אם משהו לא נמצא בדיוק במקום, מחפשים בחיפוש של ההגדרות, או שואלים את קלוד איפה זה.</p></div>'); } },
  { ch:'פתיחה', title:'ארבע שכבות של הגדרות',
    do:'<p>רוב הבלבול בקלוד מגיע מזה שלא יודעים באיזו שכבה נמצאת הגדרה. מה שנכון תמיד, עולה לשכבה גבוהה. מה שנכון רק למשימה אחת, נשאר בשיחה.</p>',
-   screen: function(){ return win('claude.ai', '<div class="cover"><table class="layers"><tr><th>שכבה</th><th>מה יש בה</th><th>על מה היא חלה</th></tr><tr><td>החשבון</td><td>העדפות אישיות, זיכרון כללי, חיבורים</td><td>כל שיחה וכל פרויקט</td></tr><tr><td>הפרויקט</td><td>הנחיות, מאגר, קבצים, זיכרון של הפרויקט</td><td>כל השיחות בפרויקט</td></tr><tr><td>השיחה (שרשור)</td><td>משימה אחת עם מטרה אחת</td><td>רק השיחה הזו</td></tr><tr><td>המחשב (קלוד קוד)</td><td>קובץ הוראות אישי, הרשאות, תיקיות</td><td>עבודה על קבצים במחשב שלי</td></tr></table></div>'); } },
+   screen: function(){ return win('<div class="cover"><table class="layers"><tr><th>שכבה</th><th>מה יש בה</th><th>על מה היא חלה</th></tr><tr><td>החשבון</td><td>העדפות אישיות, זיכרון כללי, יכולות, חיבורים</td><td>כל שיחה וכל פרויקט</td></tr><tr><td>הפרויקט</td><td>מטרה, הנחיות, זיכרון של הפרויקט, מאגר</td><td>כל השרשורים בפרויקט</td></tr><tr><td>השרשור</td><td>משימה אחת עם מטרה אחת, וקבצים שמצרפים לה</td><td>רק השרשור הזה</td></tr><tr><td>המחשב (קלוד קוד)</td><td>קובץ הוראות אישי, הרשאות, תיקיות</td><td>עבודה על קבצים במחשב שלי</td></tr></table></div>'); } },
 
- { ch:'1. חיבור גיטהאב', title:'פותחים את ההגדרות',
-   do: skip('אם בהגדרות, בחלק של החיבורים, גיטהאב כבר מחובר, דלגו לפרק 2.')+'<p>לוחצים על השם שלכם בפינה למטה (1), ואז על ההגדרות (2).</p>',
-   screen: function(){ return win('claude.ai', app(sidebar({userHl:true, menu:true}), '<h2>Good afternoon</h2><div class="composer">How can I help you today?</div>')); } },
- { ch:'1. חיבור גיטהאב', title:'מחברים את גיטהאב',
-   do:'<p>בהגדרות, בוחרים בחיבורים. ליד גיטהאב לוחצים על כפתור החיבור (1).</p><p>אפשר גם לפתוח ישר את הקישור הזה:</p>'+copy(P.github, true),
-   screen: function(){ return settings('Connectors', '<div class="row"><div><b>GitHub</b><div class="muted">Repositories, issues, pull requests</div></div><span class="btn dark"'+h(1,true)+'>Connect</span></div><div class="row"><div><b>Google Drive</b><div class="muted">Docs, Sheets and files</div></div><span class="btn">Connect</span></div><div class="row"><div><b>Figma</b></div><span class="btn">Connect</span></div>'); } },
- { ch:'1. חיבור גיטהאב', title:'מאשרים בגיטהאב',
-   do:'<p>נפתח מסך של גיטהאב. בודקים שהחשבון שמופיע למעלה הוא החשבון שאיתו הוזמנתם למאגר, ורק אז מאשרים (1).</p><p>אם מופיע חשבון אחר, מתנתקים מגיטהאב ומתחברים עם החשבון הנכון.</p>',
-   screen: function(){ return win('github.com/login/oauth/authorize', '<div class="gh"><div class="ghbar">GitHub</div><div class="body" style="text-align:center"><div class="av" style="margin:0 auto 8px;width:40px;height:40px">S</div><div style="font-size:18px;font-weight:600">Authorize Claude</div><p class="muted">Signed in as <b>your-github-username</b></p><span class="btn green"'+h(1,true)+'>Authorize</span></div></div>'); } },
- { ch:'1. חיבור גיטהאב', title:'מחברים גם את הכונן של גוגל',
-   do:'<p>חוזרים לחיבורים. גיטהאב מסומן עכשיו כמחובר. מחברים באותה דרך את הכונן של גוגל (1): שם החומרים של החוליה, הקלטות, תמלולים וטבלאות.</p><p>חיבור נקרא רק כשהשיחה מתחילה. מי שחיבר משהו באמצע שיחה, פותח שיחה חדשה.</p><p>בהתחלה: קריאה חופשית, וכתיבה רק עם אישור.</p>',
-   screen: function(){ return settings('Connectors', '<div class="row"><div><b>GitHub</b><div class="muted">Connected</div></div><span class="btn">Configure</span></div><div class="row"><div><b>Google Drive</b><div class="muted">Docs, Sheets and files</div></div><span class="btn dark"'+h(1,true)+'>Connect</span></div><div class="row"><div><b>Figma</b></div><span class="btn">Connect</span></div>'); } },
+ { ch:'1. חיבורים', title:'פותחים את ההגדרות',
+   do: skip('אם GitHub Integration כבר מחובר, דלגו לפרק 2.')+'<p>באפליקציה במחשב, לוחצים על השם שלכם בפינה למטה (1), ואז על ההגדרות (2).</p>',
+   screen: function(){ return win(app(sidebar({userHl:true, menu:true}), HOME)); } },
+ { ch:'1. חיבורים', title:'נכנסים להתאמה אישית',
+   do:'<p>בתפריט של ההגדרות, בוחרים בהתאמה אישית (1). שם יש שלוש לשוניות: חיבורים, מיומנויות ותוספים. נשארים בחיבורים.</p><p>ברשימה שלכם, מחפשים את GitHub Integration (2). אם הוא לא שם, לוחצים על ההוספה (3) ומוסיפים אותו.</p>',
+   screen: function(){ return settings('Customize', '<div class="tabs"><span class="on">Connectors</span><span>Skills</span><span>Plugins</span></div><div class="pills"><span class="on">Yours</span><span>Discover</span><span class="grow"></span><span>Search</span><span'+h(3,true)+'>+ Add</span></div><div class="tbl"><div class="tr th"><span>Connector</span><span>Type</span><span>Status</span></div><div class="tr"'+h(2,true)+'><span><b>GitHub Integration</b></span><span>Built-in</span><span class="muted">Not connected</span></div><div class="tr"><span>Google Drive</span><span>Built-in</span><span class="muted">Not connected</span></div><div class="tr"><span>Figma</span><span>Directory</span><span class="muted">Not connected</span></div></div>', 'Customize'); } },
+ { ch:'1. חיבורים', title:'מאשרים בגיטהאב',
+   do:'<p>לוחצים על GitHub Integration ומתחברים. נפתח מסך של גיטהאב. בודקים שהחשבון למעלה הוא החשבון שאיתו הוזמנתם למאגר, ורק אז מאשרים (1).</p><p>אם מופיע חשבון אחר, מתנתקים מגיטהאב ומתחברים עם החשבון הנכון.</p>',
+   screen: function(){ return '<div class="win"><div class="tbar"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">github.com</span></div><div class="gh"><div class="ghbar">GitHub</div><div class="body" style="text-align:center"><div class="av" style="margin:0 auto 8px;width:40px;height:40px">S</div><div style="font-size:18px;font-weight:600">Authorize Claude</div><p class="muted">Signed in as <b>your-github-username</b></p><span class="btn green"'+h(1,true)+'>Authorize</span></div></div></div>'; } },
+ { ch:'1. חיבורים', title:'מחברים גם את הכונן של גוגל',
+   do:'<p>חוזרים לחיבורים. GitHub Integration מחובר עכשיו. באותה דרך מחברים את הכונן של גוגל (1): שם החומרים של החוליה, הקלטות, תמלולים וטבלאות. מי שמעצב בפיגמה, מחבר גם אותה.</p><p>חיבור נקרא רק כשהשיחה מתחילה. מי שחיבר משהו באמצע שיחה, פותח שיחה חדשה.</p><div class="why">בכל חיבור אפשר לקבוע מה קלוד עושה לבד ומה דורש אישור. בהתחלה: קריאה חופשית, כתיבה עם אישור.</div>',
+   screen: function(){ return settings('Customize', '<div class="tabs"><span class="on">Connectors</span><span>Skills</span><span>Plugins</span></div><div class="pills"><span class="on">Yours</span><span>Discover</span><span class="grow"></span><span>Search</span><span>+ Add</span></div><div class="tbl"><div class="tr th"><span>Connector</span><span>Type</span><span>Status</span></div><div class="tr"><span><b>GitHub Integration</b></span><span>Built-in</span><span class="ok">Connected</span></div><div class="tr"'+h(1,true)+'><span><b>Google Drive</b></span><span>Built-in</span><span class="muted">Not connected</span></div><div class="tr"><span>Figma</span><span>Directory</span><span class="muted">Not connected</span></div></div>'); } },
 
  { ch:'2. פרויקט הקורס', title:'יוצרים פרויקט חדש',
-   do: skip('אם יש לכם פרויקט "HIT ME · עיצוב החלטות" עם ההנחיות ועם המאגר, דלגו לפרק 3.')+'<p>בתפריט הצד, בפרויקטים (1), ואז בכפתור של פרויקט חדש (2).</p>',
-   screen: function(){ return win('claude.ai/projects', app(sidebar({active:'Projects', hl:'Projects'}), '<div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">Projects</h2><span class="btn dark"'+h(2,true)+'>+ New project</span></div><p class="muted">No projects yet.</p>')); } },
- { ch:'2. פרויקט הקורס', title:'נותנים לפרויקט שם',
-   do:'<p>מדביקים את השם בשדה (1), ויוצרים את הפרויקט (2).</p>'+copy(P.name),
-   screen: function(){ return win('claude.ai/projects/create', app(sidebar({active:'Projects'}), '<h2>Create a project</h2><div class="muted">Name</div><div class="field rtl"'+h(1,true)+'>'+esc(P.name)+'</div><div class="muted" style="margin-top:10px">Description (optional)</div><div class="field"></div><div style="margin-top:14px"><span class="btn dark"'+h(2,true)+'>Create project</span></div>')); } },
- { ch:'2. פרויקט הקורס', title:'מדביקים את הנחיות הפרויקט',
-   do:'<p>בפרויקט, פותחים את ההנחיות (1) ומדביקים את הטקסט. משנים רק את השורה הראשונה: השם שלכם ושם המשתמש בגיטהאב.</p>'+copy(P.instructions)+'<div class="why">בהנחיות כותבים רק מה שנכון תמיד. משימה של השבוע נכנסת לשיחה, לא להנחיות. שינוי בהנחיות חל רק על שיחות חדשות.</div>',
-   screen: function(){ return project('<div class="cols"><div><div class="composer">How can I help you today?</div></div><div><div class="card"'+h(1,true)+'><b>Instructions</b><div class="muted">Add instructions to tailor Claude\'s responses</div></div><div class="card"><b>Files</b><div class="muted">No files yet</div></div></div></div>'); } },
- { ch:'2. פרויקט הקורס', title:'מחברים את המאגר לפרויקט',
-   do:'<p>בהגדרות הפרויקט, בחלק של המאגרים (1), מוסיפים את המאגר של הקורס (2).</p>'+copy(P.repo, true)+'<div class="why">כשקלוד עובד על המאגר, הוא עובד על מחשב בענן. משאירים את ברירות המחדל: בלי סקריפט הכנה, בלי משתנים ובלי סודות.</div>',
-   screen: function(){ return project('<h3>Project settings</h3><div class="setwrap"><div class="setnav"><div>General</div><div class="on"'+h(1,true)+'>Repositories</div><div>Environment</div></div><div class="setbody"><div class="row"><div class="muted">owner/repository</div><span class="btn dark">Add</span></div><div class="row"'+h(2,true)+'><b>eranlahav/hitme</b><span class="muted">Added</span></div></div></div>'); } },
+   do: skip('אם יש לכם פרויקט "HIT ME · עיצוב החלטות" עם מטרה, הנחיות ומאגר, דלגו לפרק 3.')+'<p>בתפריט הצד, בפרויקטים (1), ואז בכפתור של פרויקט חדש (2).</p>',
+   screen: function(){ return win(app(sidebar({active:'Projects', hl:'Projects'}), '<div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">Projects</h2><span class="btn dark"'+h(2,true)+'>+ New project</span></div><p class="muted">No projects yet.</p>')); } },
+ { ch:'2. פרויקט הקורס', title:'כללי: שם, ועל מה רוצים לעבוד',
+   do:'<p>נכנסים להגדרות הפרויקט, לחלק הכללי. בשדה של השם והסמל (1), מדביקים:</p>'+copy('name')+'<p>בשדה "על מה רוצים לעבוד" (2), ממלאים את הצהוב ומדביקים. זו המטרה שקלוד עובד לקראתה בכל הפרויקט:</p>'+copy('goal'),
+   screen: function(){ return projSettings('General', '<h2>General</h2><div class="lbl">Name and icon</div><div class="field rtl"'+h(1,true)+'>'+esc(P.name)+'</div><div class="lbl">What do you want to work on?</div><div class="sub">The outcome you want. Up to 8,000 characters.</div><div class="field rtl"'+h(2,true)+'>'+marks(EDITS.goal != null ? EDITS.goal : P.goal)+'</div>'); } },
+ { ch:'2. פרויקט הקורס', title:'כללי: מודלים ומכסה',
+   do:'<p>מתחת למטרה יש עוד שלושה דברים. את כולם משאירים כמו שהם:</p><p><b>מודלים (1).</b> איזה מודל מנהל את הפרויקט, איזה עובד בשרשורים, וכמה מאמץ. ברירת המחדל מתאימה.</p><p><b>המשך אוטומטי (2).</b> כשהמכסה נגמרת באמצע עבודה, קלוד ממשיך לבד כשהיא מתחדשת. לא חובה.</p><p><b>השהיית הפרויקט (3).</b> עוצרת את כל העבודה בפרויקט. לא נוגעים.</p>',
+   screen: function(){ return projSettings('General', '<h2>General</h2><div'+h(1,true)+'><div class="lbl">Models</div><div class="row">Coordinator model<span class="btn">Default ▾</span></div><div class="row">Thread model<span class="btn">Default ▾</span></div><div class="row">Thread effort<span class="btn">Default ▾</span></div></div><div style="margin-top:12px"'+h(2,true)+'>'+tog('Auto-continue when usage limits reset', false)+'</div><div style="margin-top:12px"'+h(3,true)+'><div class="row">Pause project<span class="btn">Pause</span></div></div>'); } },
+ { ch:'2. פרויקט הקורס', title:'זיכרון: הנחיות הפרויקט',
+   do:'<p>בחלק הזיכרון, בשדה של הנחיות הפרויקט (1), ממלאים את הצהוב ומדביקים. כל שרשור בפרויקט קורא את ההנחיות.</p>'+copy('instructions')+'<div class="why">בהנחיות כותבים רק מה שנכון תמיד. משימה של השבוע נכנסת לשרשור, לא להנחיות. שינוי בהנחיות חל על שרשורים חדשים בלבד.</div>',
+   screen: function(){ return projSettings('Memory', '<h2>Memory</h2><div class="lbl">Project instructions</div><div class="sub">Read by every thread, like a CLAUDE.md. Up to 16,000 characters.</div><div class="field rtl"'+h(1,true)+'>'+marks(EDITS.instructions != null ? EDITS.instructions : P.instructions)+'</div>'); } },
+ { ch:'2. פרויקט הקורס', title:'זיכרון: מה קלוד זוכר לבד',
+   do:'<p>מתחת להנחיות יש את הזיכרון האוטומטי (1). את זה קלוד כותב בעצמו תוך כדי עבודה, כדי ששרשור חדש ידע מה קרה קודם. כל שרשור קורא את קובץ הזיכרון הראשי.</p><p>רואים שם את קבצי הזיכרון שהוא שמר. בשורה שלמטה (2) אפשר להוסיף הערה קצרה בעצמכם, למשל מה החוליה שלכם השבוע.</p><div class="why">הנחיות כותבים אתם, והן חוקים. זיכרון כותב קלוד, והוא עובדות שנלמדו בדרך. לא סיסמאות ולא פרטים של משתתפי מחקר.</div>',
+   screen: function(){ return projSettings('Memory', '<h2>Memory</h2><div class="lbl">Project instructions</div><div class="field rtl">אני [שם], סטודנט/ית בקורס…</div><div'+h(1,true)+' style="margin-top:14px"><div class="lbl">Auto memory</div><div class="row"><b>MEMORY.md</b><span class="muted">Read every thread</span></div><div class="lbl">Memory files</div><div class="file"><i></i>squad-and-topic.md</div><div class="file"><i></i>how-i-work.md</div></div><div class="field" style="margin-top:10px;color:var(--ui-2)"'+h(2,true)+'>Note that…</div>'); } },
+ { ch:'2. פרויקט הקורס', title:'סביבה: מחברים את המאגר',
+   do:'<p>בחלק הסביבה, במאגרי הפרויקט, לוחצים על ההוספה (1) ובוחרים את המאגר של הקורס (2):</p>'+copy('repo', true)+'<p>אם המאגר לא מופיע ברשימה, בודקים שגיטהאב מחובר (פרק 1), ושאישרתם את ההזמנה למאגר.</p>',
+   screen: function(){ return projSettings('Environment', '<h2>Environment</h2><div class="sub">Cloud</div><div class="lbl">Project repositories</div><div class="row"><span class="muted">Repositories Claude can work on</span><span class="btn dark"'+h(1,true)+'>Add</span></div><div class="row"'+h(2,true)+'><b>eranlahav/hitme</b><span class="muted">Added</span></div><div class="lbl">Cloud environment</div><div class="row">Default<span class="btn">Edit</span></div>'); } },
+ { ch:'2. פרויקט הקורס', title:'סביבה: ענן ומחשב',
+   do:'<p><b>סביבת הענן (1).</b> משאירים את ברירת המחדל. כשקלוד עובד על המאגר, הוא עובד על מחשב בענן. בקורס אין סודות ואין משתנים, אז אין מה לערוך.</p><p><b>שימוש במחשב שלכם (2).</b> לא צריך בשביל ההדרכה. מי שרוצה שקלוד יעבוד על תיקייה במחשב שלו, מדליק ומוסיף אותה בתיקיות המאושרות.</p><p><b>עותקי עבודה נפרדים (3).</b> משאירים כמו שזה.</p><div class="why">בהגדרות הפרויקט יש גם שימוש ובדיקת תקלות. לא צריך לגעת בהם.</div>',
+   screen: function(){ return projSettings('Environment', '<h2>Environment</h2><div class="sub">Cloud</div><div class="lbl">Project repositories</div><div class="row"><b>eranlahav/hitme</b><span class="btn">Add</span></div><div'+h(1,true)+'><div class="lbl">Cloud environment</div><div class="row">Default<span class="btn">Edit</span></div></div><div class="sub" style="margin-top:14px">Local</div><div'+h(2,true)+'>'+tog('Let Claude use your device', false)+'<div class="row">Pre-approved folders<span class="btn">Add</span></div></div><div'+h(3,true)+'>'+tog('Use worktrees', false)+'</div>'); } },
 
- { ch:'3. קבצים וזיכרון', title:'מעלים שלושה קבצים לפרויקט',
-   do: skip('אם שלושת הקבצים כבר בפרויקט, דלגו לצעד הבא.')+'<p>בקבצי הפרויקט, בכפתור ההוספה (1), מעלים:</p><p>קובץ ההקשר הציבורי שלכם ממטלה 1. הקובץ האישי הפרטי מראיון ההקשר, שנשאר רק כאן ולעולם לא במאגר. וההסכמות לעבודה בחוליות.</p><div class="why">את דוחות החוליות לא מעלים. הם במאגר, וקלוד קורא אותם משם, כך שהם תמיד מעודכנים.</div>',
-   screen: function(){ return project('<div class="cols"><div><div class="composer">How can I help you today?</div></div><div><div class="card"><b>Instructions</b><div class="muted">אני [שם], סטודנט/ית בקורס…</div></div><div class="card"><div style="display:flex;justify-content:space-between"><b>Files</b><span class="btn"'+h(1,true)+'>+</span></div><div class="file"><i></i>context.md</div><div class="file"><i></i>me.private.md</div><div class="file"><i></i>team-agreements.md</div></div></div></div>'); } },
- { ch:'3. קבצים וזיכרון', title:'בודקים מה בזיכרון של הפרויקט',
-   do:'<p>פותחים שיחה חדשה בפרויקט ומדביקים:</p>'+copy(P.memory)+'<div class="why">הנחיות כותבים אנחנו, והן חוקים. זיכרון כותב קלוד, והוא עובדות שנלמדו בדרך: החלטות ולמה, מצב העבודה, העדפות. לא סיסמאות ולא פרטים של משתתפי מחקר.</div>',
-   screen: function(){ return chat('בדיקת זיכרון', [['me', esc(P.memory)], ['ai','שמור בזיכרון של הפרויקט:\n• את/ה בקורס עיצוב החלטות, שלב המחקר.\n• המטלות בתיקיות שלך במאגר.\nאין כאן משהו שכבר לא נכון.']], 'Reply…'); } },
+ { ch:'3. קבצי ההקשר והזיכרון', title:'מצרפים את קבצי ההקשר',
+   do: skip('אם קלוד כבר שמר את קבצי ההקשר שלכם בזיכרון של הפרויקט, דלגו לצעד הבא.')+'<p>פותחים שרשור חדש בפרויקט. מצרפים (1) את שני קבצי ההקשר: הציבורי ממטלה 1, והפרטי מראיון ההקשר. ממלאים את הצהוב ומדביקים (2):</p>'+copy('files')+'<div class="why">את דוחות החוליות לא מצרפים. הם במאגר, וקלוד קורא אותם משם, כך שהם תמיד מעודכנים.</div>',
+   screen: function(){ return chat('קבצי ההקשר שלי', [], '<div class="chips"'+h(1,true)+'><span>📄 context.md</span><span>📄 me.private.md</span></div><div class="msg me" style="max-width:none;margin:0"'+h(2,true)+'>'+marks(EDITS.files != null ? EDITS.files : P.files)+'</div>'); } },
+ { ch:'3. קבצי ההקשר והזיכרון', title:'מנקים את הזיכרון מדי פעם',
+   do:'<p>מדי פעם, בשרשור חדש, מבקשים מקלוד להראות מה שמור, ולמחוק מה שכבר לא נכון:</p>'+copy('memory'),
+   screen: function(){ return chat('ניקוי זיכרון', [['me', esc(P.memory)], ['ai','שמור בזיכרון של הפרויקט:\n• את/ה בחוליית הראיונות, אחראי/ת על התחבורה.\n• את/ה מעדיף/ה צעדים קצרים.\nשורה אחת כבר לא נכונה: החוליה של השבוע הקודם. למחוק?', 1]], 'Reply…'); } },
 
  { ch:'4. הגדרות החשבון', title:'כותבים העדפות אישיות',
-   do: skip('אם ההעדפות כתובות והזיכרון מופעל, דלגו לפרק 5.')+'<p>בהגדרות, בחלק הכללי, בשדה ההעדפות האישיות (1), כותבים מי אתם ואיך לדבר אתכם. זה חל על כל שיחה. אפשר להתחיל מזה ולשנות:</p>'+copy(P.prefs),
-   screen: function(){ return settings('General', '<h3 style="margin-top:0">Profile</h3><div class="muted">What personal preferences should Claude consider in responses?</div><div class="field rtl"'+h(1,true)+'>'+esc(P.prefs)+'</div>'); } },
+   do: skip('אם ההעדפות כתובות והזיכרון מופעל, דלגו לפרק 5.')+'<p>ההגדרות כאן חלות על כל שיחה, גם מחוץ לפרויקט. בהגדרות, בחלק של קלוד שלכם (1), בשדה ההעדפות (2), ממלאים את הצהוב ומדביקים:</p>'+copy('prefs')+'<p class="why">לא מוצאים את השדה? כותבים בחיפוש של ההגדרות: preferences.</p>',
+   screen: function(){ return settings('Your Claude', '<h2>Your Claude</h2><div class="lbl">Personal preferences</div><div class="sub">What should Claude consider in responses?</div><div class="field rtl"'+h(2,true)+'>'+marks(EDITS.prefs != null ? EDITS.prefs : P.prefs)+'</div>', 'Your Claude'); } },
  { ch:'4. הגדרות החשבון', title:'מפעילים זיכרון ויכולות',
-   do:'<p>בהגדרות, ביכולות: מפעילים את שני המתגים של הזיכרון (1), ואת יצירת הקבצים, החיפוש ברשת והתוצרים (2).</p>',
-   screen: function(){ return settings('Capabilities', '<h3 style="margin-top:0">Memory</h3><div'+h(1,true)+'><div class="row">Search and reference chats<span class="tog on"></span></div><div class="row">Generate memory from chat history<span class="tog on"></span></div></div><h3>Features</h3><div'+h(2,true)+'><div class="row">Code execution and file creation<span class="tog on"></span></div><div class="row">Web search<span class="tog on"></span></div><div class="row">Artifacts<span class="tog on"></span></div></div>'); } },
+   do:'<p>בהגדרות, ביכולות (1): מפעילים את החיפוש בשיחות קודמות ואת יצירת הזיכרון (2), ואת הרצת הקוד ויצירת הקבצים, והחיפוש ברשת (3).</p>',
+   screen: function(){ return settings('Capabilities', '<h2>Capabilities</h2><div class="lbl">Memory</div><div'+h(2,true)+'>'+tog('Search and reference chats', true)+tog('Generate memory from chat history', true)+'</div><div class="lbl">Tools</div><div'+h(3,true)+'>'+tog('Code execution and file creation', true)+tog('Web search', true)+'</div>', 'Capabilities'); } },
 
  { ch:'5. שרשורים', title:'שרשור אחד לכל משימה',
    do:'<p>בתוך הפרויקט, פותחים שרשור חדש לכל משימה (1), עם שם שאומר מה המטרה. לא הכול באותה שיחה.</p><p>לא עוזבים באמצע החלטה: אם קלוד שאל שאלה, עונים, אחרת העבודה עומדת. סוגרים כשהמשימה נגמרה.</p><div class="why">הגשה מתוך שרשור, בלי טרמינל: קלוד פותח ענף, מוסיף את הקובץ ופותח בקשת מיזוג. בקשה שנוגעת רק בתיקייה שלכם נכנסת לבד תוך כמה דקות.</div>',
-   screen: function(){ return project('<div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">Threads</h3><span class="btn dark"'+h(1,true)+'>+ New thread</span></div><div class="row">פרסונה רזה<span class="muted">2h</span></div><div class="row">דוח החוליה, סבב 2<span class="muted">1d</span></div><div class="row">בדיקת זיכרון<span class="muted">1d</span></div>'); } },
+   screen: function(){ return project('<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><h3 style="margin:0">Threads</h3><span class="btn dark"'+h(1,true)+'>+ New thread</span></div><div class="row">פרסונה רזה<span class="muted">2h</span></div><div class="row">דוח החוליה, סבב 2<span class="muted">1d</span></div><div class="row">קבצי ההקשר שלי<span class="muted">1d</span></div>'); } },
 
  { ch:'6. משימת הסיום', title:'פותחים שרשור למשימת הסיום',
-   do:'<p>את הפרק הזה כולם עושים. ממנו אני יודע שסיימתם.</p><p>פותחים שרשור חדש בפרויקט, ומדביקים (1):</p>'+copy(P.finish),
+   do:'<p>את הפרק הזה כולם עושים. ממנו אני יודע שסיימתם.</p><p>פותחים שרשור חדש בפרויקט, ומדביקים (1):</p>'+copy('finish'),
    screen: function(){ return chat('משימת סיום', [], '<div class="msg me" style="max-width:none;margin:0"'+h(1,true)+'>'+esc(P.finish)+'</div>'); } },
  { ch:'6. משימת הסיום', title:'עונים על רשימת הבדיקה',
-   do:'<p>קלוד עובר אתכם על רשימת הבדיקה, שורה אחת בכל פעם (1). עונים בכנות. אם משהו לא מוכן, חוזרים לפרק שלו ואז ממשיכים.</p>',
-   screen: function(){ return chat('משימת סיום', [['me','אני מגיש/ה את משימת הסיום של הדרכת קלוד…'], ['ai','קראתי את ההוראות. נעבור על הרשימה.\nשורה 1: העדפות אישיות כתובות, והזיכרון מופעל. זה מוכן?'], ['me','כן']], null).replace('<div class="msg ai">','<div class="msg ai" data-hl="1">'); } },
+   do:'<p>קלוד עובר אתכם על רשימת הבדיקה, שורה אחת בכל פעם (1). עונים בכנות. אם משהו לא מוכן, חוזרים לפרק שלו ואז ממשיכים.</p><p>הרשימה: גיטהאב והכונן מחוברים. יש פרויקט עם מטרה והנחיות. המאגר מחובר. קבצי ההקשר שמורים בזיכרון. העדפות כתובות והזיכרון מופעל.</p>',
+   screen: function(){ return chat('משימת סיום', [['me','אני מגיש/ה את משימת הסיום של הדרכת קלוד…'], ['ai','קראתי את ההוראות. נעבור על הרשימה.\nשורה 1: גיטהאב והכונן של גוגל מחוברים. זה מוכן?', 1], ['me','כן']], null); } },
  { ch:'6. משימת הסיום', title:'בודקים את הקובץ ומאשרים',
    do:'<p>קלוד מראה את הקובץ לפני שהוא מגיש. קוראים אותו (1). מהקבצים מופיעים רק שמות, בלי התוכן של הקובץ הפרטי. רק אם הכול נכון, כותבים שמאשרים.</p>',
-   screen: function(){ return chat('משימת סיום', [['ai','זה הקובץ שאגיש:'], ['ai','<div data-hl="1" style="direction:ltr;text-align:left;font-family:ui-monospace,monospace;font-size:12px"># setup.md\n## Checklist\n- [x] Preferences and memory\n- [x] GitHub and Google Drive\n…\n## Project files\ncontext.md, me.private.md, team-agreements.md</div>'], ['me','מאשר/ת']], null); } },
+   screen: function(){ return chat('משימת סיום', [['ai','זה הקובץ שאגיש:'], ['ai','<div data-hl="1" style="direction:ltr;text-align:left;font-family:ui-monospace,monospace;font-size:12px"># setup.md\n## Checklist\n- [x] GitHub and Google Drive\n- [x] Project goal and instructions\n- [x] Repository added\n- [x] Context files in project memory\n- [x] Preferences and memory\n## Files\ncontext.md, me.private.md (name only)</div>'], ['me','מאשר/ת']], null); } },
  { ch:'6. משימת הסיום', title:'הבקשה נכנסת לבד',
    do:'<p>קלוד פותח בקשת מיזוג ונותן קישור. בקשה שנוגעת רק בתיקייה שלכם ועוברת את הבדיקות נכנסת לבד תוך כמה דקות, ומסומנת בסגול (1).</p><p>לא נכנסה? בודקים שהקבצים רק בתיקייה שלכם ושאין שם קובץ בעברית. קלוד יסביר מה נכשל.</p>',
-   screen: function(){ return win('github.com/eranlahav/hitme/pull/…', '<div class="gh"><div class="ghbar">GitHub · eranlahav/hitme</div><div class="body"><div style="font-size:18px;font-weight:600">Add claude setup check</div><p><span class="merged"'+h(1,true)+'>Merged</span> <span class="muted">github-actions merged 1 commit into main</span></p><div class="file"><i></i>assignments/00-claude-setup/your-github-username/setup.md</div></div></div>'); } },
+   screen: function(){ return '<div class="win"><div class="tbar"><span class="dots"><i></i><i></i><i></i></span><span class="ttl">github.com</span></div><div class="gh"><div class="ghbar">GitHub · eranlahav/hitme</div><div class="body"><div style="font-size:18px;font-weight:600">Add claude setup check</div><p><span class="merged"'+h(1,true)+'>Merged</span> <span class="muted">github-actions merged 1 commit into main</span></p><div class="file"><i></i>assignments/00-claude-setup/your-github-username/setup.md</div></div></div></div>'; } },
 
- { ch:'7. קלוד דיזיין', title:'מתחילים מערכת עיצוב',
-   do: skip('אם כבר התחלתם מערכת עיצוב, סיימתם.')+'<p>פותחים את קלוד דיזיין, ויוצרים מערכת עיצוב חדשה (1). נותנים לה מקור: המאגר של הקורס, צילומי מסך של האפליקציה, או קובץ פיגמה (2). בודקים מה היא חילצה, ומפרסמים.</p>'+copy(P.design, true)+'<div class="why">השבוע רק מכירים ומגדירים. העבודה בכלי מתחילה במפגש 5.</div>',
-   screen: function(){ return win('claude.ai/design', app(sidebar({}), '<div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">Claude Design</h2><span class="btn dark"'+h(1,true)+'>New design system</span></div><h3>Source</h3><div'+h(2,true)+'><div class="row">GitHub repository<span class="muted">eranlahav/hitme</span></div><div class="row">Screenshots<span class="muted">Upload</span></div><div class="row">Figma file<span class="muted">Link</span></div></div>')); } },
-
- { ch:'סיום', title:'רשימת הבדיקה',
-   do:'<p>אם כל השורות מסומנות וקובץ הסיום נכנס למאגר, סיימתם.</p><p>תקועים יותר מרבע שעה? כותבים לי בוואטסאפ, עם צילום מסך.</p><p>קלוד קוד במחשב לא חובה השבוע. מי שרוצה, מוצא אותו בדף ההדרכה.</p>',
-   screen: function(){ return win('claude.ai', '<div class="cover"><h2 style="margin-top:0">רשימת הבדיקה</h2><ol><li>גיטהאב מחובר, וגם הכונן של גוגל.</li><li>יש פרויקט "HIT ME · עיצוב החלטות" עם הנחיות.</li><li>המאגר מחובר לפרויקט.</li><li>קובץ ההקשר הציבורי והקובץ הפרטי בקבצי הפרויקט.</li><li>העדפות אישיות כתובות, והזיכרון מופעל.</li><li>נכנסתי לקלוד דיזיין והתחלתי מערכת עיצוב.</li><li>קובץ משימת הסיום נכנס למאגר.</li></ol><p class="hint"><a href="../#troubles">תקלות נפוצות בדף ההדרכה</a></p></div>'); } }
+ { ch:'7. מה חדש במאגר', title:'בכל פעם שמתחילים לעבוד',
+   do:'<p>מעכשיו, בכל פעם שמתחילים לעבוד: שרשור חדש בפרויקט (1), ממלאים את הצהוב ומדביקים (2). כך קלוד מביא את כל מה שהחוליות העלו מאז הפעם הקודמת.</p>'+copy('sync')+'<p>תקועים יותר מרבע שעה? כותבים לי בוואטסאפ, עם צילום מסך. ויש <a href="../#troubles">תקלות נפוצות בדף ההדרכה</a>.</p>',
+   screen: function(){ return chat('מה חדש במאגר', [], '<div class="msg me" style="max-width:none;margin:0"'+h(2,true)+'>'+marks(EDITS.sync != null ? EDITS.sync : P.sync)+'</div>').replace('<h2>מה חדש במאגר</h2>', '<h2 data-hl="1" style="display:inline-block">מה חדש במאגר</h2>'); } }
 ];
 
 /* ---------- player ---------- */
@@ -264,15 +332,29 @@ document.getElementById('prev').onclick = function(){ show(i - 1); };
 document.getElementById('next').onclick = function(){ show(i + 1); };
 sel.onchange = function(){ show(parseInt(sel.value, 10)); };
 document.addEventListener('keydown', function(e){
-  if (e.target.tagName === 'SELECT') return;
+  if (e.target.tagName === 'SELECT' || e.target.isContentEditable) return;
   if (e.key === 'ArrowLeft' || e.key === 'PageDown') show(i + 1);
   if (e.key === 'ArrowRight' || e.key === 'PageUp') show(i - 1);
 });
+/* keep what the student typed, so the mock screen and later slides show it too */
+document.addEventListener('input', function(e){
+  var t = e.target.closest && e.target.closest('.copy .t[data-key]'); if (!t) return;
+  EDITS[t.dataset.key] = t.innerText.replace(/\n$/, '');
+  try { localStorage.setItem('hitme-claude-slides-v1', JSON.stringify(EDITS)); } catch (err) {}
+});
+document.addEventListener('focusout', function(e){
+  var t = e.target.closest && e.target.closest('.copy .t[data-key]'); if (!t) return;
+  document.getElementById('screen').innerHTML = SLIDES[i].screen();
+});
 document.addEventListener('click', function(e){
-  var b = e.target.closest('.copy button'); if (!b) return;
-  var t = b.parentNode.querySelector('.t').textContent;
+  var b = e.target.closest('.copy .head button'); if (!b) return;
+  var t = b.closest('.copy').querySelector('.t').innerText.replace(/\n$/, '');
   var done = function(){ b.textContent = 'הועתק'; setTimeout(function(){ b.textContent = 'העתק'; }, 1500); };
-  if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, function(){}); 
+  if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(t).then(done, function(){}); return; }
+  var ta = document.createElement('textarea'); ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { if (document.execCommand('copy')) done(); } catch (err) {}
+  document.body.removeChild(ta);
 });
 var start = parseInt((location.hash || '#1').slice(1), 10);
 show(isNaN(start) ? 0 : start - 1);
