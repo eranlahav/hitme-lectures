@@ -1,0 +1,94 @@
+{
+  "id": "04-persona-to-product",
+  "session": "04",
+  "date": "11.11",
+  "title": "מפרסונה למוצר: 17 מושגים",
+  "map": "00-map.jpg",
+  "concepts": [
+    {
+      "n": "01",
+      "name": "לקוח",
+      "file": "01-customer.jpg"
+    },
+    {
+      "n": "02",
+      "name": "בעל עניין",
+      "file": "02-stakeholder.jpg"
+    },
+    {
+      "n": "03",
+      "name": "הגדרת בעיה",
+      "file": "03-problem-statement.jpg"
+    },
+    {
+      "n": "04",
+      "name": "הזדמנות",
+      "file": "04-opportunity.jpg"
+    },
+    {
+      "n": "05",
+      "name": "חזון מוצר",
+      "file": "05-product-vision.jpg"
+    },
+    {
+      "n": "06",
+      "name": "מטרת מוצר",
+      "file": "06-product-goal.jpg"
+    },
+    {
+      "n": "07",
+      "name": "הצעת ערך",
+      "file": "07-value-proposition.jpg"
+    },
+    {
+      "n": "08",
+      "name": "מדד הצלחה",
+      "file": "08-success-metric.jpg"
+    },
+    {
+      "n": "09",
+      "name": "הנחת יסוד",
+      "file": "09-assumption.jpg"
+    },
+    {
+      "n": "10",
+      "name": "פתרון",
+      "file": "10-solution.jpg"
+    },
+    {
+      "n": "11",
+      "name": "אב־טיפוס",
+      "file": "11-prototype.jpg"
+    },
+    {
+      "n": "12",
+      "name": "MVP",
+      "file": "12-mvp.jpg"
+    },
+    {
+      "n": "13",
+      "name": "מוצר",
+      "file": "13-product.jpg"
+    },
+    {
+      "n": "14",
+      "name": "פיצ׳ר",
+      "file": "14-feature.jpg"
+    },
+    {
+      "n": "15",
+      "name": "Backlog",
+      "file": "15-backlog.jpg"
+    },
+    {
+      "n": "16",
+      "name": "תעדוף",
+      "file": "16-prioritization.jpg"
+    },
+    {
+      "n": "17",
+      "name": "מפת דרכים",
+      "file": "17-roadmap.jpg"
+    }
+  ]
+}
