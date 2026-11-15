@@ -1,0 +1,27 @@
+{
+  "id": "05-session-5",
+  "session": "05",
+  "date": "18.11",
+  "title": "Claude: 18 מושגים",
+  "map": "00-map.jpg",
+  "concepts": [
+    {"n": "01", "name": "מודל שפה", "en": "language model", "file": "01-language-model.jpg"},
+    {"n": "02", "name": "פרומפט", "en": "prompt", "file": "02-prompt.jpg"},
+    {"n": "03", "name": "אסימון", "en": "token", "file": "03-token.jpg"},
+    {"n": "04", "name": "הקשר וחלון הקשר", "en": "context · context window", "file": "04-context-window.jpg"},
+    {"n": "05", "name": "בחירת מודל", "en": "model choice", "file": "05-model-choice.jpg"},
+    {"n": "06", "name": "רמת מאמץ בחשיבה", "en": "thinking effort", "file": "06-thinking-effort.jpg"},
+    {"n": "07", "name": "פרויקט ב-Claude", "en": "project", "file": "07-project.jpg"},
+    {"n": "08", "name": "קבצי ידע", "en": "knowledge files", "file": "08-knowledge-files.jpg"},
+    {"n": "09", "name": "הוראות לפרויקט", "en": "project instructions", "file": "09-project-instructions.jpg"},
+    {"n": "10", "name": "שרשור", "en": "thread", "file": "10-thread.jpg"},
+    {"n": "11", "name": "חפץ", "en": "artifact", "file": "11-artifact.jpg"},
+    {"n": "12", "name": "זיכרון", "en": "memory", "file": "12-memory.jpg"},
+    {"n": "13", "name": "סוכן", "en": "agent", "file": "13-agent.jpg"},
+    {"n": "14", "name": "מחבר", "en": "connector", "file": "14-connector.jpg"},
+    {"n": "15", "name": "מיומנות", "en": "skill", "file": "15-skill.jpg"},
+    {"n": "16", "name": "משימות מתוזמנות", "en": "scheduled tasks", "file": "16-scheduled-tasks.jpg"},
+    {"n": "17", "name": "הוראות מותאמות אישית", "en": "custom instructions", "file": "17-custom-instructions.jpg"},
+    {"n": "18", "name": "הגדרות", "en": "settings", "file": "18-settings.jpg", "optional": true}
+  ]
+}
