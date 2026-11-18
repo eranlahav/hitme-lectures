@@ -210,7 +210,8 @@ footer { margin-top: 64px; color: var(--text-2); font-size: 14px; }
   <p class="sub">קישור אחד לכל הקורס. בכל מפגש: מה עושים עד המפגש הבא, סיכום, וחומרים. המפגש האחרון תמיד למעלה.</p>
   </div>
   <nav class="pills" aria-label="מפגשים">
-    <a class="on" href="#session-04">מפגש 04 · 11.11</a>
+    <a class="on" href="#session-05">מפגש 05 · 18.11</a>
+    <a href="#session-04">מפגש 04 · 11.11</a>
     <a href="#session-03">מפגש 03</a>
     <a href="#session-02">מפגש 02</a>
     <a href="#session-01">מפגש 01</a>
@@ -221,7 +222,7 @@ footer { margin-top: 64px; color: var(--text-2); font-size: 14px; }
   <div class="layout">
   <aside class="side" aria-label="ההתקדמות והכללים">
     <div class="progress glass" aria-live="polite">
-      <div class="row"><span>ההתקדמות שלי · מפגש 04</span><span id="count">0/0</span></div>
+      <div class="row"><span>ההתקדמות שלי · מפגש 05</span><span id="count">0/0</span></div>
       <div class="bar"><i id="bar"></i></div>
       <ol class="mini" id="mini"></ol>
       <p class="note">הסימון נשמר רק בדפדפן שבו סימנתם. אני רואה את ההתקדמות לפי מה שנכנס למאגר.</p>
@@ -246,6 +247,40 @@ footer { margin-top: 64px; color: var(--text-2); font-size: 14px; }
   </aside>
 
   <div class="content">
+  <article id="session-05" class="session">
+    <div class="session-head glass">
+      <div class="eyebrow">מפגש 05 · יום רביעי 18.11</div>
+      <h2 class="session-title">החלטות שמשותפות לכל האפליקציה</h2>
+      <nav class="subnav">
+        <a href="#s05-homework">שיעורי בית</a>
+      </nav>
+    </div>
+
+    <section id="s05-homework">
+      <h3 class="part"><span class="n">01</span>שיעורי בית עד 19.11 ב־20:00</h3>
+      <div class="task glass" data-id="s05-cross-question">
+        <div class="task-head">
+          <span class="check"><input type="checkbox" id="t30"><span></span></span>
+          <label for="t30"><span class="task-title">להעלות שאלה רוחבית אחת להצבעה</span>
+            <span class="meta"><span class="chip due">חמישי 19.11, 20:00</span><span class="chip">אישי</span><span class="chip time">⏱ 30 דקות</span></span></label>
+        </div>
+        <div class="task-body">
+          <p>החלטה רוחבית היא החלטה שהתשובה עליה צריכה להיות <b>זהה בכל האפליקציה</b>, ולכן לא אחד מכם מחליט עליה לבד. למשל: מתי מבקשים הרשאות, איך נראה מצב "אין מידע", איפה שמים פעולה מהירה. כל הכיתה מצביעה עליהן ביום חמישי בבוקר, ברוב פשוט, וערן מחזיק בווטו.</p>
+          <p>המשימה: לחשוב על <b>שאלה אחת</b> מהמקצוע שלכם שנוגעת בכל האפליקציה, לנסח אותה עם שתי אפשרויות לפחות, ולכל אפשרות יתרון ומחיר אמיתיים. אם השאלה נוגעת רק בפיצ'ר שלכם, היא לא רוחבית, ומחליטים עליה שם. הסוכן שלכם מכין את הקובץ ובודק אותו, ואתם מחליטים מה כתוב בו.</p>
+          <div class="prompt-label">הנחיה לסוכן</div>
+          <div class="prompt"><button type="button">העתק</button>אני רוצה להעלות שאלה רוחבית אחת להצבעה של הכיתה, במאגר של הקורס.
+תמשוך את הגרסה העדכנית, ותקרא את decisions/votes/README.md ואת הדוגמה decisions/votes/questions/2026-11-16-test/color-mode.json.
+תשאל אותי מה המקצוע שלי ומה אני בונה, ותעזור לי למצוא החלטה אחת שהתשובה עליה חייבת להיות זהה בכל האפליקציה. אם מה שאני מציע נוגע רק בפיצ'ר שלי, תגיד לי את זה ותעזור לי להגיע לשאלה אחרת.
+אחרי שבחרנו, תשאל אותי מה האפשרויות, ותעזור לי לכתוב לכל אחת תיאור קצר, יתרון ומחיר אמיתיים. אל תכתוב אפשרות גרועה רק כדי להשלים. אל תמציא במקומי: אם חסר לי מידע, תגיד מה כדאי לבדוק.
+תכתוב את הקובץ decisions/votes/questions/2026-11-19/<מזהה-באנגלית-קצר>.json. בשדה owner תכתוב את המקצוע שלי בלי שם פרטי.
+תריץ node scripts/check-votes.mjs --question עם נתיב הקובץ, ותתקן עד שהוא עובר.
+תראה לי את הקובץ ואת תוצאת הבדיקה, ורק אחרי שאישרתי תפתח בקשת מיזוג. הבקשה לא נמזגת אוטומטית: ערן קורא ומחליט אילו שאלות נכנסות להצבעה.</div>
+          <div class="dod"><b>גמור כש:</b> נפתחה בקשת מיזוג עם קובץ שאלה אחד בתיקייה <code>decisions/votes/questions/2026-11-19/</code>, והבדיקה של השאלה עברה.<br><a href="https://github.com/eranlahav/hitme/blob/main/decisions/votes/README.md">ההוראות המלאות במאגר</a></div>
+        </div>
+      </div>
+    </section>
+  </article>
+
   <article id="session-04" class="session">
     <div class="session-head glass">
       <figure class="hero" style="--ar: 1774 / 887"><img src="img/session-04.jpg" alt="סיכום מפגש 4: הקפיצה ממחקר למוצר, מסך הבית של HIT ME ושיעורי הבית" width="1774" height="887"></figure>
@@ -1436,8 +1471,8 @@ https://github.com/eranlahav/hitme
   var state = {};
   try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
   var all = Array.prototype.slice.call(document.querySelectorAll('.task[data-id]'));
-  var tasks = Array.prototype.slice.call(document.querySelectorAll('#session-04 .task[data-id]'));
-  var older = ['01', '02', '03'].map(function (n) {
+  var tasks = Array.prototype.slice.call(document.querySelectorAll('#session-05 .task[data-id]'));
+  var older = ['01', '02', '03', '04'].map(function (n) {
     return { el: document.getElementById('count-' + n), tasks: Array.prototype.slice.call(document.querySelectorAll('#session-' + n + ' .task[data-id]')) };
   });
   var mini = document.getElementById('mini');
