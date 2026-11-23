@@ -1,0 +1,135 @@
+{
+  "id": "06-session-6",
+  "session": "06",
+  "date": "25.11",
+  "title": "איך בנויה האפליקציה: 21 מושגים",
+  "map": "00-map.jpg",
+  "concepts": [
+    {
+      "n": "01",
+      "name": "מעטפת",
+      "en": "shell",
+      "file": "01-shell.jpg"
+    },
+    {
+      "n": "02",
+      "name": "מסך ונתיב",
+      "en": "screen and route",
+      "file": "02-screen-and-route.jpg"
+    },
+    {
+      "n": "03",
+      "name": "רכיב",
+      "en": "component",
+      "file": "03-component.jpg"
+    },
+    {
+      "n": "04",
+      "name": "מצב",
+      "en": "state",
+      "file": "04-state.jpg"
+    },
+    {
+      "n": "05",
+      "name": "התקנה כאפליקציה",
+      "en": "PWA",
+      "file": "05-pwa.jpg"
+    },
+    {
+      "n": "06",
+      "name": "ממשק API",
+      "en": "API",
+      "file": "06-api.jpg"
+    },
+    {
+      "n": "07",
+      "name": "הגשה",
+      "en": "hosting",
+      "file": "07-hosting.jpg"
+    },
+    {
+      "n": "08",
+      "name": "הזדהות",
+      "en": "authentication",
+      "file": "08-authentication.jpg"
+    },
+    {
+      "n": "09",
+      "name": "אסימון כניסה",
+      "en": "sign-in token",
+      "file": "09-sign-in-token.jpg"
+    },
+    {
+      "n": "10",
+      "name": "פונקציית שרת",
+      "en": "server function",
+      "file": "10-server-function.jpg"
+    },
+    {
+      "n": "11",
+      "name": "שער בינה מלאכותית",
+      "en": "AI gateway",
+      "file": "11-ai-gateway.jpg"
+    },
+    {
+      "n": "12",
+      "name": "ספק בינה מלאכותית",
+      "en": "AI provider",
+      "file": "12-ai-provider.jpg"
+    },
+    {
+      "n": "13",
+      "name": "אוסף",
+      "en": "collection",
+      "file": "13-collection.jpg"
+    },
+    {
+      "n": "14",
+      "name": "מסמך",
+      "en": "document",
+      "file": "14-document.jpg"
+    },
+    {
+      "n": "15",
+      "name": "שדה",
+      "en": "field",
+      "file": "15-field.jpg"
+    },
+    {
+      "n": "16",
+      "name": "סכמה",
+      "en": "schema",
+      "file": "16-schema.jpg"
+    },
+    {
+      "n": "17",
+      "name": "כללי אבטחה",
+      "en": "security rules",
+      "file": "17-security-rules.jpg"
+    },
+    {
+      "n": "18",
+      "name": "מאגר קוד",
+      "en": "repository",
+      "file": "18-repository.jpg"
+    },
+    {
+      "n": "19",
+      "name": "מתג תכונות",
+      "en": "feature flag",
+      "file": "19-feature-flag.jpg"
+    },
+    {
+      "n": "20",
+      "name": "הסכמה",
+      "en": "consent",
+      "file": "20-consent.jpg"
+    },
+    {
+      "n": "21",
+      "name": "נתוני שימוש",
+      "en": "usage data",
+      "file": "21-usage-data.jpg"
+    }
+  ]
+}
