@@ -331,6 +331,49 @@ Ground rules (read CLAUDE.md and features/_template/README.md first, and follow 
           <div class="dod"><b>גמור כש:</b> נפתחה בקשת מיזוג עם הפיצ׳ר, כל הבדיקות ירוקות, וחלק ״בעברית״ מלא.</div>
         </div>
       </div>
+      <div class="task glass" data-id="s08-decisions">
+        <div class="task-head">
+          <span class="check"><input type="checkbox" id="t55"><span></span></span>
+          <label for="t55"><span class="task-title">יומן החלטות ועץ החלטות אישי</span>
+            <span class="meta"><span class="chip due">רביעי 9.12, מפגש 8</span><span class="chip">אישי</span><span class="chip time">⏱ 45 דקות</span></span></label>
+        </div>
+        <div class="task-body">
+          <p>בכיתה הראינו יומן החלטות כיתתי ועץ החלטות. עכשיו כל אחד בונה את שלו: אילו החלטות קיבלתם בקורס, מה שקלתם, על מה הסתמכתם, ומה קרה אחר כך. זה גם מראה איך אתם עובדים עם בינה מלאכותית. כל החלטה מתועדת עם ראיה, ולא מנחשים: אם אין ראיה, כותבים שאין.</p>
+          <p>הסוכן סופר רק כמה שיחות היו לכם ועל מה, ולא מעתיק שום תוכן שלהן. אל תדביקו בקובץ סיסמאות, מפתחות או פרטים פרטיים.</p>
+          <div class="prompt-label">הנחיה לסוכן (באנגלית, כי היא נכתבה בשבילו). מדביקים כמו שהיא בקלוד קוד, בתיקייה של הפרויקט</div>
+          <div class="prompt" dir="ltr" style="text-align:left"><button type="button">העתק</button>You are helping me, a student in the HIT ME course, build my PERSONAL DECISION JOURNAL and
+DECISION TREE. I am a design student, not a developer. Explain to me in simple Hebrew; write file
+names and commits in English. Work ONLY inside my own folder assignments/design-journal/&lt;my-github-login&gt;/
+(ask me for my login if you do not know it). Start with the start-task skill so I work on my own branch.
+
+Goal: show how my decisions in this course developed over time, and how I work with AI.
+
+Step 1. Collect evidence, only about MY work:
+- my journal.md and my other assignment folders;
+- my own commits and pull requests (git log --author, gh pr list --author @me);
+- the squad meeting summaries in squads/ that mention my profession;
+- my Claude conversations on this computer: count only. For each day and topic, how many conversations
+  I had and roughly how long. Do NOT copy any conversation text, names, passwords, keys or private data
+  into any file.
+
+Step 2. Write decisions.md in my folder. One entry per decision, newest first:
+date | the decision | the options I considered | why I chose it (evidence: research, a test, advice, usage data) |
+what happened after (or "not known yet") | links to the file or pull request.
+Mark clearly what is a real decision and what is only an idea. Do not invent anything; if evidence is
+missing, write "no evidence yet".
+
+Step 3. At the top of decisions.md add a decision tree in mermaid (flowchart TD): the first question I
+asked, then each decision as a node, rejected options as dashed nodes, and arrows showing what led to what.
+
+Step 4. Add a short section "How I work with AI": number of conversations per week, which tasks took the
+most conversations, one thing I would do differently, and one prompt that worked well for me.
+
+Step 5. Run the checks you know of for my folder, save with the save-work skill, and open a pull request
+with request-review. Fill the "בעברית" section in plain Hebrew. At the end, tell me in Hebrew which decisions
+you could not document and what I should add by myself.</div>
+          <div class="dod"><b>גמור כש:</b> בתיקייה שלכם במאגר יש decisions.md עם עץ החלטות, לפחות חמש החלטות מתועדות עם ראיות, וקטע "איך אני עובד עם בינה מלאכותית", ונפתחה בקשת מיזוג.</div>
+        </div>
+      </div>
       <div class="task glass" data-id="s08-content">
         <div class="task-head">
           <span class="check"><input type="checkbox" id="t50"><span></span></span>
