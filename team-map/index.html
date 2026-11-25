@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><title>HIT ME · מי אחראי על מה</title>
+<style>
+:root{--ink:#1f2328;--mut:#6b7280;--line:#c9ced6;--fill:#eceef1;--fill2:#dfe3e8;--bg:#fff;--acc:#2f3b4a;--warn:#fff3c4}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:#cfd3d9;color:var(--ink);line-height:1.4}
+button{font:inherit;color:inherit;cursor:pointer}
+.stage{display:flex;gap:22px;justify-content:center;align-items:flex-start;padding:18px;min-height:100%}
+.phone{width:390px;height:800px;max-height:calc(100vh - 36px);background:var(--bg);border-radius:30px;border:8px solid #1f2328;position:relative;overflow:hidden;flex:none;display:flex;flex-direction:column}
+.status{height:26px;font-size:11px;display:flex;justify-content:space-between;padding:6px 18px 0;color:var(--mut)}
+.screens{flex:1;position:relative;overflow:hidden}
+.scr{position:absolute;inset:0;display:none;flex-direction:column;overflow:hidden}
+.scr.on{display:flex}
+.hd{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--line);min-height:54px}
+.hd h1{flex:1;font-size:17px;margin:0}
+.ib{width:36px;height:36px;border:1.5px solid var(--line);border-radius:50%;background:#fff;display:grid;place-items:center;font-size:16px;position:relative}
+.badge{position:absolute;top:-3px;left:-3px;min-width:16px;height:16px;background:var(--acc);color:#fff;border-radius:8px;font-size:10px;display:grid;place-items:center}
+.body{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:12px}
+.body.c{justify-content:center}
+.foot{padding:10px 14px 14px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.box{border:1.5px solid var(--line);border-radius:12px;padding:12px;background:#fff}
+.box h3{margin:0 0 4px;font-size:15px}.box p{margin:3px 0;font-size:13px;color:var(--mut)}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:12px;padding:13px;font-weight:600;width:100%;text-align:center}
+.btn.o{background:#fff;color:var(--acc);border:1.5px solid var(--acc)}
+.btn.s{padding:9px;font-size:13px}
+.img{background:linear-gradient(to top right,transparent calc(50% - 1px),var(--line),transparent calc(50% + 1px)),linear-gradient(to top left,transparent calc(50% - 1px),var(--line),transparent calc(50% + 1px)),var(--fill);border:1.5px solid var(--line);border-radius:12px;display:grid;place-items:center;color:var(--mut);font-size:12px}
+.img span{background:var(--fill);padding:2px 8px;border-radius:6px}
+.logo{height:90px;width:90px;margin:0 auto;border-radius:22px;border:2px solid var(--acc);display:grid;place-items:center;font-weight:800;color:var(--acc);font-size:15px}
+.in{border:1.5px solid var(--line);border-radius:10px;padding:12px;background:#fff;width:100%;font:inherit;text-align:right}
+label.f{font-size:12px;color:var(--mut);display:block;margin-bottom:3px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);border-radius:20px;padding:8px 14px;background:#fff;font-size:14px}
+.chip.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.row{display:flex;align-items:center;gap:10px}.grow{flex:1}
+.lst>*{display:flex;align-items:center;gap:10px;padding:13px 2px;border-bottom:1px solid var(--line);width:100%;background:none;border-inline:0;border-top:0;text-align:right}
+.lst>*:last-child{border-bottom:0}
+.arr{margin-inline-start:auto;color:var(--mut)}
+.tag{font-size:11px;border:1px solid var(--acc);color:var(--acc);border-radius:8px;padding:1px 7px;white-space:nowrap}
+.ph{background:var(--warn);border:1.5px dashed #c9a227;color:#6b5200;border-radius:10px;padding:8px 10px;font-size:12px}
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);background:#fff;padding:4px 2px 10px;display:none}
+.tabs.on{display:grid}
+.tab{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--mut);padding:5px 0}
+.tab i{font-style:normal;font-size:20px;line-height:1}
+.tab.on{color:var(--acc);font-weight:700}
+.tab.home i{width:46px;height:46px;border-radius:50%;background:var(--acc);color:#fff;display:grid;place-items:center;margin-top:-24px;border:4px solid #fff}
+.sw{width:44px;height:24px;border-radius:12px;background:var(--line);position:relative;border:0;flex:none}
+.sw::after{content:"";position:absolute;top:2px;inset-inline-start:2px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.15s}
+.sw.on{background:var(--acc)}.sw.on::after{inset-inline-start:22px}
+.chat{display:flex;flex-direction:column;gap:8px}
+.bub{max-width:84%;padding:9px 12px;border-radius:14px;font-size:14px}
+.bot{background:var(--fill);align-self:flex-start;border-end-start-radius:4px}
+.me{background:var(--acc);color:#fff;align-self:flex-end;border-end-end-radius:4px}
+.prog{height:8px;background:var(--fill2);border-radius:6px;overflow:hidden}.prog i{display:block;height:100%;background:var(--acc)}
+.dots{display:flex;gap:6px;justify-content:center}.dots i{width:8px;height:8px;border-radius:50%;background:var(--fill2)}.dots i.on{background:var(--acc)}
+.sheetbg{position:absolute;inset:0;background:#0007;display:none;align-items:flex-end;z-index:20}
+.sheetbg.on{display:flex}
+.sheet{background:#fff;width:100%;border-radius:22px 22px 0 0;padding:16px;display:flex;flex-direction:column;gap:10px}
+.drawer{position:absolute;inset:0;background:#0007;display:none;z-index:25}
+.drawer.on{display:block}.drawer .pn{background:#fff;width:80%;height:100%;margin-inline-start:auto;padding:16px;overflow:auto}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{border:1.5px solid var(--line);border-radius:12px;padding:12px 6px;text-align:center;background:#fff;font-size:13px;display:flex;flex-direction:column;gap:6px;align-items:center}
+.tile b{font-size:24px;font-weight:400}
+.sec{font-size:12px;color:var(--mut);margin:2px 0 -4px}
+.cal{display:grid;grid-template-columns:36px repeat(5,1fr);gap:3px;font-size:11px}
+.cal div{border:1px solid var(--line);min-height:34px;border-radius:5px;padding:2px;text-align:center;color:var(--mut)}
+.cal .k{background:var(--acc);color:#fff;border-color:var(--acc)}
+.side{width:320px;flex:none}
+.side .box{margin-bottom:10px;background:#fff}
+.side h3{font-size:14px}.side li{font-size:13px;color:#444;margin-bottom:2px}.side ul{margin:4px 0;padding-inline-start:18px}
+.side .sl{display:flex;flex-wrap:wrap;gap:5px}.side .sl button{font-size:11px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:3px 7px}
+.side .sl button.cur{background:var(--acc);color:#fff}
+.side small{color:var(--mut);display:block;margin:6px 0 3px}
+@media(max-width:780px){.side{display:none}.stage{padding:0}.phone{border:0;border-radius:0;max-height:100vh;height:100vh;width:100%}}
+</style></head><body>
+<div class="stage">
+<div class="phone" id="phone">
+ <div class="status"><span>9:41</span><span>HIT ME</span><span>▂▄▆ 🔋</span></div>
+ <div class="screens" id="screens">
+
+<!-- ====== כניסה ראשונה ====== -->
+<section class="scr" id="login" data-name="כניסה">
+ <div class="body c" style="gap:14px">
+  <div class="logo">HIT ME</div>
+  <div style="text-align:center"><b style="font-size:20px">ברוכים הבאים</b><p style="margin:2px;color:var(--mut);font-size:14px">האפליקציה של הסטודנטים</p></div>
+  <div><label class="f">מייל של המכון</label><input class="in" value="student@hit.ac.il"></div>
+  <div><label class="f">סיסמה</label><input class="in" type="password" value="123456"></div>
+  <button class="btn" data-go="consent">כניסה</button>
+  <button class="btn o" data-go="consent">כניסה עם חשבון המכון</button>
+  <p style="text-align:center;font-size:12px;color:var(--mut)">שכחתי סיסמה</p>
+ </div>
+</section>
+
+<section class="scr" id="consent" data-name="הסכמה">
+ <div class="hd"><h1>לפני שמתחילים</h1></div>
+ <div class="body">
+  <div class="box"><h3>מה אנחנו שומרים עליך</h3><p>HIT ME שומרת מידע על הלימודים שלך כדי להתאים לך מילואים, שירותים, קורסים והכוונה לעבודה. אפשר לשנות הכול בהגדרות.</p></div>
+  <div class="box row"><span class="grow">אני מסכים/ה לתנאי השימוש ולמדיניות הפרטיות</span><button class="sw" data-sw></button></div>
+  <div class="box row"><span class="grow">אפשר להשתמש במידע לשיפור האפליקציה</span><button class="sw on" data-sw></button></div>
+  <div class="ph">נוסח משפטי: מקום זמני, עוד לא נכתב.</div>
+ </div>
+ <div class="foot"><button class="btn" data-go="q1">המשך</button></div>
+</section>
+
+<section class="scr" id="q1" data-name="שאלון פתיחה 1">
+ <div class="hd"><button class="ib" data-back>›</button><h1>הכרות קצרה</h1><span class="tag">1 מ-2</span></div>
+ <div class="body">
+  <div><b>באיזו פקולטה את/ה לומד/ת?</b></div>
+  <div class="chips" data-single><button class="chip on">תקשורת חזותית ואינטראקטיבית</button><button class="chip">עיצוב תעשייתי</button><button class="chip">הנדסה</button><button class="chip">אחר</button></div>
+  <div><b>באיזו שנה?</b></div>
+  <div class="chips" data-single><button class="chip">שנה א׳</button><button class="chip">שנה ב׳</button><button class="chip">שנה ג׳</button><button class="chip on">שנה ד׳</button></div>
+ </div>
+ <div class="foot"><button class="btn" data-go="q2">המשך</button></div>
+</section>
+
+<section class="scr" id="q2" data-name="שאלון פתיחה 2">
+ <div class="hd"><button class="ib" data-back>›</button><h1>הכרות קצרה</h1><span class="tag">2 מ-2</span></div>
+ <div class="body">
+  <div><b>מה הכי חשוב לך עכשיו?</b><p style="margin:2px;font-size:12px;color:var(--mut)">אפשר לבחור כמה</p></div>
+  <div class="chips" data-multi><button class="chip on">למצוא עבודה</button><button class="chip">לבחור קורסים</button><button class="chip">מילואים</button><button class="chip">להבין איפה הכול במכון</button></div>
+  <div class="ph">שאלות סופיות עוד לא תוכננו (החלטה 20.11: פקולטה ושנה; שימוש ראשון מעצב).</div>
+ </div>
+ <div class="foot"><button class="btn" data-go="onb1">סיום</button></div>
+</section>
+
+<section class="scr" id="onb1" data-name="שימוש ראשון 1">
+ <div class="body c" style="gap:16px;text-align:center">
+  <div class="img" style="height:200px"><span>איור</span></div>
+  <b style="font-size:20px">בואו נכיר</b><p style="color:var(--mut);margin:0">ב-HIT ME יש ארבעה עזרים לסטודנט.</p>
+  <div class="dots"><i class="on"></i><i></i><i></i></div>
+ </div>
+ <div class="foot"><button class="btn" data-go="onb2">הבא</button><button class="btn o" data-go="home">דלג</button></div>
+</section>
+<section class="scr" id="onb2" data-name="שימוש ראשון 2">
+ <div class="body c" style="gap:12px">
+  <div class="dots"><i></i><i class="on"></i><i></i></div>
+  <div class="box row"><span style="font-size:26px">🪖</span><div><h3>מילואים</h3><p>זכויות ובקשות למרצים</p></div></div>
+  <div class="box row"><span style="font-size:26px">🧭</span><div><h3>הכוונה</h3><p>שירותים ומפה של המכון</p></div></div>
+  <div class="box row"><span style="font-size:26px">💼</span><div><h3>תעסוקה</h3><p>מדריך קריירה אישי</p></div></div>
+  <div class="box row"><span style="font-size:26px">📚</span><div><h3>קורסים</h3><p>בחירה ובניית מערכת</p></div></div>
+ </div>
+ <div class="foot"><button class="btn" data-go="onb3">הבא</button></div>
+</section>
+<section class="scr" id="onb3" data-name="שימוש ראשון 3">
+ <div class="body c" style="gap:16px;text-align:center">
+  <div class="dots"><i></i><i></i><i class="on"></i></div>
+  <div class="img" style="height:180px"><span>איור: כרטיס בדף הבית</span></div>
+  <b style="font-size:20px">מפעילים רק מה שצריך</b><p style="color:var(--mut);margin:0">בדף הבית יש כרטיס לכל עזר. לוחצים הפעלה והוא מתחיל לעבוד.</p>
+ </div>
+ <div class="foot"><button class="btn" data-go="home">לדף הבית</button></div>
+</section>
+
+<!-- ====== בית ====== -->
+<section class="scr" id="home" data-name="דף הבית" data-tab="home" data-main>
+ <div class="body">
+  <div class="box" style="background:var(--fill)"><h3>בוקר טוב, מיכל</h3><p>יש לך 2 עדכונים</p><button class="btn s o" style="margin-top:6px;width:auto;padding:6px 14px" data-go="notif">לעדכונים</button></div>
+  <button class="box" id="magic" data-go="res-rights" style="text-align:right;border-color:var(--acc);background:#fff"><div class="row"><span style="font-size:24px">🎁</span><div class="grow"><h3>הגעת ל־21 ימי מילואים</h3><p class="fs">מגיע לך מועד מיוחד בכל הבחינות של הסמסטר</p></div><span class="arr">‹</span></div></button>
+  <div class="ph" id="magicNote">חדש 24.11: כרטיס קליל שעולה כשחוצים סף ימים (חוליית מילואים, גילדת חוויה). לא חוסם, נסגר לבד. הספים עוד לא אומתו.</div>
+  <div class="sec">העזרים שלך</div>
+  <div class="box" data-feat="res"><div class="row"><span style="font-size:28px">🪖</span><div class="grow"><h3>מילואים</h3><p class="fs">זכויות, טפסים ובקשות למרצים</p><p class="fs" data-on-only style="color:var(--ink)"><b>24 ימים השנה · בקשה אחת פתוחה</b></p></div></div><button class="btn s o fa" style="margin-top:8px">הפעלה</button></div>
+  <div class="box" data-feat="gui"><div class="row"><span style="font-size:28px">🧭</span><div class="grow"><h3>הכוונה</h3><p class="fs">שירותים ומפה של המכון</p></div></div><button class="btn s o fa" style="margin-top:8px">הפעלה</button></div>
+  <div class="box" data-feat="emp"><div class="row"><span style="font-size:28px">💼</span><div class="grow"><h3>תעסוקה</h3><p class="fs">מדריך קריירה אישי</p></div></div><button class="btn s o fa" style="margin-top:8px">הפעלה</button></div>
+  <div class="box" data-feat="cou"><div class="row"><span style="font-size:28px">📚</span><div class="grow"><h3>קורסים</h3><p class="fs">בחירה ובניית מערכת</p></div></div><button class="btn s o fa" style="margin-top:8px">הפעלה</button></div>
+  <div class="ph">סידור הכרטיסים (בנטו) עוד לא הוחלט.</div>
+ </div>
+</section>
+
+<section class="scr" id="act" data-name="הפעלת עזר" data-tab="x">
+ <div class="hd"><button class="ib" data-back>›</button><h1 id="actT"></h1></div>
+ <div class="body c" style="text-align:center;gap:14px"><div style="font-size:60px" id="actI"></div><b style="font-size:19px" id="actH"></b><p style="color:var(--mut);margin:0" id="actP"></p></div>
+ <div class="foot"><button class="btn" id="actB">הפעלה</button></div>
+</section>
+
+<section class="scr" id="search" data-name="חיפוש">
+ <div class="hd"><button class="ib" data-back>›</button><input class="in" id="q" placeholder="חפשו מילה או משפט" style="padding:9px"></div>
+ <div class="body"><div class="sec">תוצאות</div><div class="lst" id="res"></div>
+  <div class="ph">חיפוש אחד לכל האפליקציה (החלטה 20.11). עוד אין סקיצה; התוצאות כאן הן דוגמה.</div></div>
+</section>
+
+<section class="scr" id="notif" data-name="עדכונים">
+ <div class="hd"><button class="ib" data-back>›</button><h1>עדכונים</h1></div>
+ <div class="body"><div class="lst">
+  <button data-go="res-upd"><span>✅</span><div><b>בקשת מילואים אושרה</b><p style="margin:0;font-size:12px;color:var(--mut)">לפני שעה</p></div><span class="arr">‹</span></button>
+  <button data-go="cou-status"><span>📅</span><div><b>ההרשמה לקורסים נפתחת מחר</b><p style="margin:0;font-size:12px;color:var(--mut)">אתמול</p></div><span class="arr">‹</span></button>
+  <button data-go="emp-path"><span>💼</span><div><b>משימה חדשה במסלול הקריירה</b><p style="margin:0;font-size:12px;color:var(--mut)">לפני יומיים</p></div><span class="arr">‹</span></button></div>
+  <div class="ph">מרכז העדכונים עוד לא תוכנן.</div></div>
+</section>
+
+<section class="scr" id="support" data-name="תמיכה">
+ <div class="hd"><button class="ib" data-back>›</button><h1>תמיכה</h1></div>
+ <div class="body"><div class="box"><h3>מקום אחד לכל פנייה</h3><p>החלטה 20.11: כל התמיכה כאן.</p></div>
+  <div class="lst box"><button>שאלה על האפליקציה<span class="arr">‹</span></button><button>דיווח על תקלה<span class="arr">‹</span></button><button>שיחה עם אדם<span class="arr">‹</span></button></div>
+  <div class="ph">אין סקיצה; אף אחד לא צייר.</div></div>
+</section>
+
+<section class="scr" id="profile" data-name="פרופיל">
+ <div class="hd"><button class="ib" data-back>›</button><h1>פרופיל</h1></div>
+ <div class="body" style="align-items:center;text-align:center">
+  <div class="img" style="width:96px;height:96px;border-radius:50%"><span>תמונה</span></div>
+  <b style="font-size:18px">מיכל לוי</b><p style="margin:0;color:var(--mut)">תקשורת חזותית · שנה ד׳</p>
+  <button class="btn o s" style="width:auto;padding:8px 18px" data-go="profile-edit">שינוי שם ותמונה</button>
+  <button class="btn s" style="width:auto;padding:8px 18px" data-go="settings">להגדרות</button></div>
+</section>
+<section class="scr" id="profile-edit" data-name="שינוי שם ותמונה">
+ <div class="hd"><button class="ib" data-back>›</button><h1>שינוי פרופיל</h1></div>
+ <div class="body"><div class="img" style="width:96px;height:96px;border-radius:50%;align-self:center"><span>תמונה</span></div>
+  <button class="btn o s">החלפת תמונה</button><div><label class="f">שם</label><input class="in" value="מיכל לוי"></div></div>
+ <div class="foot"><button class="btn" data-back>שמירה</button></div>
+</section>
+
+<section class="scr" id="settings" data-name="הגדרות">
+ <div class="hd"><button class="ib" data-back>›</button><h1>הגדרות</h1></div>
+ <div class="body">
+  <div class="sec">העזרים</div>
+  <div class="box"><div class="row" style="padding:6px 0"><span class="grow">🪖 מילואים</span><button class="sw" data-fsw="res"></button></div><div class="row" style="padding:6px 0"><span class="grow">🧭 הכוונה</span><button class="sw" data-fsw="gui"></button></div><div class="row" style="padding:6px 0"><span class="grow">💼 תעסוקה</span><button class="sw" data-fsw="emp"></button></div><div class="row" style="padding:6px 0"><span class="grow">📚 קורסים</span><button class="sw" data-fsw="cou"></button></div></div>
+  <div class="lst box"><button data-go="settings-notif">התראות<span class="arr">‹</span></button><button data-go="profile">פרופיל<span class="arr">‹</span></button><button data-go="support">תמיכה<span class="arr">‹</span></button></div>
+  <div class="sec">חיבורים</div>
+  <div class="box"><div class="row" style="padding:6px 0"><span class="grow">Google</span><button class="sw" data-sw></button></div><div class="row" style="padding:6px 0"><span class="grow">LinkedIn</span><button class="sw" data-sw></button></div></div>
+  <div class="ph">חיבורים והקבצה של ההגדרות: מקצוע ההגדרות עדיין בעבודה.</div>
+  <button class="btn o" data-go="login">יציאה</button>
+ </div>
+</section>
+<section class="scr" id="settings-notif" data-name="התראות">
+ <div class="hd"><button class="ib" data-back>›</button><h1>התראות</h1></div>
+ <div class="body"><div class="box">
+  <div class="row" style="padding:7px 0"><span class="grow">🪖 מילואים</span><span class="tag">חשובות</span></div>
+  <div class="row" style="padding:7px 0"><span class="grow">🧭 הכוונה</span><span class="tag">הכול</span></div>
+  <div class="row" style="padding:7px 0"><span class="grow">💼 תעסוקה</span><span class="tag">חשובות</span></div>
+  <div class="row" style="padding:7px 0"><span class="grow">📚 קורסים</span><span class="tag">הכול</span></div></div>
+  <p style="font-size:12px;color:var(--mut)">שלוש רמות: הכול, חשובות בלבד, כבוי.</p></div>
+</section>
+
+<!-- ====== מילואים ====== -->
+<section class="scr" id="res-chat" data-name="מילואים · שיחה" data-tab="res" data-main data-feat-need="res">
+ <div class="body"><div class="chat" id="chat">
+  <div class="bub bot">שלום מיכל! אני כאן לעזור עם המילואים. מה נעשה היום?</div>
+  <div class="box" style="align-self:stretch"><h3>סיכום מצב</h3><p>24 ימי שירות השנה · 1 בקשה פתוחה</p></div></div></div>
+ <div class="foot"><div class="chips">
+  <button class="chip" data-go="res-up">להעלות טופס 3010 / צו 8</button><button class="chip" data-go="res-rights">מה מגיע לי?</button><button class="chip" data-go="res-req">הבקשות שלי</button><button class="chip" data-say="יש לי מבחן בזמן המילואים">שאלה חופשית</button></div></div>
+</section>
+<section class="scr" id="res-up" data-name="מילואים · העלאת טופס" data-tab="res">
+ <div class="hd"><button class="ib" data-back>›</button><h1>העלאת טופס</h1></div>
+ <div class="body"><div class="img" style="height:150px"><span>גררו קובץ לכאן</span></div><button class="btn o">בחירת קובץ</button>
+  <div class="box" style="border-color:#b33"><p style="color:#b33;margin:0">הקובץ לא זוהה. נסו טופס 3010 או צו 8.</p></div></div>
+ <div class="foot"><button class="btn" data-go="res-rights">העלאה והמשך</button></div>
+</section>
+<section class="scr" id="res-rights" data-name="מילואים · מה מגיע לך" data-tab="res">
+ <div class="hd"><button class="ib" data-back>›</button><h1>מה מגיע לך</h1></div>
+ <div class="body"><div class="box row"><div class="grow"><h3>24 ימי שירות</h3><p>לפי טופס 3010</p></div><span class="tag">מידע רשמי</span></div>
+  <div class="lst box"><button>הקלות בבחינות<span class="arr">‹</span></button><button>היעדרות מקורסים<span class="arr">‹</span></button><button>מלגת מילואים<span class="arr">‹</span></button><button>נקודות זכות<span class="arr">‹</span></button></div></div>
+ <div class="foot"><button class="btn" data-go="res-draft">להכין טיוטה למרצים</button></div>
+</section>
+<section class="scr" id="res-draft" data-name="מילואים · טיוטה למרצים" data-tab="res">
+ <div class="hd"><button class="ib" data-back>›</button><h1>טיוטה למרצים</h1></div>
+ <div class="body"><div class="box"><p style="color:var(--ink)">שלום, אני סטודנטית במילואים בין 12.11 ל-20.11 ולכן לא אוכל להגיש במועד. אשמח להתחשבות.</p></div>
+  <div><label class="f">למי לשלוח</label><div class="chips" data-multi><button class="chip on">מרצה בקורס אנימציה</button><button class="chip">מרצה בקורס UX</button></div></div></div>
+ <div class="foot"><button class="btn" data-sure="res-req">שליחה</button></div>
+</section>
+<section class="scr" id="res-req" data-name="מילואים · הבקשות שלי" data-tab="res">
+ <div class="hd"><button class="ib" data-back>›</button><h1>הבקשות שלי</h1></div>
+ <div class="body"><div class="lst box"><button data-go="res-upd"><span>✅</span><div><b>מרצה באנימציה</b><p style="margin:0;font-size:12px;color:var(--mut)">אושרה</p></div><span class="arr">‹</span></button>
+  <button data-go="res-upd"><span>⏳</span><div><b>מרצה ב-UX</b><p style="margin:0;font-size:12px;color:var(--mut)">לא ענה, תזכורת אחרי 48 שעות</p></div><span class="arr">‹</span></button></div></div>
+</section>
+<section class="scr" id="res-upd" data-name="מילואים · עדכון בקשה" data-tab="res">
+ <div class="hd"><button class="ib" data-back>›</button><h1>עדכון בקשה</h1></div>
+ <div class="body"><div class="box"><h3>✅ הבקשה אושרה</h3><p>המרצה באנימציה אישר הגשה מאוחרת עד 30.11.</p></div><div class="ph">מצבים נוספים שיוצגו כאן: לא ענה, הועבר לרכזת, סירב.</div></div>
+</section>
+
+<!-- ====== הכוונה ====== -->
+<section class="scr" id="gui-grid" data-name="הכוונה · איפה עושים את זה" data-tab="gui" data-main data-feat-need="gui">
+ <div class="body"><input class="in" placeholder="💬 שאלו או חפשו: איפה מדפיסים A1?" data-go="search" readonly>
+  <div class="ph">חדש 24.11 לפי אב־הטיפוס של חוליית הכוונה: חיפוש וצ׳אט הם אותו מסך, והשדה בראש כל מסך מוביל אליו.</div>
+  <div class="grid2" style="grid-template-columns:repeat(3,1fr)">
+   <button class="tile" data-go="gui-print"><b>🖨</b>הדפסות ומחירון</button><button class="tile" data-go="gui-svc"><b>🧰</b>חנות חומרים</button><button class="tile" data-go="gui-svc"><b>🪚</b>סדנאות</button>
+   <button class="tile" data-go="gui-svc"><b>🎥</b>השאלת ציוד</button><button class="tile" data-go="gui-svc"><b>🗂</b>מזכירות ושכר לימוד</button><button class="tile" data-go="gui-svc"><b>📖</b>ספרייה</button>
+   <button class="tile" data-go="gui-map"><b>🗺</b>מפת המכון</button><button class="tile" data-go="support"><b>🤝</b>תמיכה</button><button class="tile" data-go="emp-start"><b>💼</b>מרכז קריירה</button></div></div>
+</section>
+<section class="scr" id="gui-print" data-name="הכוונה · הדפסות ומחירון" data-tab="gui">
+ <div class="hd"><button class="ib" data-back>›</button><h1>הדפסות ומחירון</h1><span class="tag">נבדק בשטח</span></div>
+ <div class="body"><div class="lst box"><button data-go="gui-map"><b>בניין 7 · קומה 2</b><span class="arr">צבע, A3 ‹</span></button><button data-go="gui-map"><b>בניין 5 · חדר 219</b><span class="arr">צבע ‹</span></button><button data-go="gui-map"><b>בניין 5 · ספרייה, קומה 3</b><span class="arr">A4 ‹</span></button></div>
+  <div class="sec">מחירון (₪ · רגיל / חבר אגודה)</div>
+  <div class="lst box"><div><b>A4 שחור־לבן, 80 גרם</b><span class="arr">0.20 / 0.17</span></div><div><b>A3 צבעוני, 200 גרם</b><span class="arr">4.50 / 3.70</span></div><div><b>פלוטר A1 צבעוני, דק</b><span class="arr">55 / 40</span></div><div><b>פלוטר A0 צבעוני, עבה</b><span class="arr">135 / 120</span></div></div>
+  <div class="ph">המחירון הועתק מהשלט של האגודה בקמפוס (23.11). ביום ראשון בבוקר יש תור ארוך בבניין 7.</div></div>
+</section>
+<section class="scr" id="gui-svc" data-name="הכוונה · דף שירות" data-tab="gui">
+ <div class="hd"><button class="ib" data-back>›</button><h1>ציוד אור-קולי</h1><span class="tag">מידע רשמי</span></div>
+ <div class="body"><div class="img" style="height:110px"><span>תמונה</span></div>
+  <div class="lst box"><div><b>מי זכאי</b><span class="arr">סטודנטים שנה ג׳-ד׳</span></div><div><b>מתי</b><span class="arr">א׳-ה׳ 9:00-16:00</span></div><div><b>מה להביא</b><span class="arr">תעודת סטודנט</span></div><button data-go="gui-map"><b>איפה</b><span class="arr">קומה 2 · במפה ‹</span></button></div></div>
+ <div class="foot"><button class="btn" data-sure="gui-grid">הגשת בקשה</button></div>
+</section>
+<section class="scr" id="gui-map" data-name="הכוונה · מפת המכון" data-tab="gui">
+ <div class="hd"><button class="ib" data-back>›</button><h1>מפת המכון</h1></div>
+ <div class="body"><div class="img" style="height:260px"><span>מפת קמפוס</span></div><div class="lst box"><button data-go="gui-room">בניין ראשי · קומה 2<span class="arr">‹</span></button><button data-go="gui-room">ספרייה · קומה 1<span class="arr">‹</span></button></div><div class="ph">אין מפה אמיתית. המיקומים הם דוגמה.</div></div>
+</section>
+<section class="scr" id="gui-room" data-name="הכוונה · קומה וחדר" data-tab="gui">
+ <div class="hd"><button class="ib" data-back>›</button><h1>קומה 2</h1></div>
+ <div class="body"><div class="img" style="height:230px"><span>תרשים קומה</span></div><div class="box"><h3>חדר 214</h3><p>מחסן ציוד אור-קולי</p></div></div>
+</section>
+
+<!-- ====== תעסוקה ====== -->
+<section class="scr" id="emp-start" data-name="תעסוקה · פתיחה" data-tab="emp" data-main data-feat-need="emp">
+ <div class="body c" style="text-align:center;gap:14px"><div class="img" style="height:170px"><span>איור</span></div><b style="font-size:20px">מדריך הקריירה שלך</b><p style="color:var(--mut);margin:0">שלוש שאלות קצרות, ואז מסלול אישי עם משימות.</p></div>
+ <div class="foot"><button class="btn" data-go="emp-q1">מתחילים</button></div>
+</section>
+<section class="scr" id="emp-q1" data-name="תעסוקה · כיוון מקצועי" data-tab="emp">
+ <div class="hd"><button class="ib" data-back>›</button><h1>כיוון מקצועי</h1><span class="tag">1 מ-3</span></div>
+ <div class="body"><b>לאיזה תחום את/ה שואף/ת?</b><div class="chips" data-single><button class="chip on">עיצוב מוצר</button><button class="chip">עיצוב מותג</button><button class="chip">אנימציה</button><button class="chip">עוד לא יודע/ת</button></div></div>
+ <div class="foot"><button class="btn" data-go="emp-q2">המשך</button></div>
+</section>
+<section class="scr" id="emp-q2" data-name="תעסוקה · מצב קיים" data-tab="emp">
+ <div class="hd"><button class="ib" data-back>›</button><h1>מה יש לך כבר</h1><span class="tag">2 מ-3</span></div>
+ <div class="body"><div class="chips" data-multi><button class="chip on">תיק עבודות</button><button class="chip">קורות חיים</button><button class="chip">פרופיל בלינקדאין</button><button class="chip">ניסיון עבודה</button></div></div>
+ <div class="foot"><button class="btn" data-go="emp-q3">המשך</button></div>
+</section>
+<section class="scr" id="emp-q3" data-name="תעסוקה · שלב בחיפוש" data-tab="emp">
+ <div class="hd"><button class="ib" data-back>›</button><h1>שלב בחיפוש</h1><span class="tag">3 מ-3</span></div>
+ <div class="body"><b>איפה את/ה היום?</b><div class="chips" data-single><button class="chip on">רק מתחיל/ה</button><button class="chip">שולח/ת קורות חיים</button><button class="chip">בראיונות</button></div></div>
+ <div class="foot"><button class="btn" data-go="emp-path">למסלול שלי</button></div>
+</section>
+<section class="scr" id="emp-path" data-name="תעסוקה · המסלול שלי" data-tab="emp" data-main>
+ <div class="body"><div class="box"><h3>המסלול שלך</h3><div class="prog"><i style="width:30%"></i></div><p>שלב 2 מ-5</p></div>
+  <div class="lst box"><button data-go="emp-task"><span>▶️</span><div><b>בניית תיק עבודות</b><p style="margin:0;font-size:12px;color:var(--mut)">המשימה הבאה</p></div><span class="arr">‹</span></button><div><span>🔒</span>קורות חיים</div><div><span>🔒</span>פנייה לחברות</div><div><span>🔒</span>ראיונות</div></div>
+  <button class="btn o" data-go="emp-alu">פנה לעזרה (בוגרים)</button></div>
+</section>
+<section class="scr" id="emp-task" data-name="תעסוקה · משימה" data-tab="emp">
+ <div class="hd"><button class="ib" data-back>›</button><h1>בניית תיק עבודות</h1></div>
+ <div class="body"><div class="box"><h3>למה</h3><p>זה מה שמעסיקים רואים קודם.</p></div><div class="box"><h3>איך</h3><p>בחרו ארבעה פרויקטים והסבירו את התהליך בכל אחד.</p></div><div class="box"><h3>טיפ</h3><p>פרויקט אחד בלבד שמראה עבודת צוות.</p></div><div class="ph">תוכן המשימות עוד לא נכתב.</div></div>
+ <div class="foot"><button class="btn" data-go="emp-done">סיימתי</button></div>
+</section>
+<section class="scr" id="emp-done" data-name="תעסוקה · סיום שלב" data-tab="emp">
+ <div class="body c" style="text-align:center;gap:12px"><div style="font-size:60px">🎉</div><b style="font-size:20px">סיימת שלב</b><p style="color:var(--mut);margin:0">עוד 3 שלבים למסלול המלא.</p></div>
+ <div class="foot"><button class="btn" data-go="emp-path">חזרה למסלול</button></div>
+</section>
+<section class="scr" id="emp-alu" data-name="תעסוקה · בוגרים" data-tab="emp">
+ <div class="hd"><button class="ib" data-back>›</button><h1>בוגרים שיכולים לעזור</h1></div>
+ <div class="body"><div class="box row"><div class="img" style="width:48px;height:48px;border-radius:50%"></div><div class="grow"><h3>נועה ל׳ · מעצבת מוצר</h3><p>בוגרת 2023</p></div><button class="btn s" style="width:auto">פנייה</button></div><div class="ph">ערוץ הפנייה (וואטסאפ, צ׳אט או מייל) עוד לא נבחר.</div></div>
+</section>
+
+<!-- ====== קורסים ====== -->
+<section class="scr" id="cou-status" data-name="קורסים · תמונת מצב" data-tab="cou" data-main data-feat-need="cou">
+ <div class="body"><div class="box"><h3>נשארו לך 18 נקודות זכות</h3><div class="prog"><i style="width:72%"></i></div><p>הרשמה נפתחת מחר ב-8:00</p></div>
+  <div class="lst box"><button data-go="cou-how">איך זה עובד<span class="arr">‹</span></button><button data-go="cou-prof">הגדרת פרופיל וזמנים<span class="arr">‹</span></button><button data-go="cou-list">רשימת קורסים<span class="arr">‹</span></button><button data-go="cou-build">בניית מערכת<span class="arr">‹</span></button><button data-go="cou-swap">מסירה והחלפה<span class="arr">‹</span></button><button data-go="cou-help">לא הצלחתי? מה עושים<span class="arr">‹</span></button></div></div>
+</section>
+<section class="scr" id="cou-how" data-name="קורסים · איך זה עובד" data-tab="cou">
+ <div class="hd"><button class="ib" data-back>›</button><h1>איך זה עובד</h1></div>
+ <div class="body"><div class="box"><h3>1. מגדירים זמנים</h3><p>מתי את/ה פנוי/ה בשבוע.</p></div><div class="box"><h3>2. בוחרים קורסים</h3><p>מקבלים המלצות לפי מה שנשאר.</p></div><div class="box"><h3>3. בונים מערכת</h3><p>רואים עומס ונרשמים בזמן.</p></div></div>
+</section>
+<section class="scr" id="cou-prof" data-name="קורסים · פרופיל" data-tab="cou">
+ <div class="hd"><button class="ib" data-back>›</button><h1>מתי את/ה פנוי/ה</h1></div>
+ <div class="body"><div class="box"><div class="row" style="padding:6px 0"><span class="grow">ימים א׳-ג׳</span><button class="sw on" data-sw></button></div><div class="row" style="padding:6px 0"><span class="grow">ימים ד׳-ה׳</span><button class="sw" data-sw></button></div><div class="row" style="padding:6px 0"><span class="grow">בקרים</span><button class="sw on" data-sw></button></div></div><div class="ph">איך המערכת יודעת את השעות: עוד לא הוחלט.</div></div>
+ <div class="foot"><button class="btn" data-go="cou-list">להמלצות</button></div>
+</section>
+<section class="scr" id="cou-list" data-name="קורסים · רשימה" data-tab="cou">
+ <div class="hd"><button class="ib" data-back>›</button><h1>קורסים מתאימים</h1></div>
+ <div class="body"><div class="chips" data-single><button class="chip on">הכול</button><button class="chip">חובה</button><button class="chip">בחירה</button></div>
+  <div class="lst box"><button data-go="cou-course"><div><b>מבוא ל-UX</b><p style="margin:0;font-size:12px;color:var(--mut)">ג׳ 10:00 · 2 נ״ז · ★ 4.2</p></div><span class="arr">‹</span></button><button data-go="cou-course"><div><b>אנימציה מתקדמת</b><p style="margin:0;font-size:12px;color:var(--mut)">ד׳ 12:00 · 3 נ״ז · ★ 4.6</p></div><span class="arr">‹</span></button><button data-go="cou-course"><div><b>הצגה ומצגות</b><p style="margin:0;font-size:12px;color:var(--mut)">ה׳ 9:00 · 2 נ״ז · ★ 3.9</p></div><span class="arr">‹</span></button></div></div>
+</section>
+<section class="scr" id="cou-course" data-name="קורסים · עמוד קורס" data-tab="cou">
+ <div class="hd"><button class="ib" data-back>›</button><h1>מבוא ל-UX</h1></div>
+ <div class="body"><div class="box"><h3>ג׳ 10:00-13:00 · 2 נ״ז</h3><p>מרצה: ד״ר ר. לוי</p></div><div class="box"><h3>ביקורות</h3><p>"קורס מעשי, עומס בינוני" ★★★★☆</p></div></div>
+ <div class="foot"><button class="btn" data-go="cou-build">הוספה למערכת</button></div>
+</section>
+<section class="scr" id="cou-build" data-name="קורסים · בניית מערכת" data-tab="cou">
+ <div class="hd"><button class="ib" data-back>›</button><h1>המערכת שלך</h1></div>
+ <div class="body"><div class="cal"><div></div><div>א</div><div>ב</div><div>ג</div><div>ד</div><div>ה</div><div>9</div><div></div><div></div><div></div><div></div><div class="k">מצגות</div><div>11</div><div></div><div></div><div class="k">UX</div><div></div><div></div><div>13</div><div></div><div></div><div></div><div class="k">אנימ׳</div><div></div></div>
+  <div class="box"><h3>עומס: בינוני</h3><div class="prog"><i style="width:55%"></i></div><p>6 נ״ז · 3 ימים בשבוע</p></div></div>
+ <div class="foot"><button class="btn" data-sure="cou-status">שמירת המערכת</button></div>
+</section>
+<section class="scr" id="cou-swap" data-name="קורסים · מסירה והחלפה" data-tab="cou">
+ <div class="hd"><button class="ib" data-back>›</button><h1>מסירה והחלפה</h1></div>
+ <div class="body"><div class="lst box"><button data-go="cou-help"><div><b>מוסרת: אנימציה ד׳ 12:00</b><p style="margin:0;font-size:12px;color:var(--mut)">מחפשת: UX ג׳</p></div><span class="tag">התאמה</span></button><button data-go="cou-help"><div><b>מוסר: הצגה ה׳ 9:00</b><p style="margin:0;font-size:12px;color:var(--mut)">מחפש: כל קורס בחירה</p></div></button></div><div class="ph">אין ראיה במחקר; ניסיון אישי של חברת צוות.</div></div>
+</section>
+<section class="scr" id="cou-help" data-name="קורסים · לא הצלחתי" data-tab="cou">
+ <div class="hd"><button class="ib" data-back>›</button><h1>לא הצלחתי להירשם</h1></div>
+ <div class="body"><div class="box"><h3>מה אפשר לעשות</h3><p>1. לנסות קורס חלופי מהרשימה.<br>2. לפנות למזכירות.</p></div></div>
+ <div class="foot"><button class="btn" data-go="support">לתמיכה</button></div>
+</section>
+
+ </div>
+ <nav class="tabs" id="tabs">
+  <button class="tab" data-tab="res"><i>🪖</i>מילואים</button><button class="tab" data-tab="gui"><i>🧭</i>הכוונה</button>
+  <button class="tab home" data-tab="home"><i>🏠</i>בית</button>
+  <button class="tab" data-tab="emp"><i>💼</i>תעסוקה</button><button class="tab" data-tab="cou"><i>📚</i>קורסים</button>
+ </nav>
+ <div class="sheetbg" id="sure"><div class="sheet"><b style="font-size:17px">לשלוח?</b><p style="margin:0;color:var(--mut);font-size:14px">שואלים רק בפעם הראשונה. אחר כך זה יתבצע מיד.</p><button class="btn" id="sureOk">כן, לשלוח</button><button class="btn o" id="sureNo">חזרה</button></div></div>
+ <div class="drawer" id="menu"><div class="pn"><div class="row"><b class="grow" style="color:var(--acc)">HIT ME</b><button class="ib" id="menuX">✕</button></div><div class="ph" style="margin:10px 0">התפריט הראשי עוד לא הוחלט (נדחה ב-20.11). זו רשימה זמנית.</div>
+  <div class="lst"><button data-go="home">🏠 בית<span class="arr">‹</span></button><button data-go="search">🔎 חיפוש<span class="arr">‹</span></button><button data-go="notif">🔔 עדכונים<span class="arr">‹</span></button><button data-go="profile">👤 פרופיל<span class="arr">‹</span></button><button data-go="settings">⚙️ הגדרות<span class="arr">‹</span></button><button data-go="support">💬 תמיכה<span class="arr">‹</span></button></div></div></div>
+</div>
+
+<aside class="side">
+ <div class="box"><h3 id="sName">מסך</h3><p style="margin:0;font-size:12px;color:var(--mut)">לחצו על האפליקציה כמו על טלפון. כאן אפשר לקפוץ למסך ולראות מה עומד מאחוריו.</p></div>
+ <div class="box"><h3>מאחורי המסך</h3><div id="sNotes"></div></div>
+ <div class="box"><h3>קפיצה למסך</h3>
+  <small>כניסה ראשונה</small><div class="sl" data-jump="login consent q1 q2 onb1 onb2 onb3"></div>
+  <small>כללי</small><div class="sl" data-jump="home search notif support profile settings settings-notif"></div>
+  <small>מילואים</small><div class="sl" data-jump="res-chat res-up res-rights res-draft res-req res-upd"></div>
+  <small>הכוונה</small><div class="sl" data-jump="gui-grid gui-print gui-svc gui-map gui-room"></div>
+  <small>תעסוקה</small><div class="sl" data-jump="emp-start emp-q1 emp-path emp-task emp-done emp-alu"></div>
+  <small>קורסים</small><div class="sl" data-jump="cou-status cou-how cou-prof cou-list cou-course cou-build cou-swap cou-help"></div>
+  <button class="btn o s" style="margin-top:10px" id="reset">התחלה מחדש</button></div>
+</aside>
+</div>
+
+<script>
+var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return Array.from((r||document).querySelectorAll(s))};
+var hist=[],cur=null,active={res:false,gui:false,emp:false,cou:false},seenSure=false,pendingSure=null;
+var FEAT={res:{n:'מילואים',i:'🪖',h:'עזר למילואים',p:'מעלים טופס ומקבלים זכויות, טיוטה למרצים ומעקב אחרי בקשות.',to:'res-chat'},
+gui:{n:'הכוונה',i:'🧭',h:'שירותים ומפה',p:'כל שירותי המכון במקום אחד, עם מפה של הבניינים.',to:'gui-grid'},
+emp:{n:'תעסוקה',i:'💼',h:'מדריך קריירה',p:'כמה שאלות, ואז מסלול אישי עם משימות לשלב שלך.',to:'emp-start'},
+cou:{n:'קורסים',i:'📚',h:'בחירת קורסים',p:'המלצות לפי מה שנשאר ובניית מערכת שעות.',to:'cou-status'}};
+var NOTES={login:{s:['אין'],d:['משתמש מחובר'],t:['users']},consent:{d:['הסכמה לתנאים ולשימוש במידע'],t:['consents (משתמש, גרסה, תאריך)']},
+q1:{d:['פקולטה, שנה'],t:['users.faculty, users.year'],n:['משפיע על התאמת קורסים ותעסוקה']},q2:{d:['מה חשוב למשתמש כרגע'],t:['users.goals']},
+home:{s:['אילו עזרים הופעלו'],d:['כרטיס דחוף לכל עזר'],t:['user_features (משתמש, עזר, מופעל)'],n:['דף הבית: מה עולה למשבצת העליונה כשיש שני דחופים?']},
+search:{d:['אינדקס על כל העזרים'],t:['search_index'],n:['מילה או משפט; שוויון נפתר על ידי ערן']},
+notif:{d:['עדכונים לפי עזר'],t:['notifications (משתמש, עזר, טקסט, נקרא)']},
+settings:{s:['מתג לכל עזר','התראות לפי נושא','חיבורים'],d:['הגדרות משתמש'],t:['user_settings','connections (ספק, טוקן)'],n:['מקצוע ההגדרות: האם הגדרה מתעדכנת בזמן אמת?']},
+'res-chat':{s:['מתג הפעלה'],d:['שיחה','ימי שירות'],t:['reserve_profile','reserve_requests']},
+'res-up':{d:['טופס 3010 / צו 8'],t:['reserve_documents'],n:['מי רואה מידע רגיש: לא הוחלט']},
+'res-rights':{d:['זכויות לפי ימי שירות'],t:['rights_catalog'],n:['תג מידע רשמי']},
+'gui-grid':{d:['רשימת שירותים לפי פקולטה'],t:['services'],n:['עודכן 24.11 לפי אב־הטיפוס של החוליה','רוב השירותים עוד בלי מסך משלהם']},
+'gui-print':{d:['מדפסות ומחירון'],t:['printers','pricelist'],n:['תגיות: רשמי, נבדק בשטח, בבדיקה']},
+'gui-map':{d:['בניינים וקומות'],t:['buildings','rooms'],n:['אין מפה אמיתית']},
+'emp-path':{d:['שלב נוכחי','משימות שהושלמו'],t:['career_progress','career_tasks'],n:['תוכן המשימות עוד לא נכתב']},
+'cou-status':{s:['זמנים פנויים'],d:['קורסים שנשארו'],t:['courses','user_courses'],n:['איך המערכת יודעת שעות: ארבע אפשרויות']},
+'cou-build':{d:['מערכת שעות','עומס'],t:['schedule_slots'],n:['התראה ביום הרישום: אין מסך']}};
+var MAIN={home:1,'res-chat':1,'gui-grid':1,'emp-start':1,'cou-status':1};
+var SEARCH=[['מה מגיע לי אחרי מילואים','res-rights',1],['השאלת ציוד אור-קולי','gui-svc',1],['איפה מדפיסים, ומחירון','gui-print',1],['מפת המכון','gui-map'],['רשימת קורסים','cou-list'],['המסלול האישי שלי','emp-path'],['הגדרות התראות','settings-notif'],['תמיכה','support']];
+function el(id){return document.getElementById(id)}
+function show(id){
+ $$('.scr').forEach(function(s){s.classList.remove('on')});var s=el(id);s.classList.add('on');cur=id;
+ var tab=s.dataset.tab,tabs=el('tabs');
+ if(tab&&tab!=='x'){tabs.classList.add('on');$$('.tab').forEach(function(t){t.classList.toggle('on',t.dataset.tab===tab)})}else tabs.classList.remove('on');
+ s.scrollTop=0;var b=$('.body',s);if(b)b.scrollTop=0;
+ el('sName').textContent=s.dataset.name||id;var n=NOTES[id]||{};
+ el('sNotes').innerHTML=[['הגדרות','s'],['נתונים','d'],['טבלאות','t'],['הערות','n']].map(function(k){var v=n[k[1]];return '<b style="font-size:12px">'+k[0]+'</b>'+(v?'<ul>'+v.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>':'<div class="ph" style="margin:3px 0 8px">עוד לא מולא</div>')}).join('');
+ $$('.sl button').forEach(function(b){b.classList.toggle('cur',b.dataset.id===id)});
+ if(id==='home')refreshHome();
+ if(id==='settings')$$('[data-fsw]').forEach(function(b){b.classList.toggle('on',active[b.dataset.fsw])});
+ if(id==='search'){el('q').value='';renderSearch('')}
+}
+function go(id,noPush){if(!noPush&&cur&&cur!==id)hist.push(cur);show(id)}
+function back(){var p=hist.pop();show(p||'home')}
+function refreshHome(){document.querySelectorAll('[data-on-only]').forEach(function(e){e.style.display=active[e.closest('[data-feat]').dataset.feat]?'':'none'});el('magic').style.display=el('magicNote').style.display=active.res?'':'none';$$('[data-feat]').forEach(function(c){var k=c.dataset.feat,on=active[k],b=$('.fa',c);
+ b.textContent=on?'פתיחה':'הפעלה';b.className='btn s fa '+(on?'':'o');b.style.marginTop='8px'})}
+function openFeat(k){if(active[k])go(FEAT[k].to);else{var f=FEAT[k];el('actT').textContent=f.n;el('actI').textContent=f.i;el('actH').textContent=f.h;el('actP').textContent=f.p;el('actB').onclick=function(){active[k]=true;hist.pop&&0;go(f.to,false)};go('act')}}
+function renderSearch(t){el('res').innerHTML=SEARCH.filter(function(r){return !t||r[0].indexOf(t)>-1}).map(function(r){return '<button data-go="'+r[1]+'">'+r[0]+(r[2]?' <span class="tag">מידע רשמי</span>':'')+'<span class="arr">‹</span></button>'}).join('')||'<p style="color:var(--mut)">לא נמצא</p>'}
+document.addEventListener('click',function(e){
+ var t=e.target.closest('button,[data-go],.tab');if(!t)return;
+ if(t.dataset.go){go(t.dataset.go);return}
+ if(t.hasAttribute('data-back')){back();return}
+ if(t.dataset.sure){pendingSure=t.dataset.sure;if(seenSure)go(pendingSure);else el('sure').classList.add('on');return}
+ if(t.dataset.say){var c=el('chat');c.insertAdjacentHTML('beforeend','<div class="bub me">'+t.dataset.say+'</div><div class="bub bot">אפשר לבקש מהמרצה הקלה. רוצה שאכין טיוטה?</div>');var b=$('.body',el('res-chat'));b.scrollTop=1e5;return}
+ if(t.classList.contains('tab')){var k=t.dataset.tab;if(k==='home')go('home');else openFeat(k);return}
+ if(t.hasAttribute('data-sw')||t.dataset.fsw){t.classList.toggle('on');if(t.dataset.fsw)active[t.dataset.fsw]=t.classList.contains('on');return}
+ if(t.classList.contains('chip')){var p=t.parentElement;if(p.hasAttribute('data-single'))$$('.chip',p).forEach(function(c){c.classList.remove('on')});if(p.hasAttribute('data-single')||p.hasAttribute('data-multi')){t.classList.toggle('on',p.hasAttribute('data-single')?true:!t.classList.contains('on'))}return}
+ if(t.classList.contains('fa')){openFeat(t.closest('[data-feat]').dataset.feat);return}
+ if(t.dataset.id){go(t.dataset.id);return}
+});
+el('sureOk').onclick=function(){seenSure=true;el('sure').classList.remove('on');go(pendingSure)};
+el('sureNo').onclick=function(){el('sure').classList.remove('on')};
+el('menuX').onclick=function(){el('menu').classList.remove('on')};
+el('menu').addEventListener('click',function(e){if(e.target===el('menu')||e.target.closest('[data-go]'))el('menu').classList.remove('on')});
+el('q').addEventListener('input',function(e){renderSearch(e.target.value)});
+$$('[data-jump]').forEach(function(w){w.dataset.jump.split(' ').forEach(function(id){var b=document.createElement('button');b.dataset.id=id;b.textContent=el(id).dataset.name;w.appendChild(b)})});
+el('reset').onclick=function(){active={res:false,gui:false,emp:false,cou:false};seenSure=false;hist=[];go('login',true)};
+/* header: add menu, search, bell to main screens */
+$$('.scr[data-main]').forEach(function(s){var h=document.createElement('div');h.className='hd';h.innerHTML='<button class="ib" data-menu>☰</button><h1>'+(s.id==='home'?'HIT ME':s.dataset.name.split(' · ')[0])+'</h1><button class="ib" data-go="search">🔎</button><button class="ib" data-go="notif">🔔<span class="badge">2</span></button>';s.insertBefore(h,s.firstChild)});
+document.addEventListener('click',function(e){if(e.target.closest('[data-menu]'))el('menu').classList.add('on')});
+go('login',true);
+</script><style id="ownCss">
+#ownBar{position:fixed;bottom:12px;inset-inline-end:12px;z-index:200;display:flex;gap:6px}
+#ownBar button{font:600 13px/1 inherit;font-family:inherit;padding:9px 14px;border-radius:20px;border:1.5px solid #1f2328;background:#fff;cursor:pointer}
+#ownBar button.on{background:#1f2328;color:#fff}
+#ownLayer{position:absolute;inset:0;pointer-events:none;z-index:60;display:none}
+body.own #ownLayer{display:block}
+.oz{position:absolute;border-radius:8px;box-sizing:border-box}
+.oz.base{border-radius:0}
+.oz.small{border:2px solid;border-radius:10px}
+.oz .ol{position:absolute;top:3px;inset-inline-start:3px;font:700 11px/1.2 inherit;font-family:inherit;color:#fff;padding:2px 7px;border-radius:9px;white-space:nowrap}
+.oz.base .ol{top:62px;inset-inline-start:auto;inset-inline-end:6px;font-size:12px}
+.oz.fade{opacity:.08}
+#ownTip{position:fixed;z-index:210;pointer-events:none;background:#1f2328;color:#fff;font:600 12px/1.35 inherit;font-family:inherit;padding:6px 9px;border-radius:8px;display:none;max-width:240px}
+#ownLegend{display:none}
+body.own #ownLegend{display:block}
+#ownLegend .who{display:flex;align-items:center;gap:8px;width:100%;border:0;background:none;padding:4px 2px;font:inherit;font-size:13px;text-align:start;cursor:pointer;border-radius:6px}
+#ownLegend .who:hover{background:#f3f4f6}
+#ownLegend .who.sel{background:#e5e7eb}
+#ownLegend .sw2{width:16px;height:16px;border-radius:4px;flex:none}
+#ownLegend small{color:#6b7280;display:block;font-size:11px}
+#graphView{position:fixed;inset:0;z-index:150;background:#fbfbfa;display:none;overflow:auto}
+body.graph #graphView{display:block}
+#gTop{position:sticky;top:0;inset-inline:0;z-index:3;display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:10px 16px;background:#fbfbfaee;border-bottom:1px solid #e5e7eb;font-size:13px}
+#gTop b{font-size:15px}
+#gTop .lg{display:flex;align-items:center;gap:6px;color:#374151}
+#gTop .zb{display:flex;gap:4px;margin-inline-start:auto}
+#gTop .zb button{width:34px;height:34px;border-radius:50%;border:1.5px solid #9ca3af;background:#fff;font:700 16px inherit;cursor:pointer}
+#gWrap{padding:10px 16px 90px}
+#graphView svg{display:block}
+#graphView .gn{cursor:pointer}
+#gInfo{position:fixed;bottom:16px;inset-inline-start:16px;width:310px;background:#fff;border:1.5px solid #d1d5db;border-radius:12px;font-size:13px;z-index:160;box-shadow:0 4px 18px #0002}
+#gInfo .ih{display:flex;align-items:center;gap:6px;padding:8px 10px;border-bottom:1px solid #e5e7eb}
+#gInfo .ih h4{margin:0;font-size:14px;flex:1}
+#gInfo .ih button{border:0;background:#f3f4f6;border-radius:6px;width:26px;height:26px;cursor:pointer;font-weight:700}
+#gInfo .ib2{padding:8px 10px;max-height:40vh;overflow:auto}
+#gInfo.min .ib2{display:none}
+</style>
+<div id="ownBar"><button id="ownBtn">מי אחראי על מה</button><button id="graphBtn">מפת קשרים</button></div>
+<div id="ownTip"></div>
+<div id="graphView"><div id="gTop"><b>מפת קשרים</b>
+<span class="lg"><svg width="34" height="8"><line x1="0" y1="4" x2="34" y2="4" stroke="#374151" stroke-width="2.2" stroke-dasharray="7 5"/></svg>יורש</span>
+<span class="lg"><svg width="34" height="8"><line x1="0" y1="4" x2="34" y2="4" stroke="#374151" stroke-width="1.6"/></svg>תורם לתוך</span>
+<span class="lg"><svg width="34" height="8"><line x1="0" y1="4" x2="34" y2="4" stroke="#374151" stroke-width="1.6" stroke-dasharray="2 4"/></svg>בודק</span>
+<span class="lg"><svg width="22" height="14"><rect x="1" y="1" width="20" height="12" rx="3" fill="#fff" stroke="#6b7280" stroke-dasharray="3 2"/></svg>קובץ או שלב, ומי אחראי עליו</span>
+<span class="zb"><button id="zOut" title="הקטנה">−</button><button id="zFit" title="להתאים למסך">⤢</button><button id="zIn" title="הגדלה">+</button></span></div>
+<div id="gWrap"><svg id="gsvg" style="direction:ltr"></svg></div>
+<div id="gInfo"><div class="ih"><h4 id="gTitle">איך קוראים את המפה</h4><button id="gMin" title="צמצום">−</button></div><div class="ib2" id="gBody">משמאל לימין: האפליקציה, בקרת האיכות של בקרת איכות (השער האחרון), בעלי המסכים, הרכיבים, השכבות המשותפות, התורמים, התקנים של תקנים, מחקר שמחבר למשתמש, והמשתמש עצמו. שיווק מביא את המשתמש. קו עבה הוא הקו המרכזי של מישהו. מעבר עם העכבר על אדם או על קובץ מדגיש רק את הקשרים שלו. לחיצה נועלת את ההדגשה, לחיצה על רקע משחררת.</div></div></div>
+<script>
+(function(){
+var P={
+ shaked:{n:'פיצ׳ר מילואים',r:'מילואים',c:'#e11d48'}, lia:{n:'פיצ׳ר הכוונה',r:'הכוונה',c:'#f97316'}, roy:{n:'פיצ׳ר תעסוקה',r:'תעסוקה',c:'#16a34a'}, amitT:{n:'פיצ׳ר קורסים',r:'קורסים',c:'#4f46e5'},
+ roni:{n:'מיתוג',r:'מיתוג: לוגו, אייקון האפליקציה, צבעים',c:'#ec4899'}, noam:{n:'שפה',r:'שפה: טקסטים, אייקונים, איורים',c:'#92400e'},
+ ziv:{n:'שימוש ראשון',r:'כל שרשרת הכניסה',c:'#64748b'}, shibi:{n:'זהות',r:'פרופיל ותמיכה',c:'#0d9488'}, shira:{n:'הגדרות',r:'הגדרות',c:'#84cc16'},
+ noa:{n:'בקרת איכות',r:'בקרת איכות, וגם דף החיפוש',c:'#2563eb'}, amitR:{n:'מערכת עיצוב',r:'מערכת עיצוב: כל הרכיבים',c:'#38bdf8'},
+ omer:{n:'דף הבית',r:'דף הבית, תפריט עליון ותחתון, עדכונים',c:'#eab308'}, dana:{n:'תנועה',r:'תנועה, טעינה, משוב',c:'#a855f7'},
+ shahar:{n:'שיווק',r:'שיווק: מביא את המשתמש',c:'#be185d'}, yuval:{n:'מחקר',r:'מחקר: החיבור למשתמש',c:'#0f766e'},
+ yarden:{n:'מדידה',r:'מדידה: מה בודקים בכל פיצ׳ר',c:'#b45309'}, maya:{n:'תקנים',r:'תקנים ושער',c:'#475569'}
+};
+var FEATO={res:'shaked',gui:'lia',emp:'roy',cou:'amitT'};
+function screenOwner(id){
+ if(/^res-/.test(id))return'shaked'; if(/^gui-/.test(id))return'lia'; if(/^emp-/.test(id))return'roy'; if(/^cou-/.test(id))return'amitT';
+ if(/^(login|consent|q1|q2|onb1|onb2|onb3)$/.test(id))return'ziv';
+ if(/^(home|act|notif)$/.test(id))return'omer'; if(id==='search')return'noa';
+ if(/^(support|profile|profile-edit)$/.test(id))return'shibi'; if(/^settings/.test(id))return'shira'; return null;}
+var phone=document.getElementById('phone'),layer=document.createElement('div');layer.id='ownLayer';phone.appendChild(layer);
+var zones=[],sel=null,on=false;
+function rectIn(e,clip){var r=e.getBoundingClientRect();if(!r.width||!r.height)return null;
+ var pr=phone.getBoundingClientRect(),ox=pr.left+phone.clientLeft,oy=pr.top+phone.clientTop;
+ var L=r.left,T=r.top,R=r.right,B=r.bottom;
+ if(clip){var c=clip.getBoundingClientRect();L=Math.max(L,c.left);T=Math.max(T,c.top);R=Math.min(R,c.right);B=Math.min(B,c.bottom)}
+ if(R-L<2||B-T<2)return null;return{l:L-ox,t:T-oy,w:R-L,h:B-T,vl:L,vt:T,vr:R,vb:B};}
+function add(e,who,kind,label,clip,what){var r=rectIn(e,clip);if(!r||!P[who])return;zones.push({r:r,who:who,kind:kind,label:label,what:what});}
+function hex(c,a){var n=parseInt(c.slice(1),16);return'rgba('+(n>>16)+','+((n>>8)&255)+','+(n&255)+','+a+')'}
+function draw(){if(!on)return;zones=[];layer.innerHTML='';
+ var s=document.querySelector('.scr.on');if(!s)return;var so=screenOwner(s.id);
+ if(so)add(s,so,'base',P[so].n+' · '+P[so].r,null,'המסך כולו');
+ var tabs=document.getElementById('tabs');
+ s.querySelectorAll('.hd').forEach(function(h){if(h.querySelector('[data-menu]'))add(h,'omer','zone','דף הבית · תפריט עליון',null,'התפריט העליון');});
+ if(tabs&&tabs.classList.contains('on'))add(tabs,'omer','zone','דף הבית · תפריט תחתון',null,'התפריט התחתון');
+ var body=s.querySelector('.body');
+ s.querySelectorAll('[data-feat]').forEach(function(f){if(f.offsetParent)add(f,FEATO[f.dataset.feat],'zone',P[FEATO[f.dataset.feat]].n+' · כרטיס בבית',body,'הכרטיס של הפיצ׳ר בדף הבית: הפיצ׳ר שולח אותו, דף הבית מציג');});
+ var ctl='.btn,.ib,.chip,.sw,.tile,.tag,.prog,.dots,.in,.badge,.bub';
+ s.querySelectorAll(ctl).forEach(function(c){if(c.offsetParent)add(c,'amitR','small','',c.closest('.body'),'רכיב ממערכת העיצוב: '+(c.className.split(' ')[0]));});
+ if(tabs&&tabs.classList.contains('on'))tabs.querySelectorAll('.tab').forEach(function(t){add(t,'amitR','small','',null,'רכיב ממערכת העיצוב: פריט בתפריט התחתון')});
+ s.querySelectorAll('.img').forEach(function(c){add(c,'noam','zone','שפה · איור',c.closest('.body'),'איור')});
+ s.querySelectorAll('.logo').forEach(function(c){add(c,'roni','zone','מיתוג · לוגו',c.closest('.body'),'הלוגו')});
+ var m=document.getElementById('menu');if(m&&m.classList.contains('on'))add(m.querySelector('.pn'),'omer','zone','דף הבית · התפריט הראשי',null,'התפריט הראשי');
+ zones.forEach(function(z){var d=document.createElement('div');d.className='oz '+(z.kind==='small'?'small':z.kind==='base'?'base':'');
+  var c=P[z.who].c;d.style.cssText='left:'+z.r.l+'px;top:'+z.r.t+'px;width:'+z.r.w+'px;height:'+z.r.h+'px;background:'+hex(c,z.kind==='base'?.22:.38)+';'+(z.kind==='small'?'border-color:'+c:'');
+  if(sel&&z.who!==sel)d.classList.add('fade');
+  if(z.label){var l=document.createElement('span');l.className='ol';l.style.background=c;l.textContent=z.label;d.appendChild(l)}
+  layer.appendChild(d);});}
+var raf=0;function later(){if(!raf)raf=requestAnimationFrame(function(){raf=0;draw()})}
+new MutationObserver(later).observe(phone,{subtree:true,attributes:true,attributeFilter:['class','style'],childList:true});
+document.getElementById('menu')&&new MutationObserver(later).observe(document.getElementById('menu'),{attributes:true});
+document.addEventListener('scroll',later,true);window.addEventListener('resize',later);
+var tip=document.getElementById('ownTip');
+phone.addEventListener('mousemove',function(e){if(!on){tip.style.display='none';return}
+ var hit=zones.filter(function(z){return e.clientX>=z.r.vl&&e.clientX<=z.r.vr&&e.clientY>=z.r.vt&&e.clientY<=z.r.vb}).sort(function(a,b){return a.r.w*a.r.h-b.r.w*b.r.h});
+ if(!hit.length){tip.style.display='none';return}
+ tip.innerHTML=hit.map(function(z){return'<span style="color:'+P[z.who].c+'">■</span> '+P[z.who].n+': '+z.what}).join('<br>');
+ tip.style.display='block';tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY+14)+'px';});
+phone.addEventListener('mouseleave',function(){tip.style.display='none'});
+/* legend */
+var side=document.querySelector('.side'),lg=document.createElement('div');lg.className='box';lg.id='ownLegend';
+var inApp=['shaked','lia','roy','amitT','ziv','omer','noa','shibi','shira','amitR','noam','roni','dana'];
+lg.innerHTML='<h3>מי אחראי על מה</h3><p style="margin:0 0 6px;font-size:12px;color:#6b7280">לחיצה על שם משאירה רק אותו. מעבר עם העכבר על המסך מראה של מי כל חלק. מסך גדול: הצבע של בעל המסך. מסגרת קטנה: רכיב של מערכת עיצוב.</p>'+
+ inApp.map(function(k){return'<button class="who" data-who="'+k+'"><span class="sw2" style="background:'+P[k].c+'"></span><span>'+P[k].n+'<small>'+P[k].r+'</small></span></button>'}).join('')+
+ '<p style="margin:8px 0 0;font-size:12px;color:#444"><b>ירושה:</b> מיתוג ← מערכת עיצוב ← כל המסכים. הצבעים והגופנים של מיתוג עוברים לרכיבים של מערכת העיצוב, והרכיבים עוברים לכל מסך.</p>'+
+ '<p style="margin:6px 0 0;font-size:12px;color:#444"><b>לא נראים במסך סטטי:</b> תנועה (טעינה ואנימציה, אלמנט אחד בכל פיצ׳ר), שפה גם בכל הטקסטים.</p>'+
+ '<p style="margin:6px 0 0;font-size:12px;color:#444"><b>מחוץ לאפליקציה:</b> שיווק, מחקר, מדידה. תקנים מגדירה את התקנים ובודקת לפני שחרור. כולם מופיעים במפת הקשרים.</p>';
+side.insertBefore(lg,side.firstChild);
+lg.addEventListener('click',function(e){var b=e.target.closest('.who');if(!b)return;sel=sel===b.dataset.who?null:b.dataset.who;
+ lg.querySelectorAll('.who').forEach(function(x){x.classList.toggle('sel',x.dataset.who===sel)});draw();});
+var ob=document.getElementById('ownBtn');ob.onclick=function(){on=!on;document.body.classList.toggle('own',on);ob.classList.toggle('on',on);if(on)draw();else{layer.innerHTML='';tip.style.display='none'}};
+/* ===== graph ===== */
+var GW=1800,GH=860;
+var N=[
+ {id:'app',x:90,y:420,t:'האפליקציה',d:'מה שהמשתמש מחזיק ביד ב-9.12.',w:150,h:96},
+ {id:'f_qa',x:270,y:420,t:'בקרת איכות',o:'noa',d:'שנייה לפני השחרור: כל מסך עובר תסריט בדיקה, ותקלות חוזרות לבעלים שלו.',w:160,h:70},
+ {id:'ziv',x:460,y:50},{id:'omer',x:460,y:140},{id:'shaked',x:460,y:230},{id:'lia',x:460,y:300},{id:'roy',x:460,y:370},{id:'amitT',x:460,y:440},
+ {id:'noa',x:250,y:650,w:170,h:56},{id:'shira',x:460,y:560},{id:'shibi',x:460,y:640},
+ {id:'f_ctl',x:660,y:150,t:'קטלוג הרכיבים',o:'amitR',d:'כפתורים, צ׳יפים, מתגים, שורות רשימה. כל מסך בונה רק מהם. עובר את השער של תקנים לפני שחרור.'},
+ {id:'f_tok',x:860,y:70,t:'טוקנים',o:'amitR',d:'ערכי העיצוב בשמות (צבע מותג, ריווח). מערכת עיצוב מעתיקה מספר המותג.'},
+ {id:'amitR',x:860,y:190},
+ {id:'f_brand',x:1060,y:70,t:'ספר המותג',o:'roni',d:'צבעים, גופנים, לוגו, אייקוני האפליקציה.'},
+ {id:'f_str',x:1060,y:220,t:'טקסטים',o:'noam',d:'קובץ משותף של שפה, וקובץ לכל פיצ׳ר שבעליו כותב ונעם בודק.'},
+ {id:'f_ico',x:1060,y:290,t:'אייקונים ואיורים',o:'noam',d:'שפה מכין לפי רשימות שהפיצ׳רים שולחים.'},
+ {id:'f_mot',x:1060,y:370,t:'תנועה וטעינה',o:'dana',d:'מסכי טעינה, אנימציית טעינה, ואלמנט מונפש אחד בכל פיצ׳ר.'},
+ {id:'f_kpi',x:1060,y:490,t:'מדדי הצלחה',o:'yarden',d:'מה בודקים באנליטיקה בכל פיצ׳ר.'},
+ {id:'f_test',x:1060,y:620,t:'מבחן שימושיות',o:'yuval',d:'הבדיקה עם משתמשים אמיתיים ב-9.12.'},
+ {id:'roni',x:1260,y:70},{id:'noam',x:1260,y:300},{id:'dana',x:1260,y:420},{id:'yarden',x:1260,y:540},
+ {id:'f_std',x:1260,y:185,t:'התקנים',o:'maya',d:'הסטנדרטים שכולם עומדים בהם: נגישות, אמון, שפה ברורה. השער בין ספר המותג, הטקסטים והאייקונים לבין קטלוג הרכיבים. בקרת איכות יורשת מכאן את תקני האיכות.',w:160,h:70},
+ {id:'maya',x:1460,y:200},{id:'yuval',x:1460,y:440,w:160,h:56},{id:'shahar',x:1660,y:100},
+ {id:'user',x:1680,y:440,t:'המשתמש',o:'yuval',d:'המשתמש האמיתי. מחקר הכי קרוב אליו, חוקר אותו ומעביר את מה שלמד לתורמים. שיווק מביא אותו לאפליקציה. האפליקציה בצד אחד, המשתמש בצד השני.',w:180,h:150}
+];
+var FEAT4=['shaked','lia','roy','amitT'],SCR=['ziv','omer','shaked','lia','roy','amitT','shira','shibi'];
+var E=[['roni','f_brand','c'],['f_brand','f_tok','i'],['f_tok','amitR','i'],['amitR','f_ctl','c'],
+ ['noam','f_str','c'],['noam','f_ico','c'],['dana','f_mot','c'],['yarden','f_kpi','c'],['yuval','f_test','c'],
+ ['maya','f_std','c',1],
+ ['f_std','f_brand','k'],['f_std','f_str','k'],['f_std','f_ico','k'],['f_std','f_ctl','k'],['f_std','noa','i',1],
+ ['user','yuval','c',1],['yuval','roni','c'],['yuval','noam','c'],['yuval','dana','c'],['yuval','yarden','c'],['yuval','maya','c'],
+ ['roni','shahar','i',1],['shahar','user','c',1],['f_test','app','k'],['noa','f_qa','c',1],['f_qa','app','c',1],['f_ctl','noa','i']];
+SCR.forEach(function(k){E.push(['f_ctl',k,'i']);E.push([k,'f_qa','c'])});
+FEAT4.concat(['omer','ziv']).forEach(function(k){E.push(['f_str',k,'c'])});
+FEAT4.forEach(function(k){E.push(['f_ico',k,'c']);E.push(['f_mot',k,'c']);E.push(['f_kpi',k,'k']);E.push([k,'omer','c'])});
+E.push(['f_mot','omer','c']);
+var NS='http://www.w3.org/2000/svg',svg=document.getElementById('gsvg'),byId={};N.forEach(function(n){n.w=n.w||140;n.h=n.h||(P[n.id]?44:56);byId[n.id]=n});
+svg.setAttribute('viewBox','0 0 '+GW+' '+GH);
+function mk(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e}
+[[270,'שחרור'],[460,'בעלי המסכים'],[860,'מערכת העיצוב'],[1060,'שכבות משותפות'],[1260,'תורמים'],[1460,'תקנים ומחקר'],[1680,'המשתמש']].forEach(function(c){var t=mk('text',{x:c[0],y:14,'text-anchor':'middle','font-size':12,fill:'#9ca3af','font-weight':700,direction:'rtl'});t.textContent=c[1];svg.appendChild(t)});
+var eg=mk('g',{}),ng=mk('g',{});svg.appendChild(eg);svg.appendChild(ng);
+var STY={i:{d:'7 5',w:2.2,t:'יורש'},c:{d:'',w:1.6,t:'תורם'},k:{d:'2 4',w:1.8,t:'בודק'}};
+function colOf(k){return P[k]?P[k].c:(byId[k].o&&P[byId[k].o]?P[byId[k].o].c:'#9ca3af')}
+var els=[];
+E.forEach(function(e){var a=byId[e[0]],b=byId[e[1]];if(!a||!b)return;var dd;
+ if(Math.abs(a.x-b.x)<10){var ox=a.x-a.w/2,bx=ox-60;dd='M'+ox+','+a.y+' C'+bx+','+a.y+' '+bx+','+b.y+' '+ox+','+b.y}
+ else{var x1=a.x>b.x?a.x-a.w/2:a.x+a.w/2,x2=a.x>b.x?b.x+b.w/2:b.x-b.w/2,mx=(x1+x2)/2;dd='M'+x1+','+a.y+' C'+mx+','+a.y+' '+mx+','+b.y+' '+x2+','+b.y}
+ var p=mk('path',{d:dd,fill:'none',stroke:colOf(e[0]),'stroke-width':STY[e[2]].w*(e[3]?2.2:1),'stroke-dasharray':STY[e[2]].d,opacity:.5});p._a=e[0];p._b=e[1];p._s=!!e[3];if(e[3])p.setAttribute('opacity',.85);eg.appendChild(p);els.push(p);});
+N.forEach(function(n){var isP=!!P[n.id],g=mk('g',{class:'gn',transform:'translate('+n.x+','+n.y+')'}),col=isP?P[n.id].c:'#fff';
+ g.appendChild(mk('rect',{x:-n.w/2,y:-n.h/2,width:n.w,height:n.h,rx:isP?22:10,fill:col,stroke:isP?col:(n.o?P[n.o].c:'#6b7280'),'stroke-width':n.w>140?2.2:1.5,'stroke-dasharray':isP?'':'6 4'}));
+ var big=n.h>60,t1=mk('text',{x:0,y:isP?-2:(n.o?(big?-4:-3):5),'text-anchor':'middle','font-size':big?17:14,'font-weight':700,fill:isP?'#fff':'#111',direction:'rtl'});t1.textContent=isP?P[n.id].n:n.t;g.appendChild(t1);
+ var sub=isP?(P[n.id].r.length>24?P[n.id].r.slice(0,23)+'…':P[n.id].r):(n.o?'אחראי: '+P[n.o].n:'');
+ if(sub){var t2=mk('text',{x:0,y:isP?13:(big?16:13),'text-anchor':'middle','font-size':isP?10:11,fill:isP?'#fff':P[n.o].c,'font-weight':isP?400:700,direction:'rtl'});t2.textContent=sub;g.appendChild(t2)}
+ g.addEventListener('mouseenter',function(){if(!lock)focus(n.id)});g.addEventListener('mouseleave',function(){if(!lock)focus(null)});
+ g.addEventListener('click',function(ev){ev.stopPropagation();lock=lock===n.id?null:n.id;focus(lock)});ng.appendChild(g);n.g=g;});
+var lock=null;svg.addEventListener('click',function(){lock=null;focus(null)});
+var gT=document.getElementById('gTitle'),gB=document.getElementById('gBody'),defT=gT.textContent,defB=gB.innerHTML;
+function nm(k){return P[k]?P[k].n:byId[k].t}
+function focus(id){if(!id){els.forEach(function(p){p.setAttribute('opacity',p._s?.85:.5)});N.forEach(function(n){n.g.setAttribute('opacity',1)});gT.textContent=defT;gB.innerHTML=defB;return}
+ var near={};near[id]=1;els.forEach(function(p){var hit=p._a===id||p._b===id;p.setAttribute('opacity',hit?.95:.05);if(hit){near[p._a]=1;near[p._b]=1}});
+ N.forEach(function(n){n.g.setAttribute('opacity',near[n.id]?1:.22)});
+ var n=byId[id],gets=[],gives=[];E.forEach(function(e){if(e[1]===id)gets.push(nm(e[0])+' ('+STY[e[2]].t+')');if(e[0]===id)gives.push(nm(e[1])+(e[2]==='k'?' (בודק)':''))});
+ gT.textContent=P[id]?P[id].n+' · '+P[id].r:n.t;
+ gB.innerHTML=(n.o?'<b>אחראי:</b> '+P[n.o].n+'<br>':'')+(n.d?'<p style="margin:4px 0 6px">'+n.d+'</p>':'')+(gets.length?'<b>מקבל מ:</b> '+gets.join(', ')+'<br>':'')+(gives.length?'<b>נותן ל:</b> '+gives.join(', '):'');
+ document.getElementById('gInfo').classList.remove('min');document.getElementById('gMin').textContent='−';}
+var zoom=1;function fit(){var w=document.getElementById('gWrap').clientWidth-32,h=window.innerHeight-140;zoom=Math.max(.35,Math.min(w/GW,h/GH));apply()}
+function apply(){svg.setAttribute('width',Math.round(GW*zoom));svg.setAttribute('height',Math.round(GH*zoom))}
+document.getElementById('zIn').onclick=function(){zoom=Math.min(3,zoom*1.2);apply()};
+document.getElementById('zOut').onclick=function(){zoom=Math.max(.3,zoom/1.2);apply()};
+document.getElementById('zFit').onclick=fit;
+document.getElementById('gWrap').addEventListener('wheel',function(e){if(!e.ctrlKey)return;e.preventDefault();zoom=Math.max(.3,Math.min(3,zoom*(e.deltaY<0?1.1:1/1.1)));apply()},{passive:false});
+document.getElementById('gMin').onclick=function(){var i=document.getElementById('gInfo');i.classList.toggle('min');this.textContent=i.classList.contains('min')?'+':'−'};
+var gb=document.getElementById('graphBtn');gb.onclick=function(){var g=!document.body.classList.contains('graph');document.body.classList.toggle('graph',g);gb.classList.toggle('on',g);if(g)fit()};
+if(location.hash==='#graph'){document.body.classList.add('graph');gb.classList.add('on');setTimeout(fit,0)}
+})();
+</script>
+</body></html>
