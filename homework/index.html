@@ -210,7 +210,8 @@ footer { margin-top: 64px; color: var(--text-2); font-size: 14px; }
   <p class="sub">קישור אחד לכל הקורס. בכל מפגש: מה עושים עד המפגש הבא, סיכום, וחומרים. המפגש האחרון תמיד למעלה.</p>
   </div>
   <nav class="pills" aria-label="מפגשים">
-    <a class="on" href="#session-06">מפגש 06 · 25.11</a>
+    <a class="on" href="#session-08">מפגש 08 · 9.12</a>
+    <a href="#session-06">מפגש 06 · 25.11</a>
     <a href="#session-05">מפגש 05 · 18.11</a>
     <a href="#session-04">מפגש 04 · 11.11</a>
     <a href="#session-03">מפגש 03</a>
@@ -223,7 +224,7 @@ footer { margin-top: 64px; color: var(--text-2); font-size: 14px; }
   <div class="layout">
   <aside class="side" aria-label="ההתקדמות והכללים">
     <div class="progress glass" aria-live="polite">
-      <div class="row"><span>ההתקדמות שלי · מפגש 05</span><span id="count">0/0</span></div>
+      <div class="row"><span>ההתקדמות שלי · מפגש 08</span><span id="count">0/0</span></div>
       <div class="bar"><i id="bar"></i></div>
       <ol class="mini" id="mini"></ol>
       <p class="note">הסימון נשמר רק בדפדפן שבו סימנתם. אני רואה את ההתקדמות לפי מה שנכנס למאגר.</p>
@@ -248,14 +249,172 @@ footer { margin-top: 64px; color: var(--text-2); font-size: 14px; }
   </aside>
 
   <div class="content">
+  <article id="session-08" class="session">
+    <div class="session-head glass">
+      <div class="eyebrow">מפגש 08 · יום רביעי 9.12</div>
+      <h2 class="session-title">האפליקציה עובדת, והסבב הראשון יוצא החוצה</h2>
+      <nav class="subnav">
+        <a href="#s08-plan">מה קורה עכשיו</a>
+        <a href="#s08-homework">שיעורי בית</a>
+      </nav>
+    </div>
+
+    <section id="s08-plan">
+      <h3 class="part"><span class="n">00</span>מה קורה עכשיו</h3>
+      <ul>
+        <li><b>השבועיים הקרובים:</b> מכניסים את הפיצ׳רים לאפליקציה, משיקים בתצוגה המקדימה, ומשפרים שוב ושוב.</li>
+        <li><b>30.11 עד 3.12, 19:00:</b> שעה בזום לכל חוליה, ועוד פגישות לפי הצורך. אין מפגש בכיתה ב־2.12.</li>
+        <li><b>מפגש 8, 9.12:</b> כל חוליה עם התוכן שלה, לוגו ושפה גרפית ראשונה. הסבב הראשון יוצא החוצה.</li>
+        <li><b>אחרי מפגש 8:</b> מחקר שימושיות ראשון, ואז קבוצה מוגבלת של משתמשים.</li>
+      </ul>
+    </section>
+
+    <section id="s08-homework">
+      <h3 class="part"><span class="n">01</span>שיעורי בית עד מפגש 8 (9.12)</h3>
+      <p>מתחילים בעדכון ערכת הסוכן: היא מכירה את הפרויקט ואת המקצוע שלכם, וכל שאר המשימות עוברות דרכה.</p>
+      <div class="task glass" data-id="s08-kit">
+        <div class="task-head">
+          <span class="check"><input type="checkbox" id="t48"><span></span></span>
+          <label for="t48"><span class="task-title">לעדכן את ערכת הסוכן, ולבדוק שהיא מכירה אתכם</span>
+            <span class="meta"><span class="chip">אישי</span><span class="chip">לפני כל השאר</span><span class="chip time">⏱ 10 דקות</span></span></label>
+        </div>
+        <div class="task-body">
+          <p>יש לנו עכשיו ערכה משותפת בקלוד קוד שמכירה את הפרויקט ואת המקצוע שלכם. היא נכנסת למחשב שלכם כשמושכים את הגרסה האחרונה של המאגר. מי שיש לו שינויים לא שמורים, שומר אותם קודם.</p>
+          <div class="prompt-label">1. בטרמינל, בתיקייה של הפרויקט</div>
+          <div class="prompt" dir="ltr" style="text-align:left"><button type="button">העתק</button>git switch main
+git pull</div>
+          <div class="prompt-label">2. לוודא שאתם מחוברים לגיטהאב (אם לא: gh auth login)</div>
+          <div class="prompt" dir="ltr" style="text-align:left"><button type="button">העתק</button>gh auth status</div>
+          <div class="prompt-label">3. שיחה חדשה בקלוד קוד, בתיקייה של הפרויקט</div>
+          <div class="prompt"><button type="button">העתק</button>מי אני ומה מותר לי לגעת בו?</div>
+          <p>הסוכן אמור לענות בעברית ולהכיר את המקצוע שלכם. אם הוא לא מזהה אתכם, או שקיבלתם אזהרה שלא ציפיתם לה, שלחו לערן צילום מסך.</p>
+          <div class="dod"><b>גמור כש:</b> הסוכן ענה בעברית ואמר מה המקצוע שלכם.</div>
+        </div>
+      </div>
+      <div class="task glass" data-id="s08-feature">
+        <div class="task-head">
+          <span class="check"><input type="checkbox" id="t49"><span></span></span>
+          <label for="t49"><span class="task-title">מובילי פיצ׳רים: גרסה ראשונה של הפיצ׳ר בתוך האפליקציה</span>
+            <span class="meta"><span class="chip due">לפני הזום של החוליה</span><span class="chip">מובילי פיצ׳רים</span><span class="chip time">⏱ עיקר העבודה</span></span></label>
+        </div>
+        <div class="task-body">
+          <p>כל פיצ׳ר נכנס לאפליקציה בחדר משלו: תיקייה אחת שלכם ושורה אחת ברשימת הפיצ׳רים. ארבעה מובילים עובדים במקביל ולא מתנגשים, ובדיקות אוטומטיות בודקות את זה בכל בקשת מיזוג. הפיצ׳ר כבוי עד שערן מדליק אותו בתצוגה המקדימה, ואז רואים אותו עובד בטלפון.</p>
+          <p>מתחילים קטן: מסך אחד או שניים שמגיעים לערך בכמה שפחות לחיצות, לפי המוקאפ הלחיץ. בשבועיים הקרובים משפרים שוב ושוב, עד שהפיצ׳ר עובד טוב.</p>
+          <div class="prompt-label">הנחיה לסוכן (באנגלית, כי היא נכתבה בשבילו). מחליפים רק את שתי השורות בסוגריים המרובעים</div>
+          <div class="prompt" dir="ltr" style="text-align:left"><button type="button">העתק</button>You are helping me, a feature lead in the HIT ME course, put the FIRST working version of my
+feature into the real app. I am a design student, not a developer. Explain every step to me
+in simple Hebrew, but write code, commits and file names in English.
+
+My feature: [name, e.g. courses / reserve duty / guidance / employment]
+The one thing a student should be able to do in this first version: [one sentence, from our clickable mockup]
+
+Ground rules (read CLAUDE.md and features/_template/README.md first, and follow them exactly):
+1. Start with the start-task skill. It creates my branch from the latest main and copies
+   features/_template/ into features/&lt;my-feature&gt;/. Never edit _template itself.
+2. Work ONLY inside features/&lt;my-feature&gt;/, plus exactly ONE new entry in features/registry.ts.
+   Do not touch apps/web/src/shell/, packages/, functions/, or any other feature folder.
+   If something I want needs a change outside my folder, stop and tell me; that goes to Eran.
+3. One flag, default OFF. Nobody sees the feature until Eran turns the flag on in the preview.
+4. Use only what the envelope already gives me through the runtime context: my own data
+   (data.list/get/put/remove), the shared settings screen (toggle or choice only), the one app
+   search, a home card, a bottom-bar tab, and ai.ask through the one AI gateway (it answers
+   only after Eran adds my feature to the gateway policy). Use the eight design-system
+   primitives; no new ones, no new libraries, no second Firebase client, no analytics of my own.
+5. Keep this first version small: one or two screens that reach the value in as few taps as
+   possible. Hebrew, right-to-left. Mark anything invented as an example.
+6. Before saving, run pnpm verify. It must be green. If a gate fails, fix my code; never
+   weaken or skip a gate.
+7. Save with the save-work skill, then open a pull request with the request-review skill.
+   Fill the "בעברית" section in plain Hebrew: what a student will see or be able to do.
+8. At the end, tell me in Hebrew: what you built, which screens exist, what is still open,
+   and what I should ask Eran (flag on in preview, AI policy, data import).</div>
+          <div class="dod"><b>גמור כש:</b> נפתחה בקשת מיזוג עם הפיצ׳ר, כל הבדיקות ירוקות, וחלק ״בעברית״ מלא.</div>
+        </div>
+      </div>
+      <div class="task glass" data-id="s08-content">
+        <div class="task-head">
+          <span class="check"><input type="checkbox" id="t50"><span></span></span>
+          <label for="t50"><span class="task-title">כל חוליה: התוכן של הפיצ׳ר בתוך האפליקציה</span>
+            <span class="meta"><span class="chip due">רביעי 9.12, מפגש 8</span><span class="chip">חוליה</span></span></label>
+        </div>
+        <div class="task-body">
+          <p>הפיצ׳ר צריך תוכן אמיתי, לא טקסט לדוגמה: הכותרות, ההסברים, הנתונים והמילים. כל מקצוע בחוליה מביא את החלק שלו ומעביר למוביל הפיצ׳ר. מה שעוד לא אמיתי, מסמנים במפורש כדוגמה.</p>
+          <div class="dod"><b>גמור כש:</b> במפגש 8 הפיצ׳ר מציג את התוכן של החוליה.</div>
+        </div>
+      </div>
+      <div class="task glass" data-id="s08-usability">
+        <div class="task-head">
+          <span class="check"><input type="checkbox" id="t51"><span></span></span>
+          <label for="t51"><span class="task-title">כל חוליה: מה בודקים במחקר השימושיות</span>
+            <span class="meta"><span class="chip due">רביעי 9.12</span><span class="chip">חוליה</span><span class="chip time">⏱ 30 דקות</span></span></label>
+        </div>
+        <div class="task-body">
+          <p>אחרי מפגש 8 מתחיל מחקר שימושיות ראשון. לכל פיצ׳ר <b>ארבע פרסונות</b>, ומשתתפים שמתאימים להן. מוצאים משתתפים יחד עם מקצוע המחקר, וכדאי לפנות גם למחלקת השיווק של המכון. בכל סבב: בודקים, מתקנים, ובודקים שוב.</p>
+          <div class="dod"><b>גמור כש:</b> לכל חוליה יש ארבע פרסונות, ומשפט אחד של מה בודקים ואיך.</div>
+        </div>
+      </div>
+      <div class="task glass" data-id="s08-identity">
+        <div class="task-head">
+          <span class="check"><input type="checkbox" id="t52"><span></span></span>
+          <label for="t52"><span class="task-title">גילדת הזהות: לוגו ושפה גרפית ראשונה</span>
+            <span class="meta"><span class="chip due">רביעי 9.12</span><span class="chip">גילדה</span></span></label>
+        </div>
+        <div class="task-body">
+          <p>הגילדה מביאה לוגו ושפה גרפית ראשונה, בצורה שהחוליות יכולות להשתמש בה כבר בפיצ׳רים שלהן. במפגש 8 הסבב הראשון של האפליקציה יוצא החוצה, ולכן הוא צריך להיראות כמו מוצר אחד.</p>
+          <div class="dod"><b>גמור כש:</b> הלוגו והשפה הגרפית במאגר, והחוליות יודעות איפה למצוא אותם.</div>
+        </div>
+      </div>
+      <div class="task glass" data-id="s08-zoom">
+        <div class="task-head">
+          <span class="check"><input type="checkbox" id="t53"><span></span></span>
+          <label for="t53"><span class="task-title">לבחור יום לזום עם ערן ולהודיע לו</span>
+            <span class="meta"><span class="chip due">עוד היום</span><span class="chip">חוליה</span><span class="chip time">⏱ 5 דקות</span></span></label>
+        </div>
+        <div class="task-body">
+          <p>אין מפגש בכיתה ב־2.12. במקום זה כל חוליה פוגשת את ערן <b>שעה בזום בשעה 19:00</b>, באחד הימים <b>שני 30.11 עד חמישי 3.12</b>, ועוד פגישות לפי הצורך. מגיעים עם מה שיש עד אז.</p>
+          <div class="dod"><b>גמור כש:</b> החוליה בחרה יום והודיעה לערן.</div>
+        </div>
+      </div>
+      <div class="task glass" data-id="s08-feedback">
+        <div class="task-head">
+          <span class="check"><input type="checkbox" id="t54"><span></span></span>
+          <label for="t54"><span class="task-title">סקר משוב על מפגש 6</span>
+            <span class="meta"><span class="chip">אישי</span><span class="chip time">⏱ 2 דקות</span></span></label>
+        </div>
+        <div class="task-body">
+          <p>אם לא מילאתם בכיתה: בטופס בוחרים "מפגש 6".</p>
+          <div class="dod"><b>גמור כש:</b> שלחתם את הטופס.<br><a href="https://forms.gle/dQ8pLsFGombzxj8L8">לסקר המשוב השבועי</a></div>
+        </div>
+      </div>
+    </section>
+  </article>
+
   <article id="session-06" class="session">
     <div class="session-head glass">
       <div class="eyebrow">מפגש 06 · יום רביעי 25.11</div>
       <h2 class="session-title">אמצע ספרינט: מציגים את הפיצ׳רים בקליקים</h2>
       <nav class="subnav">
+        <a href="#s06-summary">סיכום</a>
         <a href="#s06-homework">שיעורי בית</a>
       </nav>
     </div>
+
+    <section id="s06-summary">
+      <h3 class="part"><span class="n">00</span>מה עשינו במפגש</h3>
+      <ul>
+        <li><b>סיפור אמיתי על פריצת אבטחה</b>, ומה הוא מלמד אותנו על בניית מוצר.</li>
+        <li><b>מפת המושגים "איך האפליקציה בנויה":</b> 21 מושגים, מהמסך והרכיב ועד השרת, המסמך והמאגר.</li>
+        <li><b>המוקאפ הלחיץ</b> של כל האפליקציה, עם המסכים החדשים של החוליות.</li>
+        <li><b>דיילי:</b> כל אחד אמר על מה עבד, איפה נתקע, ומה הוא צריך.</li>
+        <li><b>גילדת הזהות</b> הציגה מה הביאה עד עכשיו.</li>
+        <li><b>הצגות חוליות</b> בארבעה שולחנות במקביל: מה הצליח, מה נכשל, ומה הוספנו.</li>
+        <li><b>המעטפת של האפליקציה:</b> כל פיצ׳ר בחדר משלו, ואיך מובילי הפיצ׳רים מכניסים גרסה ראשונה.</li>
+      </ul>
+      <p>
+        <a href="../maps/">מפות המושגים (מפגש 6 בתוכן)</a> ·
+        <a href="#session-08">מה עושים עד מפגש 8</a>
+      </p>
+    </section>
 
     <section id="s06-homework">
       <h3 class="part"><span class="n">01</span>שיעורי בית עד מפגש 6 (25.11)</h3>
@@ -1584,7 +1743,7 @@ https://github.com/eranlahav/hitme
   var state = {};
   try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
   var all = Array.prototype.slice.call(document.querySelectorAll('.task[data-id]'));
-  var tasks = Array.prototype.slice.call(document.querySelectorAll('#session-05 .task[data-id]'));
+  var tasks = Array.prototype.slice.call(document.querySelectorAll('#session-08 .task[data-id]'));
   var older = ['01', '02', '03', '04'].map(function (n) {
     return { el: document.getElementById('count-' + n), tasks: Array.prototype.slice.call(document.querySelectorAll('#session-' + n + ' .task[data-id]')) };
   });
